@@ -9,7 +9,7 @@ public class MemberMoveAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8");
-		
+				
 		String email = request.getParameter("email");
 		request.setAttribute("email", email);
 		

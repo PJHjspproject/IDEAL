@@ -36,6 +36,11 @@ public class MemberUpdateAction implements Action {
 		if(result==1){
 			
 			System.out.println("수정성공");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script type='text/javascript'>");
+			out.println("alert('수정되었습니다.');");
+			out.println("</script>");
 			ActionForward forward=new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/index.mf");

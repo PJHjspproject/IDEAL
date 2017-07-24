@@ -1,8 +1,6 @@
 package net.member.action;
 
 
-import java.text.SimpleDateFormat;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +18,7 @@ public class MemberJoinAction implements Action {
 		System.out.println(request.getParameter("pass"));
 		System.out.println(request.getParameter("nickName"));
 		System.out.println(request.getParameter("phone"));
-		System.out.println(request.getParameter("birthday"));			
+		System.out.println(request.getParameter("birth"));			
 		
 
 		MemberDTO mdto = new MemberDTO();

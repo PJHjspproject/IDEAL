@@ -1,0 +1,27 @@
+JSP기능 VIEW
+
+index.jsp 메인페이지
+
+member/yak.jsp - 회원가입전 약관 페이지
+member/mainauth.jsp - 메일인증페이지 
+member/emailcheck.jsp - email중복체크 페이지 (팝업창)
+member/authon.jsp - 이메일 인증번호 입력페이지 (팝업창) 
+member/Joinmember.jsp - 회원가입 페이지
+member/UserCheck.jsp - 마이페이지 이동을위한 비밀번호 입력 페이지 
+member/Infomember.jsp  - 투자 유치 정보 , 내 정보 펀딩한 내역, 회원 수정및 탈퇴가 가능한 페이지
+member/UserUpdate.jsp - 회원을 수정하는 페이지 
+
+Controller
+
+MemberFrontController1 - *.mf URI는 전무 이 컨트롤러를 거친다.
+
+Action
+
+EmailCheckAction - 이메일 중복체크 액션
+MemberInfoViewAction - 회원정보 검색 액션 (뿌리는건 미구현)
+MemberJoinAction - 회원가입 액션
+MemberLoginAction - 로그인 액션
+MemberLogoutAction - 로그아웃 액션
+MemberMoveAction - 이메일 인증번호 성공적으로 인증후 회원가입 페이지로 이동시켜주는 액션
+MemberPassCheckAction - 마이페이지클릭시 비밀번호 인증하는 액션.
+MemberUpdateAction - 회원 수정 액션

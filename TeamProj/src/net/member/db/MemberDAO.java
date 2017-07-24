@@ -27,11 +27,11 @@ public class MemberDAO implements MemberMethod {
 	}
 	
 	
-
+	/*이메일 중복확인을 위한 메소드*/
 	@Override
-	public int CheckMember(String MemberEmail) {
+	public boolean CheckMember(String MemberEmail) {
 		//중복확인을 위한 Check변수
-				int Check = 0;
+				boolean Check = false;
 				Connection con = null;
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
@@ -40,20 +40,25 @@ public class MemberDAO implements MemberMethod {
 					String sql = "SELECT memberEmail FROM member WHERE memberEmail=?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, MemberEmail);
-					if(rs.next())//중복일경우 Check에 1을 저장
-						Check = 1;
-					else//중복이아닐경우 Check에 0을 저장
-						Check = 0;
-				}catch(Exception e){
+					rs = pstmt.executeQuery();
+					if(rs.next()){
+						Check = false;
+					}else{//중복이아닐경우 Check에 0을 저장
+						Check = true;
+						
+					}
+					}catch(Exception e){
 					System.out.println("CheckMember메소드 내부에서 오류 : "+e);
 				}finally{//자원해제
 					if(con!=null)try{con.close();}catch(Exception e){e.printStackTrace();}
 					if(pstmt!=null)try{pstmt.close();}catch(Exception e){e.printStackTrace();}
 					if(rs!=null)try{rs.close();}catch(Exception e){e.printStackTrace();}
 				}
+				System.out.println(Check);
 				return Check;
 		
 	}
+	/*회원가입 메소드*/
 	@Override
 	public Boolean JoinMember(MemberDTO mdto) {
 		//회원가입 성공여부를 저장할 Check변수 선언
@@ -89,7 +94,7 @@ public class MemberDAO implements MemberMethod {
 				return Check;
 		
 	}
-
+	/*회원 수정메소드*/
 	@Override
 	public int UpdateMember(MemberDTO mdto){
 		int check = 0;
@@ -123,7 +128,7 @@ public class MemberDAO implements MemberMethod {
 		}
 		return check;
 	}
-
+	/*회원 삭제 메소드 완성(x) 다른 DB도 참고해야하므로*/
 	@Override
 	public void DeleteMember(String memberEmail, String pass) {
 		
@@ -171,7 +176,7 @@ public class MemberDAO implements MemberMethod {
 	}
 
 
-
+	/*로그인 DAO*/
 	@Override
 	public int LoginMember(String MemberEmail, String pass) {
 		
@@ -212,9 +217,43 @@ public class MemberDAO implements MemberMethod {
 		
 		return result;
 	}
+	
+	
+
+	/*닉네임을 뿌려주기 위한 메소드*/
+	@Override
+	public String nickNamePick(String MemberEmail) {
+		
+		Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String name = "";
+        try{
+        	String sql = "select nickName from member where memberEmail =?";
+        	con = getCon();
+        	pstmt = con.prepareStatement(sql);
+        	pstmt.setString(1,MemberEmail);
+        	rs = pstmt.executeQuery();
+        	
+        	if(rs.next()){
+        		name = rs.getString(1);
+        	}
+        	
+        }catch(Exception e){
+        	System.out.println("닉네임 뽑아내기 불가 : "+e);
+        	e.printStackTrace();
+        }finally{
+        	if(rs!=null)try{con.close();}catch(Exception ee){ee.printStackTrace();}
+        	if(pstmt!=null)try{pstmt.close();}catch(Exception e){e.printStackTrace();}
+        	if(con!=null)try{con.close();}catch(Exception e){e.printStackTrace();}		
+        }
+		
+		
+		return name;
+	}
 
 
-
+	/*마이페이지에서 비밀번호 입력해서 유저를 판단하는 메소드*/
 	@Override
 	public boolean UserCheck(String memberEmail,String pass) {
 		
@@ -257,7 +296,7 @@ public class MemberDAO implements MemberMethod {
 	}
 
 
-
+	/*회원 정보를 뿌려주는메소드 기능은 구현 뿌리기는 하지않음*/
 	@Override
 	public MemberDTO InfoMember(String MemberEmail) {
 		

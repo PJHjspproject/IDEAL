@@ -110,6 +110,8 @@
 			opener.document.getElementById("result").value=1;
 			opener.document.getElementById("email").setAttribute("readonly", "readonly");
 			var receiver = document.getElementById("email");
+			//opener.location.href="javascript:move()";
+			opener.parent.move();
 			window.close();
 	
 		}else{
@@ -119,6 +121,7 @@
 		} 
 	}
 </script>
+<link rel="stylesheet" href="css/default.css"><!-- 약속된 css-->
 </head>
 <body>
 <center>

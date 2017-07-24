@@ -1,5 +1,7 @@
+<%@page import="net.member.db.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -76,6 +78,7 @@ $(document).ready(function() {
 <%
 	String email = (String)session.getAttribute("MemberEmail");
 	session.setAttribute("MemberEmail", email);
+	String nickName = (String)session.getAttribute("nickName");
 	if(email==null){
 %>
 
@@ -112,8 +115,9 @@ $(document).ready(function() {
 				<ul>
 					<li><input type="search" class="sear"></li>
 					<li><a href="#"><input type="submit" value="SEARCH"></a></li>
-					<li><%=email %>님 환영합니다!!</li>
+					<li>${nickName}님 환영합니다!!</li>
 					<li><a href="./Usercheckview.mf">마이페이지</a></li>
+					<li><a href="./MemberLogoutAction.mf">로그아웃</a></li>
 				</ul>
 			</div>
 		

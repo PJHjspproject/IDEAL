@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="stylesheet" href="css/default.css"><!-- 약속된 css-->
 <%
 	String email = (String)session.getAttribute("MemberEmail");
 	session.setAttribute("MemberEmail", email);
@@ -16,12 +16,12 @@
 <body>
 <h1>마이페이지</h1>
 
-<center>
+<div class="wrap">
 	<form action="./MemberPassCheckAction.mf" method="post">
 		<label>비밀번호 입력 :</label>
 		<input type="password" name="pass" id="pass" placaholder="비밀번호를 입력하세요">
 		<input type="submit" value="마이페이지로">
 	</form>
-</center>
+</div>
 </body>
 </html>

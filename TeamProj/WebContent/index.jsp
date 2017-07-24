@@ -9,22 +9,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<!-- 센터 공간은 사용자로 부터 계속해서 정보가 바뀌는 부분이기에 해당 Center.jsp의 정보를 읽어 들여야 한다. -->
 <c:set var="center" value="${param.center}"/>
-<!-- 센터 공간은 사용자로 부터 계속해서 정보가 바뀌는 부분이기에 해당 Center.jsp의 정보를 읽어 들여야 한다. -->
-<!--처음 CarMain.jsp를 실행하면  당연히 .. param.center값은 받아 올수 없기에 조건 주기   -->
 <c:if test="${center == null }">
 	<c:set var="center" value="center/center.jsp"/>
 </c:if>
-
 <center>
 	<table  width="100%" height="700" >
 		<tr align="center">
 			<td>
 				<jsp:include page="topnav/Top.jsp"/>
 			</td>
-			
 		</tr>
 		<tr>
 			<td height="500">
@@ -33,17 +27,12 @@
 		</tr>
 		<tr>
 			<td>
-				
+				<!-- Footer 부분 인크루드 해야합니다. -->
 			</td>
 		</tr>
 	
 	</table>
 </center>
-
-
-
-
-
 </body>
 </html>
     

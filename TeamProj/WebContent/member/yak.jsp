@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/default.css"><!-- 약속된 css-->
 <script type="text/javascript">
 function chk(){
  var req = document.form.req.checked;

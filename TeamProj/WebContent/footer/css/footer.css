@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+*{margin: 0px; padding:0px; border: 0px; 
+font-family: 'Noto Sans KR', DEF_FONT, sans-serif;}
+
+a{text-decoration: none;}
+
+#wrap{
+	width: 1240px;
+	margin:0 auto;
+}
+footer{
+	width: 100%; height: 200px; background-color: silver;
+}
+#f_table{
+	 position: relative;
+	width: 1238px; height: 100px;
+	
+}
+#f_table td{
+	background-color: olive;
+	width:180px;
+	border-bottom: 2px solid gray;
+	border-right: 32px solid gray;
+	text-align: center;
+}
+#f_table .endtd{
+	border-right: 0px;
+}
+#f_table a{
+	
+	-webkit-transition: color 1s; 
+}
+#f_table a:hover{
+	color:red;
+}
+#f_table img{
+	
+	height: 50px; width: 50px;
+	-webkit-transition: height 1s, width 1s; 
+	
+}
+#f_table img:hover{
+	height: 60px; width: 60px;
+}
+#f_info{
+	margin: 0 auto;
+	width: 600px;height: 60px; padding-top: 10px; 
+	
+}
+.mail_map{
+	color:blue;
+	
+}
+.mail_map:hover{
+	color:red;
+	cursor: pointer;
+}

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/*컨트롤러 .mf가 있는 URI는 전무 이 컨트롤러를 거친다.*/
 @WebServlet(asyncSupported = true, name = "MemberFrontController2", urlPatterns = { "/MemberFrontController2.mf" })
 public class MemberFrontController1 extends HttpServlet {
 
@@ -32,7 +32,7 @@ public class MemberFrontController1 extends HttpServlet {
 			forward.setRedirect(false);
 			forward.setPath("./index.jsp?center=member/yak.jsp");
 			
-		}else if(command.equals("/mailauth.mf")){//약관동의를 정상적으로 완료했을시
+		}else if(command.equals("/mailauth.mf")){//약관동의를 정상적으로 완료하고 이메일 인증창으로 이동
 			
 			forward = new ActionForward();
 			forward.setRedirect(false);
@@ -44,7 +44,7 @@ public class MemberFrontController1 extends HttpServlet {
 			forward.setRedirect(false);
 			forward.setPath("./index.jsp");
 			
-		}else if(command.equals("/Joinmember.mf")){//메일 인증을 완료하기 가입하기 버튼을 눌렀을때
+		}else if(command.equals("/Joinmember.mf")){//메일 인증을 완료하고 가입하기 버튼을 눌렀을때
 
 			action = new MemberMoveAction();
 			
@@ -97,26 +97,16 @@ public class MemberFrontController1 extends HttpServlet {
 				
 			}
 			
-		}else if(command.equals("/Memberinfo.mf")){//비밀번호를 올바르게 입력하고 넘어갈시
+		}else if(command.equals("/Memberinfo.mf")){//마이페이지비밀번호 인증 페이지에서 비밀번호를 올바르게 입력하고 넘어갈시
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./index.jsp?center=member/Memberinfo.jsp");
 			
-		}else if(command.equals("/Usercheckview.mf")){//비밀번호 입력 창으로 이동
+		}else if(command.equals("/Usercheckview.mf")){//마이페이지  버튼을 눌렀을시 비밀번호 입력 창으로 이동
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./index.jsp?center=member/Usercheck.jsp");
-		}else if(command.equals("/MemberUpdate.mf")){
-			
-			action = new MemberUpdateAction();
-			try {
-				forward = action.execute(req, resp);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("회원 수정중 실패:"+e);
-				e.printStackTrace();
-			}
-		}else if(command.equals("/MemberView.mf")){
+		}else if(command.equals("/MemberView.mf")){//회원 정보 뿌려주는 DAO실행을 위한 컨트롤러 (뿌리지않음)
 			
 			action = new MemberInfoViewAction();
 			try{
@@ -125,12 +115,12 @@ public class MemberFrontController1 extends HttpServlet {
 				System.out.println("회원 수정중 실패:"+e);
 				e.printStackTrace();
 			}
-		}else if(command.equals("/UpdateViewpage.mf")){
+		}else if(command.equals("/UpdateViewpage.mf")){//회원 수정 삭제중 회원 수정버튼을 눌렀을시!!
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./index.jsp?center=member/UserUpdate.jsp");
 	
-		}else if(command.equals("/MemberUpdateProc.mf")){
+		}else if(command.equals("/MemberUpdateProc.mf")){//회원 정보를 수정하고 수정버튼을 눌렀을때
 			action = new MemberUpdateAction();
 			
 			try{
@@ -138,7 +128,7 @@ public class MemberFrontController1 extends HttpServlet {
 				
 			}catch(Exception e){
 				e.printStackTrace();
-				System.out.println("회원 수정Action전 오류:"+e);
+				System.out.println("회원 수정 오류:"+e);
 			}
 		}
 		// 실제주소이동

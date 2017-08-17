@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 public interface questionMethod {
 
-	//ìê¸°ê°€ ì“´ ëª¨ë“ ê¸€ì„ ë³¼ìˆ˜ ìˆëŠ” ë©”ì†Œë“œ
+	//ÀÚ±â°¡ ¾´ ¸ğµç±ÛÀ» º¼¼ö ÀÖ´Â ¸Ş¼Òµå
 	public ArrayList<questionDto> AllQuestion(String MemberName);
 	
-	//1:1ë¬¸ì˜ ê¸€ ì‘ì„±ë©”ì†Œë“œ
+	//1:1¹®ÀÇ ±Û ÀÛ¼º¸Ş¼Òµå
 	public int InsertQuestion(questionDto qdto);
 	
-	//1:1ë¬¸ì˜ ê¸€ ìˆ˜ì • ë©”ì†Œë“œ
+	//1:1¹®ÀÇ ±Û ¼öÁ¤ ¸Ş¼Òµå
 	public void UpdateQuestion(questionDto qdto);
 	
-	//1:1ë¬¸ì˜ ê¸€ ì‚­ì œ ë©”ì†Œë“œ
+	//1:1¹®ÀÇ ±Û »èÁ¦ ¸Ş¼Òµå
 	public int DeleteQuestion(int num);
 	
-	//1:1ë¬¸ì˜ ê¸€ ì¤‘ í•˜ë‚˜ì˜ ê¸€ë§Œ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ
+	//1:1¹®ÀÇ ±Û Áß ÇÏ³ªÀÇ ±Û¸¸ ºÒ·¯¿À´Â ¸Ş¼Òµå
 	public questionDto OneQuestion(int num);
 	
-	//1:1ë¬¸ì˜ ê¸€ ë‹µë³€ ë‹¬ì•„ì£¼ëŠ” ë©”ì†Œë“œ
+	//1:1¹®ÀÇ ±Û ´äº¯ ´Ş¾ÆÁÖ´Â ¸Ş¼Òµå
 	public void UpdateReContent(questionDto qdto);
 	
 }

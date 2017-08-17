@@ -74,7 +74,13 @@ public class BoardUpdatePro implements Action {
 		System.out.println("title:"+title);
 		System.out.println("content:"+content);
 		System.out.println("filename:"+filename);
-
+		
+//		bdto.setNum(Integer.parseInt(request.getParameter("num")));
+//		bdto.setTitle(request.getParameter("title"));
+//		bdto.setContent(request.getParameter("content"));
+//		bdto.setDate(new Timestamp(System.currentTimeMillis()));
+//		bdto.setNickName(request.getParameter("nickName"));
+		
 		bdao.updateBoard(bdto);
 		
 		request.setAttribute("bdto", bdto);
@@ -83,5 +89,25 @@ public class BoardUpdatePro implements Action {
 		forward.setRedirect(false);
 		return forward;
 	}
-
+/*	public ActionForward execute(HttpServletRequest request, HttpServletResponse response){
+		
+		
+		
+		BoardDao bdao = new BoardDao();
+		
+		BoardDto bdto = new BoardDto();
+		bdto.setNum(Integer.parseInt(request.getParameter("num")));
+		bdto.setTitle(request.getParameter("title"));
+		bdto.setContent(request.getParameter("content"));
+		bdto.setDate(new Timestamp(System.currentTimeMillis()));
+		bdto.setNickName(request.getParameter("nickName"));
+		
+		bdao.updateBoard(bdto);
+		
+		request.setAttribute("bdto", bdto);
+		ActionForward forward= new ActionForward();
+		forward.setPath("content.bo");
+		forward.setRedirect(false);
+		return forward;
+	}*/
 }

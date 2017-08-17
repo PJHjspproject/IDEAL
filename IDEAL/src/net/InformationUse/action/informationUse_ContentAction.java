@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.InformationUse.db.InformationUseDao;
 import net.InformationUse.db.InformationUseDto;
-/*FAQ 글 뿌려주기*/
+
 public class informationUse_ContentAction implements Action {
 
 	@Override
@@ -19,7 +19,7 @@ public class informationUse_ContentAction implements Action {
 	
 		request.setAttribute("dto", dto);
 		
-		
+		//�̵�
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("./main1.jsp?center=informationUse/informationUse_content.jsp");

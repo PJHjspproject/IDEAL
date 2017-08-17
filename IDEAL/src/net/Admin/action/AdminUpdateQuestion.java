@@ -27,5 +27,4 @@ public class AdminUpdateQuestion implements Action {
 		
 		return forward;
 	}
-
 }

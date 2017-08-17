@@ -33,7 +33,7 @@ public class IdealMainController extends HttpServlet{
 		System.out.println(command);
 		
 		if(command.equals("/goMain.ma")){
-			System.out.println("/goMain.maë¡œ ì´ë™");
+			System.out.println("/goMain.ma ÁøÀÔ");
 			action = new getMainListAction();
 			try {
 				forward = action.execute(req, resp);
@@ -45,7 +45,7 @@ public class IdealMainController extends HttpServlet{
 			forward.setPath("main1.jsp?center=center1.jsp");
 			forward.setRedirect(false);
 		}else{
-			System.out.println("/Main.maì˜¤ë¥˜");
+			System.out.println("Àß¸øµÊ");
 		}
 		
 		if(forward!=null){

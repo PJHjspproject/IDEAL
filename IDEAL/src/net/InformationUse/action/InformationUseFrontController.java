@@ -18,15 +18,21 @@ public class InformationUseFrontController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		//ÀüÃ¼ ÁÖ¼Ò °¡Á®¿À±â
 		String requestURI = req.getRequestURI();
+		//ÀüÃ¼ ÁÖ¼Ò Áß ¾Õ ºÎºÐ °¡Á®¿À±â
 		String contextPath = req.getContextPath();
+		//½ÇÁ¦ ¿äÃ» ÁÖ¼Ò °¡Á®¿À±â
 		String command = requestURI.substring(contextPath.length());
 		System.out.println(command);
+		/*ÁÖ¼Ò ºñ±³*/
+		//ÀÚ½Ä Action°´Ã¼µéÀ» ´ãÀ» ÀÎÅÍÆäÀÌ½º Å¸ÀÔÀÇ ÂüÁ¶º¯¼ö ¼±¾ð
 		Action action = null;
+		
+		//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ °ª, ÀÌµ¿ÆäÀÌÁö °æ·Î °ª ÀúÀåÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼¸¦ ÀúÀåÇÒ ÂüÁ¶ º¯¼ö ¼±¾ð
 		ActionForward forward = null;
 		
-		if(command.equals("/Information.iU")){//FAQ  ëª©ë¡ ë¿Œë ¤ì£¼ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬
+		if(command.equals("/Information.iU")){
 			action = new InformationUseAction();
 			try {
 				forward = action.excute(req, resp);
@@ -34,7 +40,7 @@ public class InformationUseFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-		}else if (command.equals("/informationUse_content.iU")) {//FAQ ëª©ë¡ì¤‘ ê¸€í•˜ë‚˜ ì˜ ìƒì„¸ì •ë³´ë¥¼ ë¿Œë ¤ì£¼ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬
+		}else if (command.equals("/informationUse_content.iU")) {
 			
 			action = new informationUse_ContentAction();
 			
@@ -44,17 +50,17 @@ public class InformationUseFrontController extends HttpServlet{
 				
 				e.printStackTrace();
 			}
-		}else if(command.equals("/informationUse.iU")){ // ìƒì„¸ë³´ê¸°ì—ì„œ ëª©ë¡ ë³´ê¸°ë¥¼ ëˆ„ë¥¼ë•Œ 
+		}else if(command.equals("/informationUse.iU")){
 			forward = new ActionForward();
 			forward.setPath("Information.iU");
 			forward.setRedirect(false);
 		}
 		
-		
-		if(forward != null){//new ActionForward();
-			if(forward.isRedirect()){//true -> sendRedirect()
+		//(½ÇÁ¦ ÁÖ¼Ò·Î ÀÌµ¿)
+		if(forward != null){//new ActionForward();°´Ã¼°¡ Á¸Àç ÇÏ°í..
+			if(forward.isRedirect()){//true -> sendRedirect()¹æ½Ä
 				resp.sendRedirect(forward.getPath());
-			}else{//false -> forward()
+			}else{//false -> forward()¹æ½Ä
 				RequestDispatcher view =  req.getRequestDispatcher(forward.getPath());
 				view.forward(req, resp);
 			}

@@ -11,45 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.tableAll{
-border: none;
-border-collapse: collapse;
-}
-
-.tableAll tr.boardtr{
-	background-image: url("img/boardbg.jpg");
-	background-repeat: repeat-x;
-/* 	border: 1px solid; */
-/* 	color: white; */
-	height: 40px;
-	letter-spacing: 0.1em;
-}
-.tableAll td{
-border: none;
-}
-#qucore{
-background-image: url("img/boardbg.jpg");
-background-repeat: repeat-x;
-color: white;
-height: 30px;
-letter-spacing: 0.1em;
-
-
-}
-.wrap input{
-float: right;
-margin-left: 10px;
-width: 150px;
-}
-.wrap{
-padding-top: 100px;
-}
-.clear{
-	clear:both;
-}
-
-</style>
+<link rel="stylesheet" href="./css/question1.css">
 
 <%
 
@@ -65,18 +27,19 @@ System.out.println("사진폴더 경로"+realFolder);
 
 	<div class="wrap">
 	<center>
-		<table width="1028px" class="tableAll">
-			<tr class="boardtr">
-				<th>${qdto.num }</th>
-				<th>${qdto.title }</th>
-				<th>${qdto.nickName }</th>
-				<th><d:formatDate value="${qdto.inputDate}" pattern="yyyy-MM-dd"/> </th>
+	<h4 class="subh4">■ IDEAL 1:1문의</h4>
+		<table width="1028px" class="tableAllqc">
+			<tr class="boardqctr1">
+				<th class="qcth1">${qdto.num }</th>
+				<th class="qcth1">${qdto.title }</th>
+				<th class="qcth1">${qdto.nickName }</th>
+				<th class="qcth1"><d:formatDate value="${qdto.inputDate}" pattern="yyyy-MM-dd"/> </th>
 			</tr>
 			<tr>
-				<td colspan="4" class="txtarere">${qdto.content}</td>
+				<td class="tdendboard" colspan="4" class="txtarere">${qdto.content}</td>
 			</tr>
 			<tr>
-				<td>
+				<td width="1028px" colspan="4">
 					<c:if test="${qdto.image!=null }">
 						<img src="image/${qdto.nickName}/${qdto.image}">
 					</c:if>
@@ -87,7 +50,8 @@ System.out.println("사진폴더 경로"+realFolder);
 				<th colspan="4" id="qucore">답변내용</th>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea rows="5" cols="100" readonly="readonly" style="resize:none;" class="txtarere">${qdto.reContent }</textarea></td>
+				<td width="1028px" colspan="4">
+				<textarea rows="5" cols="100" readonly="readonly" style="resize:none;" class="txtarere2">${qdto.reContent }</textarea></td>
 			</tr>
 			
 			</c:if>
@@ -96,9 +60,9 @@ System.out.println("사진폴더 경로"+realFolder);
 			
 			<tr>
 				<td colspan="4">
-					<input type="button" value="목록으로" onclick="location.href='question.qU'">
-					<input type="button" value="삭제" onclick="location.href='deletequestion.qU?num=${qdto.num }'">
-					<c:if test="${qdto.questionStatement==false }"><input type="button" value="수정" onclick="location.href='updatequestion.qU?num=${qdto.num}'"></c:if>
+					<input class="tolist1" type="button" value="목록으로" onclick="location.href='question.qU'">
+					<input class="delete1" type="button" value="삭제" onclick="location.href='deletequestion.qU?num=${qdto.num }'">
+					<c:if test="${qdto.questionStatement==false }"><input class="modify1" type="button" value="수정" onclick="location.href='updatequestion.qU?num=${qdto.num}'"></c:if>
 				</td>
 			</tr>
 		</table>
@@ -107,91 +71,3 @@ System.out.println("사진폴더 경로"+realFolder);
 	</div>
 </body>
 </html>
-
-<%-- <style type="text/css">
-.tableAll{
-border: none;
-border-collapse: collapse;
-}
-
-.tableAll tr.boardtr{
-	background-image: url("img/boardbg.jpg");
-	background-repeat: repeat-x;
-	border: 1px solid;
-	color: white;
-	height: 40px;
-	letter-spacing: 0.1em;
-}
-.tableAll td{
-border: none;
-}
-#qucore{
-background-image: url("img/boardbg.jpg");
-background-repeat: repeat-x;
-color: white;
-height: 30px;
-letter-spacing: 0.1em;
-
-
-}
-.wrap input{
-float: right;
-margin-left: 10px;
-width: 150px;
-}
-.wrap{
-padding-top: 100px;
-}
-
-</style>
-
-<%
-
-String memberEmail = (String)session.getAttribute("memberEmail");
-String nickName = (String)session.getAttribute("nickName");
-String realFolder = request.getServletContext().getRealPath("image\\"+nickName);
-System.out.println(realFolder);
-
-%>
-</head>
-
-<body>
-
-	<div class="wrap">
-	<center>
-		<table width="1028px" class="tableAll">
-			<tr class="boardtr">
-				<th>${qdto.num }</th>
-				<th>${qdto.title }</th>
-				<th>${qdto.nickName }</th>
-				<th><d:formatDate value="${qdto.inputDate}" pattern="yyyy-MM-dd"/> </th>
-			</tr>
-			<tr>
-				<td colspan="4" class="txtarere">${qdto.content}</td>
-			</tr>
-			<tr>
-				<td><img src="image/${qdto.nickName}/${qdto.image}"></td>
-			</tr>
-			<c:if test="${qdto.questionStatement == true}">
-			<tr>
-				<th colspan="4" id="qucore">답변내용</th>
-			</tr>
-			<tr>
-				<td colspan="4"><textarea rows="5" cols="100" readonly="readonly" style="resize:none;" class="txtarere">${qdto.reContent }</textarea></td>
-			</tr>
-			
-			</c:if>
-			
-				
-			
-			<tr>
-				<td colspan="4"><input type="button" value="목록으로" onclick="location.href='question.qu'">
-								<input type="button" value="삭제" onclick="location.href='deletequestion.qu?num=${qdto.num }'">
-				</td>
-			</tr>
-		</table>
-		
-		</center>
-	</div>
-</body>
-</html> --%>

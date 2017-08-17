@@ -17,10 +17,16 @@ import org.w3c.dom.Comment;
 public class BoardDao {
 
 	private Connection getCon() throws Exception{
-		
+		//Connection ������ con 蹂���瑜� ����. 由ы�댄�댁＜湲곗����.
 		Connection con = null;
+		
+		//Context������ init蹂������� InitialContext������ 媛�泥대� ���깊���� �대����
 		Context init = new InitialContext();
+		
+		//init媛�泥대� lookup(�대�)���� datasource(而ㅻ�μ����)濡� �닿�
 		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/jspbeginner");
+		
+		//而ㅻ�μ������ �댁�⑺���� getConnection()硫����� �몄����� �곌껐�� db媛�泥대�� ����
 		con = ds.getConnection();
 		
 		return con;
@@ -65,18 +71,22 @@ public class BoardDao {
 		ResultSet rs = null;
 		
 		try {
-			
+			//DB占쎈염野�占�
 			con = getCon();
-			
+			//SQL���겸�� �닌�揆 占쎌��占쎄쉐
 			String sql = "SELECT * FROM board order by num desc limit ?,?";
-			
+			//���겸��占쎌�� 占쎈��占쎈뻬�얜��� pstmt揶��밴�占쎈� 占쎈��占쎈��占쎈��.
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, pageSize);
+			//���겸��占쎌�� 占쎈��占쎈뻬揶�誘れ�� rs占쎈� 占쎈��占쎈��占쎈��
 			rs = pstmt.executeQuery();
+			
+			// rs占쎈� 揶�誘れ�� 占쎌�놂옙��筌�占�
 			while(rs.next()){
 				BoardDto bdto = new BoardDto();
-
+				
+				// rs占쎈� 占쎄�占쎌��占쎈릭占쎈연 占쎈��占쎌����遺용�占쎈� 占쎌�놂옙�� 揶�誘れ�� 
 				bdto.setNum(rs.getInt("num"));
 				bdto.setContent(rs.getString("content"));
 				bdto.setDate(rs.getTimestamp("date"));
@@ -88,9 +98,11 @@ public class BoardDao {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("BoardList메소드 에서 에러 발생!: "+e);
+			System.out.println("BoardList筌�遺용�쇽옙諭� 占쎄땀�븝옙占쎈�占쎄� 占쎌�ㅷ��占� : "+e);
 		} finally{
-			freeRes(con, pstmt, rs);
+			if(con!=null){try{con.close();}catch(Exception e){e.printStackTrace();}}
+			if(pstmt!=null){try{pstmt.close();}catch(Exception e){e.printStackTrace();}}
+			if(rs!=null){try{rs.close();}catch(Exception e){e.printStackTrace();}}
 		}		
 		return BoardList;
 	}
@@ -112,14 +124,21 @@ public class BoardDao {
 			pstmt.setString(3, bdto.getFile());
 			pstmt.setTimestamp(4, bdto.getDate());
 			pstmt.setString(5, bdto.getNickName());
+/*			System.out.println("BoardAdd");
+			System.out.println(bdto.getTitle());
+			System.out.println(bdto.getContent());
+			System.out.println(bdto.getFile());
+			System.out.println(bdto.getDate());
+			System.out.println(bdto.getNickName());*/
 
 			pstmt.executeUpdate();
 			
 			
 		} catch(Exception e){
-			System.out.println("BoardAdd메소드 에서 에러 발생!: "+e);
+			e.printStackTrace();
 		} finally{
-			freeRes(con, pstmt);
+			if(con!=null){try{con.close();}catch(Exception e){e.printStackTrace();}}
+			if(pstmt!=null){try{pstmt.close();}catch(Exception e){e.printStackTrace();}}
 		}
 		
 	}
@@ -151,9 +170,11 @@ public class BoardDao {
 //				System.out.println(rs.getString("content"));
 			}
 		} catch(Exception e){
-			System.out.println("getBoard메소드 에서 에러 발생!: "+e);
+			e.printStackTrace();
 		} finally {
-			freeRes(con, pstmt, rs);
+			if(rs!=null)try{rs.close();}catch(SQLException ex){}
+			if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+			if(con!=null)try{con.close();}catch(SQLException ex){}
 		}
 		return bdto;		
 	}
@@ -174,7 +195,7 @@ public class BoardDao {
 			
 			pstmt.executeUpdate();
 		}catch(Exception e){
-			System.out.println("UpdateBoard메소드 에서 에러 발생!: "+e);
+			e.printStackTrace();
 		}finally{
 			freeRes(con, pstmt);
 			
@@ -193,15 +214,19 @@ public class BoardDao {
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 		} catch(Exception e){
-			System.out.println("deleteBoard메소드 에서 에러 발생!: "+e);
+			e.printStackTrace();
 		} finally{
-			freeRes(con, pstmt);
+			if(con!=null)try{con.close();}catch(SQLException ex){}
+			if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
 		}
 	}
 	
 	public void commentInsert(CommentDto cdto){
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
+		// request.getParameter() -> 由ы�댄���� String
+		// request.getAttribute() -> 由ы�댄���� Object
 		
 		try{
 			con = getCon();
@@ -215,7 +240,7 @@ public class BoardDao {
 			
 			pstmt.executeUpdate();
 		} catch(Exception e){
-			System.out.println("commentInsert()메소드에서 오류 발생:"+e);
+			e.printStackTrace();
 		} finally{
 			freeRes(con, pstmt);
 		}
@@ -236,7 +261,12 @@ public class BoardDao {
 			freeRes(con, pstmt);
 		}
 	}
-
+	
+	//��洹쇱������� �몃���洹쇱�� 媛��ν��寃���怨�...
+	//由ъ�ㅽ�몃�� 肉��ㅼ＜湲곗����... 由ы�닿��� ������寃�媛���..
+	//由ъ�ㅽ�� ���� ���ㅻ┃������ 臾댁���� 諛����쇳��源�... �닿�肉��ㅼ＜怨� �띠�� 寃��� ��媛���硫� �듭�대����
+	//洹몃���ㅻ㈃... 臾댁���� 留ㅺ�蹂���濡� 諛��� 由ъ�ㅽ�몃�� 肉��ㅼ＜怨� sql臾몄�� ���깊��源�...
+	
 	public ArrayList<CommentDto> CommentList(int num){
 		ArrayList<CommentDto> commentList = new ArrayList<CommentDto>();
 		Connection con = null;
@@ -244,24 +274,34 @@ public class BoardDao {
 		ResultSet rs = null;
 		
 		try {
-			
+			// DB�곌껐
 			con = getCon();
+			// SQL荑쇰━ 援щЦ ����
 			String sql = "SELECT * FROM comment where num=?";
+			
+			// 荑쇰━�� �ㅽ��臾몄�� pstmt媛�泥댁�� �대����.
 			pstmt= con.prepareStatement(sql);
+			// num�� ?媛��� Int���쇰� �명���댁���? => ��???
+			// 寃���湲��� num媛��� 萸�吏� ������硫�  ������ 踰��몃�� �명���댁���?
 			pstmt.setInt(1, num);
+			
+			// 荑쇰━�� �ㅽ��媛��� rs�� �대����.
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				CommentDto cdto = new CommentDto();
+				// CommentDto媛�泥댁�� 荑쇰━�ㅽ��媛��� �닿릿 rs���� num媛��� 媛��몄���� �명������?
 				cdto.setNum(rs.getInt("num"));
 				cdto.setcNum(rs.getInt("cNum"));
 				cdto.setNickName(rs.getString("nickName"));
 				cdto.setContent(rs.getString("content"));
 				cdto.setDate(rs.getTimestamp("date"));
+				
+				// ArrayList 李몄“蹂����� commentList�� cdto�� ����(?) 媛��ㅼ�� ���댁���? �ｌ�댁���?
 				commentList.add(cdto);
 			}
 		} catch (Exception e) {
-			System.out.println("CommentList(int num)메소드 에서 에러 발생!: "+e);
+			e.printStackTrace();
 		} finally{			
 			freeRes(con, pstmt);
 		}		

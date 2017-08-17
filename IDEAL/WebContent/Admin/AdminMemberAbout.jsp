@@ -10,6 +10,7 @@
 
 </head>
 <body>
+<input type="button" value="메인으로" onclick="location.href='AdminMain.ad'">
 <div align="center">
 <c:if test="${mdto != null }">
 
@@ -37,17 +38,38 @@
 					<td>금액교부일</td>
 					<td>썸네일이미지</td>
 					<td>펀딩진행상황</td>
+					<td>퍼미션 체크</td>
 				</tr>
-				<c:forEach var="ir" items="${irlist }">
-				<tr onclick="location.href='#'">
+				<c:forEach var="ir" items="${irlist}">
+				<tr onclick="location.href='AdminInvestRequestList.ad?memberEmail=${ir.memberEmail}'">
 					<td>${ir.investRequestNum }</td>
 					<td>${ir.program }</td>
-					<td>${ir.dName }</td>
+					<td>${ir.DName }</td>
 					<td><f:formatDate value="${ir.startDay }" pattern="yyyy-MM-dd"/></td>
 					<td><f:formatDate value="${ir.endDay }" pattern="yyyy-MM-dd"/></td>
 					<td><f:formatDate value="${ir.payDay }" pattern="yyyy-MM-dd"/></td>
-					<td>${ir.thumbImage }</td>
-					<td>${ir.fundSituation }</td>
+					<td>${ir.thumbImage}</td>
+					<td>
+					<c:choose>
+						<c:when test="${ir.fundSituation eq 1 }">
+							기간 미완료 / 펀딩 80%미만 (진행중)
+						</c:when>
+									
+						<c:when test="${ir.fundSituation eq 2}">
+							기간 완료  / 펀딩 80% 미만 (실패)
+						</c:when>
+									
+						<c:when test="${ir.fundSituation eq 3}">
+							기간 미완료 / 펀딩 100%달성 (조기성공)
+						</c:when>
+										
+						<c:when test="${ir.fundSituation eq 4}">
+							기간 완료 / 펀딩 80%이상 100%이하 (성공)											
+						</c:when>
+					</c:choose>
+					</td>
+					<td>${ir.permitChk}</td>
+				</tr>
 				</c:forEach>
 			</table>
 		</c:if>
@@ -65,11 +87,12 @@
 					<td>프로그램명</td>
 				</tr>
 				<c:forEach var="im" items="${imlist }">
-				<tr onclick="location.href='#'">
+				<tr onclick="location.href='AdminInvestMentList.ad?memberEmail=${im.memberEmail}'">
 					<td>${im.investNum }</td>
 					<td>${im.investRequestNum }</td>
 					<td>${im.investMoney }</td>
 					<td>${im.program }</td>
+					</tr>
 				</c:forEach>
 			</table>
 		</c:if>
@@ -92,6 +115,7 @@
 					<td>${b.title }</td>
 					<td>${b.file }</td>
 					<td><f:formatDate value="${b.date }" pattern="yyyy-MM-dd"/></td>
+					</tr>
 			</c:forEach>
 			</table>
 		</c:if>
@@ -109,12 +133,13 @@
 					<td>댓글내용</td>
 					<td>글쓴날짜</td>
 				</tr>
-			<c:forEach var="r" items="${rlist }">
-				<tr onclick="location.href='#'">
-					<td>${r.num }</td>
-					<td>${r.cNum }</td>
-					<td>${r.content}</td>
-					<td><f:formatDate value="${r.date }" pattern="yyyy-MM-dd"/></td>
+			<c:forEach var="c" items="${clist}">
+				<tr onclick="location.href='AdminCommentList.ad?nickName=${c.nickName}'">
+					<td>${c.num }</td>
+					<td>${c.cNum }</td>
+					<td>${c.content}</td>
+					<td><f:formatDate value="${c.date }" pattern="yyyy-MM-dd"/></td>
+					</tr>
 			</c:forEach>
 			</table>
 		</c:if>
@@ -135,6 +160,7 @@
 				<td>${q.num }</td>
 				<td>${q.title }</td>
 				<td><f:formatDate value="${q.inputDate }" pattern="yyyy-MM-dd"/></td>
+				</tr>
 		</c:forEach>
 		</table>
 	</c:if>	

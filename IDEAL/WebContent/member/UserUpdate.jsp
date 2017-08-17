@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/default.css"><!-- 약속된 css-->
+<link rel="stylesheet" href="css/member1.css">
 <title>Insert title here</title>
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -44,28 +44,59 @@ function check(f) {
     }
 }	
 </script>
+<style type="text/css">
+.content{
+	text-align: center;
+}
 
+</style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrapup">
 	<div class="regi_form" align="center">
 		<form action="./MemberUpdateProc.mf" method="post" id="f" name="f">
-		
-				이름 : <input type=text size=15 name=name id="name" value="${mdto.name}">
-						<span id="nameck" style="color: red;"></span><br/>
-				아이디(email) : <input type=text size=15 id="memberEmail" name="memberEmail" 
-									value="${mdto.memberEmail}" readonly="readonly"><br/> 
-				별명 : <input type="text" size=15 id=nickName name="nickName" value="${mdto.nickName}" readonly="readonly"><br/>		
-				비밀번호 : <input type=password size=15 id="pass" name="pass" placeholder="비밀번호를 반드시 바꾸십시오"><br/> 
-				비번확인 : <input type=password size=15 id="pass2" name="pass2" placeholder="비밀번호를 반드시 바꾸십시오">
-				<span id="pwsame" style="color: red;"></span><br/> 
-				<label for="birthday">생년월일 :</label>
-				<input type="text" id="birth" name="birth" value="${mdto.birth}" readonly="readonly"><br/>
-				휴대폰 : <input type="text" size="15" id="phone" name="phone" value="${mdto.phone}">
-				<span id="phoneck" style="color: red;"></span><br/>
-				<input type=button value="회원수정" onclick="check(this.form)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<input type=reset value="취소">
-			</form>
+			<table class="centerup">
+				<tr>
+					<td class="td1"><b>이름 :</b></td>
+					<td><input type=text size=15 name=name class="tdnameup" id="name" value="${mdto.name}"></td>
+					<td><span id="nameck" style="color: red;"></span><br/></td>
+				</tr>
+				<tr>
+					<td class="td1"><b>아이디</b>(Email) :</td>
+					<td><input type=text size=15 id="memberEmail" class="tdemailup" name="memberEmail" 
+									value="${mdto.memberEmail}" readonly="readonly"><br/></td> 
+				</tr>
+				<tr>
+					<td class="td1"><b>별명 :</b></td>
+					<td><input type="text" size=15 id=nickName class="tdnameup" name="nickName" value="${mdto.nickName}" readonly="readonly"><br/></td>	
+				</tr>
+				<tr>
+					<td class="td1"><b>비밀번호 :</b></td> 
+					<td><input type=password size=15 id="pass" class="tdpassup" name="pass" placeholder="비밀번호를 반드시 바꾸십시오"><br/></td> 
+				</tr>
+				<tr>
+					<td class="td1"><b>비번확인:</b></td> 
+					<td><input type=password size=15 id="pass2" class="tdpass2up" name="pass2" placeholder="비밀번호를 반드시 바꾸십시오"></td>
+					<td><span id="pwsame" style="color: red;"></span><br/></td>
+				</tr>
+				<tr>
+					<td class="td1"><label for="birthday"><b>생년월일 :</b></label></td>
+					<td><input type="text" id="birth" class="tdbirthup" name="birth" value="${mdto.birth}" readonly="readonly"><br/></td>
+				</tr>
+				<tr>
+					<td class="td1"><b>휴대폰 :</b></td> 
+					<td><input type="text" size="15" id="phone" class="tdphoneup" name="phone" value="${mdto.phone}"></td>
+					<td><span id="phoneck" style="color: red;"></span><br/></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					<input class="canbt1" type="button" onclick="history.back()" value="취소">
+					<input class="modify1" type="button" value="회원수정" onclick="check(this.form)">
+					</td>
+				</tr>
+			</table>
+			<div class="clear"></div>
+		</form>
 		</div>
 	</div>
 </body>

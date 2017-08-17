@@ -22,9 +22,9 @@ public class insertquestAction implements Action {
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("Insertquestion ����");
 		System.out.println("request getContentType : " + request.getContentType());
-		
+		//�ѱ�ó�� 
 		request.setCharacterEncoding("UTF-8");	
-		
+		/*���� ����� ó��*/
 		
 		HttpSession session = request.getSession();
 		String memberEmail = (String)session.getAttribute("memberEmail");
@@ -33,9 +33,9 @@ public class insertquestAction implements Action {
 		System.out.println(nickName);
 		String realFolder = request.getServletContext().getRealPath("image\\"+nickName);//�г��� ���� �ȿ� ������ �����Ѵ�.
 		File folder = new File(realFolder);
-		if(!folder.exists()){
-			folder.mkdirs();
-			System.out.println(memberEmail+"폴더를 생성합니다.");
+		if(!folder.exists()){//�ش� ������ �ִ��� üũ
+			folder.mkdirs();//������ ���ٸ� ���� ����
+			System.out.println(memberEmail+"������ ������ �����մϴ�.");
 		}
 		int max = 10*1024*1024;//10MB
 		MultipartRequest multi = new MultipartRequest(request, realFolder, max, 
@@ -43,15 +43,15 @@ public class insertquestAction implements Action {
 		
 		String subject= multi.getParameter("title");
 		String content= multi.getParameter("content");
-		String file = "";
+		String file = "";//�ӽ÷� ������ �̹��� �̸�
 		Enumeration files = multi.getFileNames();
-		String dbimage = "";
+		String dbimage = "";//DB�� ����� �̹���
 		if(files.hasMoreElements()){
 			file = (String) files.nextElement();
 			String src = realFolder+"\\"+multi.getFilesystemName(file);
 			dbimage += multi.getFilesystemName(file);
 
-			System.out.println("--------iRA1--------");
+			System.out.println("--------iRA1<������ ���� üũ>--------");
 			System.out.println("src:"+src);
 			System.out.println("filename:"+multi.getFilesystemName(file));
 			System.out.println("---------------------------------");
@@ -73,7 +73,7 @@ public class insertquestAction implements Action {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
-			out.println("alert('글 등록 실패');");
+			out.println("alert('�ۼ� ����');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();

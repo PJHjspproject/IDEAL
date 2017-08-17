@@ -11,9 +11,9 @@
 
 %>
 <style type="text/css">
-.downplz{
-	padding: 200px;
-}
+/* .downplz{ */
+/* 	padding: 200px; */
+/* } */
 	
 </style>
 <script src="https://code.jquery.com/jquery-3.2.1.js"
@@ -44,13 +44,13 @@ $(document).ready(function () {
 <div class="downplz">
 <jsp:include page="informationUse/Info.jsp"/>
 <script>
-	var memberEmail = "<%=memberEmail%>";
+<%-- 	var memberEmail = "<%=memberEmail%>"; --%>
 	var nickName = "<%=nickName%>";
 	window.channelPluginSettings = {
 			"plugin_id": "3fb98d16-18fd-4539-95b3-cccb3bedbc8c"    
 	 };
   if(memberEmail != "null"){
-	  alert(memberEmail);
+// 	  alert(memberEmail);
 		  window.channelPluginSettings.user = {
 		      "id": memberEmail,
 		      "name": nickName

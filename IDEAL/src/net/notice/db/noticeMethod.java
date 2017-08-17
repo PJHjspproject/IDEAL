@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public interface noticeMethod {
 
-	//ê³µì§€ì‚¬í•­ ê¸€ ì „ì²´ëª©ë¡ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û ÀüÃ¼¸ñ·Ï ºÒ·¯¿À´Â ¸Þ¼Òµå
 	public ArrayList<noticeDto> AllNotice();
 	
-	//ê³µì§€ì‚¬í•­ ê¸€ ë“±ë¡ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û µî·Ï¸Þ¼Òµå
 	public void InsertNotice(noticeDto ndto);
 	
-	//ê³µì§€ì‚¬í•­ ê¸€ ìˆ˜ì •ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û ¼öÁ¤¸Þ¼Òµå
 	public void UpdateNotice(noticeDto ndto);
 	
-	//ê³µì§€ì‚¬í•­ ê¸€ ì‚­ì œë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û »èÁ¦¸Þ¼Òµå
 	public void DeleteNotice(int num);
 	
-	//ê³µì§€ì‚¬í•­ ê¸€ ì¤‘ í•˜ë‚˜ì˜ ê¸€ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û Áß ÇÏ³ªÀÇ ±Û ºÒ·¯¿À´Â ¸Þ¼Òµå
 	public noticeDto OneNotice(int num);
 }

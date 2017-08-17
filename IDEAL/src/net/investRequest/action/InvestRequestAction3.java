@@ -18,34 +18,35 @@ public class InvestRequestAction3 implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("InvestRequestAction3 ì§„ì…");
+		System.out.println("InvestRequestAction3 ÁøÀÔ");
 		System.out.println("request getContentType : " + request.getContentType());
-
+		//ÇÑ±Û Ã³¸®
 		request.setCharacterEncoding("utf-8");
-
+		//session ¿µ¿ªÀ» »ç¿ëÇÏ±â À§ÇØ¼­ session¿µ¿ª ¹Ş¾Æ¿À±â
 		HttpSession session = request.getSession();
-
+		//session ¿µ¿ª¿¡¼­ memberEmail °¡Á®¿À±â(¸¸¾à session¿¡ ¾øÀ¸¸é request¿¡¼­ °¡Á®¿À±â)
 		String memberEmail = (String)session.getAttribute("memberEmail");
 		if(memberEmail==null) memberEmail = request.getParameter("memberEmail");
-
+		//session ¿µ¿ª¿¡¼­ irdto °¡Á®¿À±â(¸¸¾à session¿¡ ¾øÀ¸¸é request¿¡¼­ °¡Á®¿À±â)
 		InvestRequestDto irdto = (InvestRequestDto)session.getAttribute("irdto");
 		if(irdto == null) irdto = (InvestRequestDto)request.getAttribute("irdto");
-
+		//¸¸¾à session¿¡µµ request¿¡µµ ¾øÀ¸¸é °¡Á®¿Âirdto¿¡¼­ ²¨³»¿À±â
 		if(memberEmail==null) memberEmail = irdto.getMemberEmail();
 		
 		System.out.println("memberEmail:"+memberEmail);
 		
-
+		//¾÷·ÎµåÇÒ ÆÄÀÏÀÇ °æ·Î//»ó´ë°æ·Î
 		String realFolder = request.getServletContext().getRealPath("image\\"+memberEmail);
-
+//		File folder = new File("D:\\jsp\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\test2\\image"+"\\"+memberEmail);//¼­¹öÂÊ ÇÁ·ÎÁ§Æ® Æú´õ¿¡ »ç¿ëÀÚ ´Ğ³×ÀÓÀ¸·Î Æú´õ »ı¼º
+//		File folder = new File("D:\\workspace_jquerymobile\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\test2\\image\\"+memberEmail);
 		File folder = new File(realFolder);
-		if(!folder.exists()){
-			folder.mkdirs();
-			System.out.println(memberEmail+"ìœ ì €ì˜ í´ë”ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.");
+		if(!folder.exists()){//ÇØ´ç Æú´õ°¡ ÀÖ´ÂÁö Ã¼Å©
+			folder.mkdirs();//Æú´õ°¡ ¾ø´Ù¸é Æú´õ »ı¼º
+			System.out.println(memberEmail+"À¯ÀúÀÇ Æú´õ¸¦ »ı¼ºÇÕ´Ï´Ù.");
 		}
 		
 		
-
+		//¾÷·Îµå ÆÄÀÏÀÇ ÃÖ´ë Å©±â -> ¸ñ·Ï¿¡ ³ëÃâµÇ´Â ½æ³×ÀÏ ÀÌ¹ÌÁö Å©±â Á¦ÇÑ 1mb
 		int max = 10*1024*1024;//10MB
 		
 		MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8", new DefaultFileRenamePolicy());
@@ -67,9 +68,10 @@ public class InvestRequestAction3 implements Action {
 		irdto.setFile(savefile);
 		
 		
-		System.out.println("---ir1ì—ì„œ ë„˜ì–´ì˜¨íŒŒì¼+ir2 í™•ì¸----");
-		//1í˜ì´ì§€
+		System.out.println("---ir1¿¡¼­ ³Ñ¾î¿ÂÆÄÀÏ+ir2 È®ÀÎ----");
+		//1ÆäÀÌÁö
 		System.out.println("memberEmail:"+irdto.getMemberEmail());
+		//irdto.investRequestNumÀº auto_increment
 		System.out.println("program:"+irdto.getProgram());
 		System.out.println("dName:"+irdto.getDName());
 		System.out.println("introduce:"+irdto.getIntroduce());
@@ -80,15 +82,19 @@ public class InvestRequestAction3 implements Action {
 		System.out.println("payDay:"+irdto.getPayDay());
 		System.out.println("successMoney:"+irdto.getSuccessMoney());
 		System.out.println("thumbimage:"+irdto.getThumbImage());
-		//2í˜ì´ì§€
+		//2ÆäÀÌÁö
 		System.out.println("mainThumb:"+irdto.getMainThumb());
 		System.out.println("mainImage:"+irdto.getMainImage());
 		System.out.println("mainText:"+irdto.getMainText());
-		//3í˜ì´ì§€
+		//3ÆäÀÌÁö
 		System.out.println(irdto.getFile());
+		//default or DB
+//		System.out.println(irdto.getFundsituation());//±âº»°ª 1
+//		System.out.println(irdto.getPermitChk());
+//		System.out.println(irdto.getUpdateChk());
 		System.out.println("----------------------------");
 		
-		//DBì²˜ë¦¬
+		//DBÃ³¸®¸Ş¼Òµå
 		InvestRequestDao irdao = new InvestRequestDao();
 		int check = irdao.InsertInvestRequst(irdto);
 		

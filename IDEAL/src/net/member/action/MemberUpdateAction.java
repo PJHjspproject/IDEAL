@@ -31,14 +31,13 @@ public class MemberUpdateAction implements Action {
 		dto.setNickName(nick);
 		
 		MemberDAO dao = new MemberDAO();
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		int result = dao.UpdateMember(dto);
 		
+		int result = dao.UpdateMember(dto);
 		if(result==1){
 			
 			System.out.println("수정성공");
-			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
 			out.println("<script type='text/javascript'>");
 			out.println("alert('수정되었습니다.');");
 			out.println("</script>");
@@ -49,9 +48,6 @@ public class MemberUpdateAction implements Action {
 
 		}else{
 			System.out.println("수정실패");
-			out.println("<script type='text/javascript'>");
-			out.println("alert('수정에 실패해였습니다.');");
-			out.println("</script>");
 			ActionForward forward=new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/UpdateViewpage.mf");

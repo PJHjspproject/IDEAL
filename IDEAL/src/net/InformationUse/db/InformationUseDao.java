@@ -12,23 +12,27 @@ import javax.sql.DataSource;
 
 
 public class InformationUseDao implements InformationMethod{
-	
+	//DB¿¬°á ¸Ş¼Òµå ¸¸µé¾îÁÖ¼¼¿ä
 	
 	private Connection getCon(){
 		Connection con = null;
 		
 		try {
+			
+			//1. WAS¼­¹ö¿Í ¿¬°áµÈ À¥ÇÁ·ÎÁ§Æ®ÀÇ ¸ğµç Á¤º¸¸¦ °¡Áö°í ÀÖ´Â ÄÁÅØ½ºÆ® °´Ã¼ »ı¼º
 			Context init = new InitialContext();
+			//2. ¿¬°áµÈ WAS¼­¹ö¿¡¼­ DataSource(Ä¿³Ø¼ÇÇ®) °Ë»öÇØ¼­ °¡Á®¿À±â
 			DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/jspbeginner");
+			//3. DataSource(Ä¿³Ø¼ÇÇ®)¿¡¼­ ¹Ì¸® ¿¬°áµÈ DB¿¬µ¿°´Ã¼(Ä¿³Ø¼Ç) ºô·Á¿À±â
 			con = ds.getConnection();
 			
 		} catch (Exception err) {
-			System.out.println("DBì—°ê²° ì—ëŸ¬ : " + err);
+			System.out.println("DB¿¬°á ¿À·ù : " + err);
 		}
 		return con;
-	}//DB getcon() end
+	}//DB¿¬°á ¸Ş¼Òµå getcon ³¡
 	
-	
+	//ÀÚ¿øÇØÁ¦ ¸Ş¼Òµå
 	public void freeRes(Connection con, PreparedStatement pstmt, ResultSet rs){
 		if(con!=null){try{con.close();}catch(Exception e){e.printStackTrace();}}
 		if(pstmt!=null){try{pstmt.close();}catch(Exception e){e.printStackTrace();}}
@@ -37,116 +41,134 @@ public class InformationUseDao implements InformationMethod{
 	public void freeRes(Connection con, PreparedStatement pstmt){
 		if(con!=null){try{con.close();}catch(Exception e){e.printStackTrace();}}
 		if(pstmt!=null){try{pstmt.close();}catch(Exception e){e.printStackTrace();}}
-	}//ìì›í•´ì œ ë
+	}//ÀÚ¿øÇØÁ¦ ¸Ş¼Òµå ³¡
 	
-		//ì£¼ì œë¥¼ ê¸°ì¤€ìœ¼ë¡œ ëª¨ë“  ê¸€ë“¤ì„ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
+		//ÁÖÁ¦¸¦ ±âÁØÀ¸·Î ¸ğµç ±ÛµéÀ» °¡Á®¿À´Â ¸Ş¼Òµå
 		public ArrayList<InformationUseDto> Information() {
-			//DBì—°ê²°
+			//DB¿¬°á 3ÃÑ»ç
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
+			//¸®ÅÏÅ¸ÀÔ¿¡ ¸Â´Â ¸®ÅÏ °ª »ı¼º
 			ArrayList<InformationUseDto> Array = new ArrayList<InformationUseDto>();
 			
 			
 			try {
+				
+			//DB¿¬°á
 				con = getCon();
-				String sql = "select * from informationUse";
-				pstmt = con.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-			
-				while (rs.next()) {
-					InformationUseDto dto = new InformationUseDto();
-					dto.setInfoNum(rs.getInt(1));
-					dto.setInfoSubject(rs.getString(2));
-					dto.setInfoTitle(rs.getString(3));
-					dto.setInfoContent(rs.getString(4));
-					dto.setInfoImage(rs.getString(5));
-					Array.add(dto);
-				}
+			//SQLÄõ¸®¹® ÀÛ¼º
+			String sql = "select * from informationUse";
+			//SQLÄõ¸®¹® ½ÇÇà°ª RS¿¡ ´ã±â
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			//¹İº¹¹® ½ÇÇà
+			while (rs.next()) {
+				//InformationUseDto°´Ã¼ »ı¼º
+				InformationUseDto dto = new InformationUseDto();
+				//InformationUseDto°´Ã¼¾È¿¡ RS°ª ²¨³»¾î ´ã±â
+				dto.setInfoNum(rs.getInt(1));
+				dto.setInfoSubject(rs.getString(2));
+				dto.setInfoTitle(rs.getString(3));
+				dto.setInfoContent(rs.getString(4));
+				dto.setInfoImage(rs.getString(5));
+				//InformationUseDto°´Ã¼¸¦ ArrayList¿¡ ´ã±â
+				Array.add(dto);
+			}
 						
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("Information ë©”ì†Œë“œ ì—ëŸ¬: "+e);
+				System.out.println("Information¸Ş¼Òµå¿¡¼­ ¿À·ù : "+e);
 			}finally {
 				freeRes(con, pstmt, rs);
 			}
+			
+			//ArrayList¸®ÅÏ
+			
 			return Array;
-		}//Information ë
+		}//Information ¸Ş¼Òµå ³¡
 
-		//ë²ˆí˜¸ë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì•„ì„œ ê·¸ë²ˆí˜¸ì— ë”°ë¥¸ ê¸€ì„ ìƒì„¸ë³´ê¸°í•˜ëŠ” ë©”ì†Œë“œ
+		//¹øÈ£¸¦ ¸Å°³º¯¼ö·Î ¹Ş¾Æ¼­ ±×¹øÈ£¿¡ µû¸¥ ±ÛÀ» »ó¼¼º¸±âÇÏ´Â ¸Ş¼Òµå
 		
 		public InformationUseDto getInfo(int infoNum) {
-			
+			//¸®ÅÏÅ¸ÀÔÀÇ º¯¼ö ¼±¾ğ
 			InformationUseDto dto = null;
+			//DB¿¬°á »ïÃÑ»ç
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			try {
+			//DB¿¬°á
 				con = getCon();
+			//SQLÄõ¸®¹® ÀÛ¼º
 				String sql = "select * from informationUse where infoNum=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, infoNum);
-				rs = pstmt.executeQuery();
-			
-				if(rs.next()){
-					dto = new InformationUseDto();
-					dto.setInfoNum(rs.getInt(1));
-					dto.setInfoSubject(rs.getString(2));
-					dto.setInfoTitle(rs.getString(3));
-					dto.setInfoContent(rs.getString(4));
-					dto.setInfoImage(rs.getString(5));
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, infoNum);
+			rs = pstmt.executeQuery();
+			//RS¿¡ °ªÀÌ ÀÖÀ»°æ¿ì~
+			if(rs.next()){
+				dto = new InformationUseDto();
+			//InformationUseDto¾È¿¡ RS°ª ²¨³»¾î ´ã±â
+				dto.setInfoNum(rs.getInt(1));
+				dto.setInfoSubject(rs.getString(2));
+				dto.setInfoTitle(rs.getString(3));
+				dto.setInfoContent(rs.getString(4));
+				dto.setInfoImage(rs.getString(5));
 				
 				}
 			
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("getInfo() ë©”ì†Œë“œ ì—ëŸ¬"+e);
+				System.out.println("getInfo¸Ş¼Òµå ¿À·ù"+e);
 			}finally {
 				freeRes(con, pstmt, rs);
 			}
-			
+			//¸®ÅÏ
 			return dto;
 		}
 
-		//ê´€ë¦¬ìê°€ ê¸€ì“°ëŠ” ë©”ì†Œë“œ
+		//°ü¸®ÀÚ°¡ ±Û¾²´Â ¸Ş¼Òµå
 		
 		public void InsertInfo(InformationUseDto iudto) {
-			
+			//DB¿¬°á 2ÃÑ»ç
 			Connection con=null;
 			PreparedStatement pstmt = null;
 			try {
-				con = getCon();
-				String sql = "insert into informationUse (infoNum,infoSubject,infoTitle,infoContent,infoImage) "
-					+ "values(?,?,?,?,?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, iudto.getInfoNum());
-			pstmt.setString(2, iudto.getInfoSubject());
-			pstmt.setString(3, iudto.getInfoTitle());
-			pstmt.setString(4, iudto.getInfoContent());
-			pstmt.setString(5, iudto.getInfoImage());
-			pstmt.executeUpdate();
-			
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("InsertInfoë©”ì†Œë“œ ì—ëŸ¬ "+e);
-			}finally {
-				freeRes(con, pstmt);
-			}
-		}
-
-		//FAQ ìˆ˜ì • 
-		public void UpdateInfo(InformationUseDto iudto) {
-			
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			
-			try {
-			
+			//DB¿¬°á
 			con = getCon();
+			//SQLÄõ¸®¹® ÀÛ¼º
+			String sql = "insert into informationUse (infoNum,infoSubject,infoTitle,infoContent,infoImage) "
+					+ "values(?,?,?,?,?)";
+			//Äõ¸® ½ÇÇà
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, iudto.getInfoNum());
+			pstmt.setString(2, iudto.getInfoSubject());
+			pstmt.setString(3, iudto.getInfoTitle());
+			pstmt.setString(4, iudto.getInfoContent());
+			pstmt.setString(5, iudto.getInfoImage());
+			pstmt.executeUpdate();
 			
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("InsertInfo¸Ş¼Òµå "+e);
+			}finally {
+				freeRes(con, pstmt);
+			}
+		}
+
+		
+		public void UpdateInfo(InformationUseDto iudto) {
+			//DB¿¬°á 2ÃÑ»ç
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+			//DB¿¬°á
+			con = getCon();
+			//SQLÄõ¸®¹® ÀÛ¼º
 			String sql = "update informationUse set infoNum=?, infoSubject=?, infoTitle=?, infoContent=?,"
-								+ " infoImage=?";
-			
+					+ " infoImage=?";
+			//Äõ¸® ½ÇÇà
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, iudto.getInfoNum());
 			pstmt.setString(2, iudto.getInfoSubject());
@@ -158,30 +180,31 @@ public class InformationUseDao implements InformationMethod{
 			
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("UpdateInfo()ë©”ì†Œë“œì—ëŸ¬"+e);
+				System.out.println("UpdateInfo¸Ş¼Òµå ³¡"+e);
 			}finally {
 				freeRes(con, pstmt);
 			}
 			
 		}
 
-		//FAQ ì‚­ì œ
+		
 		public void DeleteInfo(int infoNum) {
-			
+			//DB¿¬°á 2ÃÑ»ç
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			try {
-			
+			//DB¿¬°á
 				con = getCon();
+			//SQLÄõ¸®¹® ÀÛ¼º
 				String sql ="delete from informationUse where infoNum=?";
-			
+			//Äõ¸® ½ÇÇà
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, infoNum);
 				pstmt.executeUpdate();
 			
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("DeleteInfo() ë©”ì„œë“œ ì—ëŸ¬: "+e);
+				System.out.println("DeleteInfo¸Ş¼Òµå ¿À·ù: "+e);
 			}finally {
 				freeRes(con, pstmt);
 			}

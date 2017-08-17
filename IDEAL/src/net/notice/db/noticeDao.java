@@ -10,33 +10,33 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class noticeDao implements noticeMethod{
-	
+	//DB¿¬°á ¸Ş¼Òµå
 	private Connection getConnection() throws Exception{
 		Connection con=null;
 		Context inti=new InitialContext();
 		DataSource ds=(DataSource)inti.lookup("java:comp/env/jdbc/jspbeginner");
 		con=ds.getConnection();
 		return con;
-	}
+	}//getConnection ³¡
 	
-	//ê³µì§€ì‚¬í•­ ê¸€ ì „ì²´ëª©ë¡ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û ÀüÃ¼¸ñ·Ï ºÒ·¯¿À´Â ¸Ş¼Òµå
 	@Override
 	public ArrayList<noticeDto> AllNotice() {
-		
+		//DB»ïÃÑ»ç
 		Connection con= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<noticeDto> array = new ArrayList<noticeDto>();
 		noticeDto dto;
 		try {
-			
+			//DB¿¬°á 
 			con = getConnection();
-			
+			//sql±¸¹® ÀÛ¼º
 			String sql = "select * from notice";
-			
+			//±¸¹® ½ÇÇà
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+			//¹İº¹¹® µ¹·Á rs¿¡¼­ Á¤º¸¸¦ ²¨³» dto¿¡ ´ã°í ´Ù½Ã ¾î·¹ÀÌ¸®½ºÆ®¿¡ ´ã±â
 			while (rs.next()) {
 				dto = new noticeDto();
 				dto.setNoticeNum(rs.getInt(1));
@@ -47,61 +47,61 @@ public class noticeDao implements noticeMethod{
 				array.add(dto);
 				
 			}
-			
+			//ÀÚ¿øÇØÁ¦
 			con.close();
 			pstmt.close();
 			rs.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("AllNoticeë©”ì†Œë“œì—ì„œ ì—ëŸ¬ :" +e);
+			System.out.println("AllNotice¸Ş¼Òµå ¿À·ù :" +e);
 		}
 				
 		
 		
 		return array;
-	}// AllNotice end
+	}// AllNotice ³¡
 
-	//ê³µì§€ì‚¬í•­ ê¸€ ë“±ë¡ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û µî·Ï¸Ş¼Òµå
 	@Override
 	public void InsertNotice(noticeDto ndto) {
 		
 		
 	}
 
-	//ê³µì§€ì‚¬í•­ ê¸€ ìˆ˜ì •ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û ¼öÁ¤¸Ş¼Òµå
 	@Override
 	public void UpdateNotice(noticeDto ndto) {
 		
 		
 	}
 
-	//ê³µì§€ì‚¬í•­ ê¸€ ì‚­ì œë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û »èÁ¦¸Ş¼Òµå
 	@Override
 	public void DeleteNotice(int num) {
 		
 		
 	}
 
-	//ê³µì§€ì‚¬í•­ ê¸€ ì¤‘ í•˜ë‚˜ì˜ ê¸€ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ
+	//°øÁö»çÇ× ±Û Áß ÇÏ³ªÀÇ ±Û ºÒ·¯¿À´Â ¸Ş¼Òµå
 	@Override
 	public noticeDto OneNotice(int noticeNum) {
-		
+		//DB»ïÃÑ»ç 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		noticeDto dto = null;
 		try {
-			
+			//DB¿¬°á
 			con = getConnection();
-			
+			//sql±¸¹® ÀÛ¼º
 			String sql = "select * from notice where noticeNum=?";
-			
+			//±¸¹® ½ÇÇà
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, noticeNum);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()){
+			if(rs.next()){//¸¸¾à Á¦´ë·Î °Ë»ö µÇ¾ú´Ù¸é?
 				dto = new noticeDto();
 				dto.setNoticeNum(rs.getInt(1));
 				dto.setNoticeSubject(rs.getString(2));
@@ -115,10 +115,10 @@ public class noticeDao implements noticeMethod{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("OneNotice ë©”ì†Œë“œì—ì„œ ì—ëŸ¬ :"+e);
+			System.out.println("OneNotice¸Ş¼Òµå ¿À·ù :"+e);
 		}
 		
 		return dto;
-	}//OneNotice end
+	}//OneNotice ³¡
 
 }

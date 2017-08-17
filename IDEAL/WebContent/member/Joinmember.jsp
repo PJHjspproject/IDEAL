@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/member1.css">
 <meta charset="utf-8">
 
 <%
@@ -12,8 +13,6 @@
 <script type="text/javascript">
 
 	function nickcheck(){
-		
-		
 		
 		var nickName = null; 
 		if(document.getElementById("nickName")!=null){
@@ -87,35 +86,61 @@
 </script>
 </head>
 <body>
-
-	<div class="auth" align="center">
+	<div class="wrap0_join">
+	<div class="joinmemdiv" align="center">
 		<form action="MemberJoin.mf" method="post" name="f">
-				이름 : <input type=text size=15 name="name" id="name">
-				<span id="nameck" style="color: red;"></span><br/>
+				<table class="centerpos">
+					<tr>
+						<td class="td1">
+							<p><b>이름 :</b></p>
+						</td>
+						<td><input type=text size=15 name="name" class="tdname" id="name"></td> 
+						<td><span id="nameck" style="color: #a50019;font-weight: 500;"></span><br /></td>
+					</tr>
+					<tr>
+						<td class="td1"><p><b>아이디</b>(Email) :</p></td>
+						<td><input type=text size=15 id="memberEmail" class="tdemail"
+							name="memberEmail" value="<%=email%>" readonly="readonly"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="td1"><p><b>별명 :</b></p></td>
+						<td><input type="text" size=15 id=nickName class="tdname" name="nickName"></td>
+						<td><input type="button" value="중복확인" onclick="nickcheck()"></td>
+						<td><span id="nickck" style="color: #a50019;"></span></td>
+					</tr>
+					<tr>
+						<td class="td1"><p><b>비밀번호 :</b></p></td>
+						<td><input type="password" size="15" id="pass" class="tdpass" name="pass">
+							</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="td1"><p><b>비번확인 :</b></p></td>
+						<td><input type="password" size="15" id="pass2" class="tdpass2" name="pass2"></td>
+						<td><span id="pwsame" style="color: #a50019;"></span></td>
+					</tr>
+					<tr>
+						<td class="td1"><label for="birthday"><p><b>생년월일 :</b></p></label></td>
+						<td><input type="text" size="15" id="birth" name="birth" class="tdbirth"
+							placeholder="주민등록번호6자리"> </td>
+						<td><span id="birthck"
+							style="color: #a50019;"></span></td>
+					</tr>
+					<tr>
+						<td class="td1"><p><b>휴대폰 :</b></p></td>
+						<td><input type="text" size="15" id="phone" name="phone" class="tdphone"
+							placeholder="-를 제외하고 입력하세요"></td>
+						<td><span id="phoneck" style="color: #a50019;"></span></td>
+					</tr>
+				</table>
+				<input type="hidden" id="result" name="result" value="0">
+				<input class="membercan1" type=reset value="취소">
+				<input class="memberjoin1" type=button value="가입" onclick="check(this.form)"> 
 				
-				아이디(email) : <input type=text size=15 id="memberEmail" name="memberEmail" 
-									value="<%=email%>" readonly="readonly"><br/> 
-									
-				별명 : <input type="text" size=15 id=nickName name="nickName">
-				<span id="nickck" style="color: red;"></span>
-				<input type="button" value="중복검사" id="nickck" name="nickck" onclick="return nickcheck();">
-				<br/>
 				
-				비밀번호 : <input type="password" size="15" id="pass" name="pass"><br/>
-				 
-				비번확인 : <input type="password" size="15" id="pass2" name="pass2">
-				<span id="pwsame" style="color: red;"></span><br/>
-				
-				<label for="birthday">생년월일 :</label>
-				<input type="text" id="birth" name="birth" placeholder="주민등록번호6자리">
-				<span id="birthck" style="color: red;"></span><br/> 
-				
-				휴대폰 : <input type="text" size="15" id="phone" name="phone" placeholder="-를 제외하고 입력하세요"><br/>
-				<span id="phoneck" style="color: red;"></span><br/>
-				<input type="hidden" name="result"  id="result" value="0">
-				<input type=button value="가입"  onclick="check(this.form)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				<input type=reset value="취소">
 		</form>
+	</div>
 	</div>
 
 </body>

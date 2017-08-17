@@ -59,6 +59,7 @@
 	}
 	textarea#introduce{
 		padding:15px;
+		resize:none;
 	}
 	select#category{
 		padding:10px;
@@ -259,7 +260,7 @@
 			}else{
 				alert("이미지 파일만 등록 가능합니다.\njpb, png, gif\n파일확장자를 확인해주세요.");
 				upload.value="";
-				holder.innerHTML = "<br><br><br><br>용량 1M미만 / 영문,숫자 파일명 권장<br>등록가능 확장자 png, gif, jpg";
+				holder.innerHTML = "<br><br><br>가로:286px 세로:200px을 권장합니다.<br>용량 1M미만 / 영문,숫자 파일명 권장<br>등록가능 확장자 png, gif, jpg";
 				size.innerHTML = "";
 				holder.classList.add("thumb_none");
 				return;
@@ -274,7 +275,7 @@
 //				alert(event.target);//여기서 event.target > object FileReader
 //				alert(event.target.result);//여기서 event.target.result > 업로드한 이미지 파일정보
 				img.width = 300;//썸네일 이미지 width값 300으로 고정
-				img.width = 200;//썸네일 이미지 height값 200으로 고정
+				img.height = 180;//썸네일 이미지 height값 200으로 고정
 				holder.classList.remove("thumb_none");
 				holder.innerHTML = "";
 				holder.appendChild(img);
@@ -316,84 +317,93 @@
 		
 		/* 각각 입력부분 공란 체크 */
 		$("#ir1submit").on("click", function(){
-			var chk = false;//공란 체크 확인용 변수
+			//공란 체크 확인용 변수
+			var thumbimagechk = false, 
+				programchk = false, 
+				dNamechk = false, 
+				introducechk = false,
+				startDaychk = false, 
+				endDaychk = false, 
+				payDaychk = false, 
+				successMoneychk = false;
 			
 			//썸네일
 			if($("#thumbimage").val()==null || $("#thumbimage").val()==""){//썸네일 이미지 선택란이 비어있을 때
 // 				alert($("#thumbimage").val());
 				$("#thumbimage").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#thumbimage").focus();
-				chk = false;
+				thumbimagechk = false;
 			}else{
 				$("#thumbimage").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				thumbimagechk = true;
 			}
 			//프로그램 이름
 			if($("#program").val()==null || $("#program").val()==""){//프로그램 이름입력란이 비어있을 때
 				$("#program").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#program").focus();
-				chk = false;
+				programchk = false;
 			}else{
 				$("#program").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				programchk = true;
 			}
 			//대표 이름
 			if($("#dName").val()==null || $("#dName").val()==""){//대표 이름 입력란이 비어있을 때
 				$("#dName").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#dName").focus();
-				chk = false;
+				dNamechk = false;
 			}else{
 				$("#dName").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				dNamechk = true;
 			}
 			//프로그램 간략 소개
 			if($("#introduce").val()==null || $("#introduce").val()==""){//프로그램 간략 소개란이 비어있을때
 				$("#introduce").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#introduce").focus();
-				chk = false;
+				introducechk = false;
 			}else{
 				$("#introduce").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				introducechk = true;
 			}
-			//시작일&종료일
+			//시작일
 			if($("#startDay").val()==null || $("#startDay").val()==""){//시작일이 비어있을 때
 				$("#startDay").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#startDay").focus();
-				chk = false;
+				startDaychk = false;
 			}else{
 				$("#startDay").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				startDaychk = true;
 			}
+			//종료일
 			if($("#endDay").val()==null || $("#endDay").val()==""){//종료일이 비어있을 때
 				$("#endDay").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#endDay").focus();
-				chk = false;
+				endDaychk = false;
 			}else{
 				$("#endDay").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				endDaychk = true;
 			}
 			//교부예정일
 			if($("#payDay").val()==null || $("#payDay").val()==""){//교부예정일이 비어잇을 때
 				$("#payDay").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#payDay").focus();
-				chk = false;
+				payDaychk = false;
 			}else{
 				$("#payDay").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				payDaychk = true;
 			}
 			//목표 금액
 			if($("#successMoney").val()==null || $("#successMoney").val()==""){//
 				$("#successMoney").siblings("h2").children("#none_alert").css("display", "inline");
 // 				$("#successMoney").focus();
-				chk = false;
+				successMoneychk = false;
 			}else{
 				$("#successMoney").siblings("h2").children("#none_alert").css("display", "none");
-				chk = true;
+				successMoneychk = true;
 			}
 
 			
 			/* submit */
-			if(chk){
+			if(thumbimagechk == true && programchk == true && dNamechk == true && introducechk == true &&startDaychk == true && endDaychk == true && payDaychk == true && successMoneychk == true){
 				$("#ir1form").submit();
 			}else{
 // 				$("body").scrollTop(0);
@@ -466,7 +476,9 @@
 					<div>
 						<h2>프로그램 간략 소개<span id='none_alert'>* 프로그램 간략 소개를 입력해주세요</span></h2>
 						<textarea rows="5" cols="60" name="introduce" id="introduce" maxlength="100" max-text-length="100"></textarea>
-						<span id="text_count">0</span>/100
+						<div style="display:inline-block; padding-top:130px;">
+							<span id="text_count">0</span>/100
+						</div>
 						<h4>캠페인에 대한 간략한 소개를 적어주세요. 홍보에 도움이 됩니다.</h4>
 					</div>
 					<br><br>

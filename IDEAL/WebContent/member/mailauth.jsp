@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/default.css">
+<link rel="stylesheet" href="css/member1.css">
 <title>Insert title here</title>
 <script type="text/javascript">
 	
@@ -43,17 +44,16 @@
 </script>
 </head>
 <body>
-<div>
+<div class="wrap0">
 	<div align="center" class="auth">
 	<form action="./Joinmember.mf" name="f" id="f" method="post" onsubmit="return check();">
 	
-	이메일 : <input type="text" id="email" name="email">
-	<input type="button" value="중복체크" onclick="return emailcheck();">
+	<b>이메일 :</b> <input class="emailin" type="text" id="email" name="email"><br/>
+	<input class="mailcheck" type="button" value="1. 중복체크" onclick="return emailcheck();">
 	<br/>
 	<input type="hidden" name="result"  id="result" value="0">
-	
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="submit" value="인증받기">
+		
+	<input class="mailreceive" type="submit" value="2. 인증받기">
 	</form>
 	</div>
 </div>

@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 
 
 public class CardDao implements CardMethod{
-	
+	//DB¿¬°á ¸Ş¼Òµå ÀÛ¼ºÇØÁÖ¼¼¿ä.
 	private Connection getCon() throws Exception{
 		Connection con = null;
 		
@@ -21,7 +21,7 @@ public class CardDao implements CardMethod{
 	
 		return con;
 	}
-	
+	//ÀÚ¿øÇØÁ¦ ¸Ş¼Òµå
 	public void freeRes(Connection con, PreparedStatement pstmt, ResultSet rs){
 		if(con!=null){try{con.close();}catch(Exception e){e.printStackTrace();}}
 		if(pstmt!=null){try{pstmt.close();}catch(Exception e){e.printStackTrace();}}
@@ -30,21 +30,38 @@ public class CardDao implements CardMethod{
 	public void freeRes(Connection con, PreparedStatement pstmt){
 		if(con!=null){try{con.close();}catch(Exception e){e.printStackTrace();}}
 		if(pstmt!=null){try{pstmt.close();}catch(Exception e){e.printStackTrace();}}
-	}
+	}//ÀÚ¿øÇØÁ¦ ¸Ş¼Òµå ³¡
 	
-	
+	//Ä«µå µî·ÏÇÏ´Â ¸Ş¼Òµå
 	@Override
 	public int InsertCard(CardDto cdto) {
+		//µî·ÏÀÌ µÆ´ÂÁö ¾ÈµÆ´ÂÁö È®ÀÎÇÏ´Â intº¯¼ö ¼±¾ğ
 		
+		//db¿¬°á 2ÃÑ»ç
+		
+		//db¿¬°á
+		
+		//sqlÄõ¸®±¸¹® ÀÛ¼º
+		
+		//sqlÄõ¸® ½ÇÇà
+		
+		//½ÇÇà°ª º¯¼ö¿¡ ´ã¾Æ¼­ ¸®ÅÏ
+		
+		//ÀÚ¿øÇØÁ¦
 		return 0;
 	}
 	
 
 
 
-	
+	//Ä«µå °áÁ¦ÇÏ´Â ¸Ş¼Òµå
 	@Override
 	public void paymentCard(int CardNum, int price) {
+		//DB¿¬°á 2ÃÑ»ç
+		
+		//DB¿¬°á
+		
+		//SQLÄõ¸®±¸¹® ÀÛ¼º
 		
 		
 		
@@ -52,9 +69,9 @@ public class CardDao implements CardMethod{
 
 
 
-	// ì…ë ¥í•œ ì¹´ë“œ ì •ë³´ ë¹„êµí•˜ê¸°
+	// ÀÔ·ÂÇÑ Ä«µå Á¤º¸ ºñ±³ÇÏ±â
 	public int getOneCard(CardDto cardDto) {
-		
+		//	DB ¿¬°á
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -91,7 +108,7 @@ public class CardDao implements CardMethod{
 			}
 			
 		} catch (Exception e) {
-			System.out.println("getOneCardë©”ì†Œë“œ ì—ì„œ ì—ëŸ¬ : " + e);
+			System.out.println("getOneCard¸Ş¼Òµå¿¡¼­ ¿À·ù : " + e);
 		}finally{
 			freeRes(con, pstmt, rs);
 		}
@@ -99,9 +116,9 @@ public class CardDao implements CardMethod{
 		return result;
 	}
 	
-	//íˆ¬ì ì„±ê³µ í•˜ì—¬ ì¹´ë“œ ì”ì•¡ ì°¨ê°
+	//ÅõÀÚ ¼º°ø ÇÏ¿© Ä«µå ÀÜ¾× Â÷°¨
 	public CardDto deductBalance(int nowMoney, String cardNum) {
-		
+		//	DB ¿¬°á
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -125,7 +142,7 @@ public class CardDao implements CardMethod{
 				
 						
 			} catch (Exception e) {
-				System.out.println("deductBalanceë©”ì†Œë“œ ì—ì„œ ì—ëŸ¬ " + e);
+				System.out.println("deductBalance¸Ş¼Òµå¿¡¼­ ¿À·ù : " + e);
 			}finally {
 				freeRes(con, pstmt, rs);
 			}
@@ -134,7 +151,7 @@ public class CardDao implements CardMethod{
 		
 	}
 
-	//ê²°ì œ í•˜ëŠ” ì¹´ë“œ ì”ì•¡ ê°€ì ¸ì˜¤ê¸°
+	//°áÁ¦ ÇÏ´Â Ä«µå ÀÜ¾× °¡Á®¿À±â
 	public CardDto getPayCard(String cardNum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -160,7 +177,7 @@ public class CardDao implements CardMethod{
 			
 					
 		} catch (Exception e) {
-			System.out.println("getPayCardë©”ì†Œë“œ ì—ì„œ ì—ëŸ¬ : " + e);
+			System.out.println("getPayCard¸Ş¼Òµå¿¡¼­ ¿À·ù : " + e);
 		}finally {
 			freeRes(con, pstmt, rs);
 		}

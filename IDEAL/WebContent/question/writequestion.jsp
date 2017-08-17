@@ -7,38 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <link href="aie.css" type="text/css" rel="stylesheet"> -->
-<style type="text/css">
-.tableAll{
-border: none;
-border-collapse: collapse;
-}
+<link href="./css/question1.css" type="text/css" rel="stylesheet">
 
-.tableAll tr.boardtr{
-	background-image: url("img/boardbg.jpg");
-	background-repeat: repeat-x;
-	border: 1px solid;
-	height: 40px;
-	letter-spacing: 0.1em;
-}
-.wrap .reseend input{
-float: right;
-margin-left: 10px;
-width: 150px;
-}
-.clear{
-	clear:both;
-}
-div.wrap{
-padding-top: 70px;
-
-}
-span{
-	color: red;
-}
-
-
-</style>
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
  function check(){
@@ -86,16 +56,13 @@ String nickName = (String)session.getAttribute("nickName");
 		<form action="insertquestion.qU" enctype="multipart/form-data" method="post">
 		<table width="1028px" class="tableAll">
 			<tr class="boardtr">
-				<th>회원이름</th>
-				<td> <input type="text" value="${nickName } " name="nickName" width="300px" readonly="readonly"></td>
-				<th>글제목</th>
-				<td><input type="text" name="title" width="300px"></td>
+				<th colspan="2">글제목<input class="thtitle" type="text" name="title"></th>
+				<th>회원이름<input type="text" value="${nickName }" name="nickName" readonly="readonly"></th>
 			</tr>
 			<tr>
 				<td colspan="4">
-				<textarea rows="5" cols="100" name="content" style="resize:none; width: 1028px;" class="txtarere">
+				<textarea rows="5" cols="100" name="content" style="width: 1028px;" class="txtarere">
 				</textarea>
-
 				</td>
 			</tr>
 			<tr>
@@ -103,11 +70,11 @@ String nickName = (String)session.getAttribute("nickName");
 					<input type="file" name="file1" id="file1" onchange="check()"><span id="fileck"></span>
 					<br/>용량 10M미만 / 영문,숫자 파일명 권장 / 등록가능 확장자 png, gif, jpg
 				</td>
-				<br>
+				<br/>
 				<td colspan="4" class="reseend">
-					<input type="submit" value="작성" >
-					<input type="reset" value="다시 작성">
-					<input type="button" value="목록으로" onclick="location.href='question.qU'">
+					<input class="write1" type="submit" value="작성" >
+					<input class="rewrite1" type="reset" value="다시 작성">
+					<input class="tolist1" type="button" value="목록으로" onclick="location.href='question.qU'">
 				</td>
 			</tr>
 		

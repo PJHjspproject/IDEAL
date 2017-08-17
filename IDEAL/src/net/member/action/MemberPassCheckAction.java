@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.member.db.MemberDAO;
-/*비밀번호 체크 메소드*/
+
 public class MemberPassCheckAction implements Action {
 
 	@Override
@@ -24,7 +24,7 @@ public class MemberPassCheckAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		
 		result = mdao.UserCheck(email, pass);
-		//
+		
 		if(result==false){
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(true);

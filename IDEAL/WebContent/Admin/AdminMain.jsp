@@ -5,14 +5,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<style type="text/css">
+input {
+/* 	position: absolute; */
+	width:100px;
+	height: 40px;
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	top:0;
+}
+.1px {
+	margin-top: 0px;
+	margin-bottom: 1px;
+}
+.center {
+	position: relative;
+}
+</style>
 </head>
 <body>
-<div align="center">
+<div align="center" class="center">
 <h1>관리자페이지입니다</h1>
+
 <input type="button" value="투자요청심사" onclick="location.href='AdminInvestRequest.ad'">
 <input type="button" value="가입회원조회" onclick="location.href='AdminMemberList.ad'">
 <input type="button" value="1:1문의글현황" onclick="location.href='AdminQuestion.ad'">
-<input type="button" value="FAQ" onclick="location.href='AdminInformationUse.ad'">
+<input type="button" class="1px" value="FAQ" onclick="location.href='AdminInformationUse.ad'">
 <input type="button" value="카드금액결제" onclick="location.href='AdminCardPayment.ad'"><!-- 안됨 -->
 <input type="button" value="공지사항" onclick="location.href='AdminNotice.ad'">
 <input type="button" value="게시판조회" onclick="location.href='AdminBoardList.ad'">

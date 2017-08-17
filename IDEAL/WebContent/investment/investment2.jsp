@@ -164,103 +164,86 @@ position:relative;
 
 <!-- 카드 정보 입력 시 공란 입력 방지 및 투자 가능 금액 보다 높은 금액 투자 시 경고 메세지 function -->
 <script type="text/javascript">
-function checkinput(fr) {
+function checkinput() {
 	
-	document.getElementById("cardck").innerHTML='';
-	document.getElementById("passck").innerHTML='';
-	document.getElementById("dayck").innerHTML='';
-	document.getElementById("birthck").innerHTML='';
-	document.getElementById("moneyck").innerHTML='';
+
 	
 	if(document.fr.cardNum1.value == ""){
-		document.getElementById("cardck").innerHTML='카드번호를 입력하십시오';
+		alert("카드번호를 입력하세요.");
 		document.fr.cardNum1.focus();
-		//return false;
-		
+		return false;
 	}
 	
-	else if(document.fr.cardNum2.value == ""){
-		
-		document.getElementById("cardck").innerHTML='카드번호를 입력하십시오';
+	if(document.fr.cardNum2.value == ""){
+		alert("카드번호를  입력하세요.");
 		document.fr.cardNum2.focus();
-		//return false;
-		
+		return false;
 	}
 	
-	else if(document.fr.cardNum3.value == ""){
-		document.getElementById("cardck").innerHTML='카드번호를 입력하십시오';
+	if(document.fr.cardNum3.value == ""){
+		alert("카드번호를 입력하세요");
 		document.fr.cardNum3.focus();	
-		//return false;		
+		return false;
 	}
 	
-	else if(document.fr.cardNum4.value == ""){
-		document.getElementById("cardck").innerHTML='카드번호를 입력하십시오';
-		document.fr.cardNum4.focus();
-		//return false;
-		
+	if(document.fr.cardNum4.value == ""){
+		alert("카드번호를 입력하세요");
+		document.fr.cardNum4.focus();	
+		return false;
 	}
 	
-	else if(document.fr.cardPass.value == ""){
-		document.getElementById("passck").innerHTML='비밀번호를 입력하시오';
+	if(document.fr.cardPass.value == ""){
+		alert("비밀번호 2자리를 입력하세요");
 		document.fr.cardPass.focus();	
-		//return false;
-		
+		return false;
 	}
 	
-	else if(document.fr.cardExpiryM.value == ""){
-		document.getElementById("dayck").innerHTML='카드 유효기간 월을 입력하세요';
-		document.fr.cardExpiryM.focus();
-		//return false;
-		
+	if(document.fr.cardExpiryM.value == ""){
+		alert("카드 유효기간 월을 입력하세요");
+		document.fr.cardExpiryM.focus();	
+		return false;
 	}
 	
-	else if(document.fr.cardExpiryY.value == ""){
-		document.getElementById("dayck").innerHTML='카드 유효기간 년도를 입력하세요';
+	if(document.fr.cardExpiryY.value == ""){
+		alert("카드 유효기간 년도를 입력하세요");
 		document.fr.cardExpiryY.focus();	
-		//return false;
-		
+		return false;
 	}
 	
 	
-	else if(document.fr.memberBirth.value == ""){
-		document.getElementById("birthck").innerHTML='생년월일을 확인하세요';
-		document.fr.cardBirth.focus();
-		//return false;
-		
+	if(document.fr.memberBirth.value == ""){
+		alert("생년월일를 입력하세요");
+		document.fr.cardBirth.focus();	
+		return false;
 	}
 	
-	else if(document.fr.InvestMoney.value == ""){
-		document.getElementById("moneyck").innerHTML='반드시 투자금액을 입력해야함';
-		document.fr.InvestMoney.focus();
-		//return false;
-		
+	if(document.fr.InvestMoney.value == ""){
+		alert("프로젝트 투자 금액을 입력하세요");
+		document.fr.InvestMoney.focus();	
+		return false;
 	}
 	
-	else if(document.fr.InvestMoney.value == 0){
-		document.getElementById("moneyck").innerHTML='0원은 입력이 불가능함';
-		document.fr.InvestMoney.focus();
-		//return false;
-		
+	if(document.fr.InvestMoney.value == 0){
+		alert("0원은 투자되지 않습니다.");
+		document.fr.InvestMoney.focus();	
+		return false;
 	}
 	
-	else if(document.fr.userInfoCk.checked == false){
+	if(document.fr.userInfoCk.checked == false){
 		alert("개인정보 제3자 제공 및 처리위탁 동의 및 \n결제 및 취소・환불 관련 유의사항에 체크 해주세요");
 		document.fr.userInfoCk.focus();	
-		
+		return false;
 	}
 	
-	else if(isNaN(document.fr.InvestMoney) > isNaN(document.fr.impInvestMoney)){
-		document.getElementById("moneyck").innerHTML='투자가능 금액 보다 높은 금액은 투자하실 수 없습니다.';
+	if(isNaN(document.fr.InvestMoney) > isNaN(document.fr.impInvestMoney)){
+		alert("투자가능 금액 보다 높은 금액은 투자하실 수 없습니다.");
 		alert(InvestMoney);
 		alert(impInvestMoney);
-		document.fr.InvestMoney.focus();
+		document.fr.InvestMoney.focus();	
 		return false;
-		
-	}else{
-		fr.submit();
 	}
 	
-	
+	return true;
 }
 
 
@@ -351,26 +334,23 @@ function checkinput(fr) {
 						<input type="text" maxlength="4" name="cardNum2" id="input">
 						<input type="password" maxlength="4" name="cardNum3" id="input">
 						<input type="password" maxlength="4" name="cardNum4" id="input">
-						<span id="cardck" style="color: red;"></span>
+						
 					</dd>
 				
 				<dt id="title">비밀번호 앞 2자리</dt>
 					<dd id="cardPwd">
 						<input type="password" maxlength="2" name="cardPass" style="width:80px; height: 30px;">
-						<span id="passck" style="color: red;"></span>
 					</dd>
 					
 				<dt id="title">유효기간</dt>
 					<dd>
 						<input type="text" maxlength="2" name="cardExpiryM" placeholder="월" style="width:100px; height: 30px;">
 						<input type="text" maxlength="2" name="cardExpiryY" placeholder="년" style="width:100px; height: 30px;">
-						<span id="dayck" style="color: red;"></span>
 					</dd>
 					
 				<dt id="title">생년월일(주민등록번호 앞 6자리)</dt>
 					<dd>
 						<input type="text" name="memberBirth"  style="width:160px; height: 30px;" maxlength="6">
-						<span id="birthck" style="color: red;"></span>
 					</dd>
 				
 				
@@ -383,8 +363,7 @@ function checkinput(fr) {
 				
 				<div id="title_immoney2">
 				<dt id="title">프로젝트 투자 금액</dt>
-					<dd><input type="text" name="InvestMoney" id="InvestMoney" style="width:160px; height: 30px;">원
-					&nbsp; <span id="moneyck" style="color: red;"></span></dd>
+					<dd><input type="text" name="InvestMoney" id="InvestMoney" style="width:160px; height: 30px;">원</dd>
 				</div>
 					
 			</dl>
@@ -462,7 +441,7 @@ function checkinput(fr) {
 		
 		<%--결제 하기 버튼 --%>
 	<div id="button">
-			<center><input type="button" class="submit" value="결제하기" style="width: 30spx; height: 30px" onclick="checkinput(this.form);">		
+			<center><input type="button" class="submit" value="결제하기" style="width: 30spx; height: 30px" onclick="checkinput();">		
 	</div>	
 	<%--결제 하기 버튼 끝--%>
 </form>

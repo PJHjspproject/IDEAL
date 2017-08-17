@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 
 public class questionDto {
 
-	private int num;//ê¸€ë²ˆí˜¸
-	private String title;//ê¸€ì œëª©
-	private String nickName;//íšŒì›ì´ë¦„
-	private Timestamp inputDate;//ë“±ë¡ì¼
-	private boolean questionStatement;//ë‹µë³€ìƒíƒœ
-	private String content;//ë¬¸ì˜ë‚´ìš©
-	private String reContent;//ë‹µë³€ë‚´ìš©
+	private int num;//±Û¹øÈ£
+	private String title;//±ÛÁ¦¸ñ
+	private String nickName;//È¸¿øÀÌ¸§
+	private Timestamp inputDate;//µî·ÏÀÏ
+	private boolean questionStatement;//´äº¯»óÅÂ
+	private String content;//¹®ÀÇ³»¿ë
+	private String reContent;//´äº¯³»¿ë
 	private String image;
 	
 	public int getNum() {

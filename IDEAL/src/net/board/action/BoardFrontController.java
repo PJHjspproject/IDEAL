@@ -29,13 +29,13 @@ public class BoardFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 
-
+		// �Խ��� �� ��� ����
 		if (p3.equals("/boardList.bo")) {
 			action = new BoardList();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("boardList.bo에서 에러 : " + e);
+				System.out.println("boardList.bo��� ���� : " + e);
 			}
 		} else if (p3.equals("/write.bo")) {
 			action = new BoardWrite();
@@ -101,7 +101,7 @@ public class BoardFrontController extends HttpServlet {
 			try{
 				forward = action.execute(request, response);
 			}catch (Exception e) {
-				System.out.println("deleteComment.bo 에서 에러: "+e);
+				System.out.println("deleteComment.bo ���� ����");
 			}
 		}
 

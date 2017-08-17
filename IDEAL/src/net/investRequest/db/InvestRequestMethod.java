@@ -5,16 +5,16 @@ import java.util.Date;
 
 public interface InvestRequestMethod {
 
-	//íˆ¬ì ìš”ì²­ í˜„í™© ë¿Œë ¤ì£¼ëŠ” ë©”ì†Œë“œ(ì¹´í…Œê³ ë¦¬ì™€ ê²€ìƒ‰ì–´ë¥¼ ë°›ì•„ì„œ...)
+	//ÅõÀÚ ¿äÃ» ÇöÈ² »Ñ·ÁÁÖ´Â ¸Ş¼Òµå(Ä«Å×°í¸®¿Í °Ë»ö¾î¸¦ ¹Ş¾Æ¼­...)
 	public ArrayList<InvestRequestDto> ListInvestRequest(String category, String search, int pageSize); 
 	
-	//íˆ¬ì ìš”ì²­ ë©”ì†Œë“œ
+	//ÅõÀÚ ¿äÃ» ¸Ş¼Òµå
 	public int InsertInvestRequst(InvestRequestDto irdto);
 	
-	//íˆ¬ì ë“±ë¡ëœê²ƒì„ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ
+	//ÅõÀÚ µî·ÏµÈ°ÍÀ» ºÒ·¯¿À´Â ¸Ş¼Òµå
 	public InvestRequestDto getInvestRequest(int num);	
 	
-	//íˆ¬ì í˜„í™© ì•Œì•„ë³´ëŠ” ë©”ì†Œë“œ ì„±ê³µ? ì‹¤íŒ¨? ì§„í–‰?
+	//ÅõÀÚ ÇöÈ² ¾Ë¾Æº¸´Â ¸Ş¼Òµå ¼º°ø? ½ÇÆĞ? ÁøÇà?
 	public int ConditionInvest(int num, Date endDay, int successMoney);
 	
 	

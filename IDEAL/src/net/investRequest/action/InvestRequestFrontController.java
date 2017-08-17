@@ -22,15 +22,16 @@ public class InvestRequestFrontController extends HttpServlet{
 	}
 	
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		//ÇÑ±ÛÃ³¸®
 		req.setCharacterEncoding("utf-8");
 		
+		//ÀüÃ¼ ÁÖ¼Ò °¡Á®¿À±â
 		String requestURI = req.getRequestURI();
 		System.out.println(requestURI);
-
+		//ÀüÃ¼ ÁÖ¼Ò Áß ¾Õ ºÎºĞ °¡Á®¿À±â
 		String contextPath = req.getContextPath();
 		System.out.println(contextPath);
-
+		//½ÇÁ¦ ¿äÃ» ÁÖ¼Ò°ª °¡Á®¿À±â
 		String command = requestURI.substring(contextPath.length());
 		System.out.println(command);
 		
@@ -40,8 +41,8 @@ public class InvestRequestFrontController extends HttpServlet{
 		
 		ActionForward forward = null;
 		
-		if(command.equals("/investRequest.iR")){//íˆ¬ììš”ì²­ ë²„íŠ¼ ì‹œì‘ì„ ëˆŒë €ì„ì‹œ
-			System.out.println("");
+		if(command.equals("/investRequest.iR")){
+			System.out.println("ÅõÀÚ¿äÃ»½ÃÀÛ");
 			forward = new ActionForward();
 			forward.setPath("main1.jsp?center=investRequest/investRequest1.jsp");
 			forward.setRedirect(false);
@@ -85,17 +86,17 @@ public class InvestRequestFrontController extends HttpServlet{
 			forward.setPath("main1.jsp?center=investRequest/product.jsp");
 			forward.setRedirect(false);
 		}else{
-			System.out.println("ë¬´ì—‡ì¸ê°€ ì˜ëª»ë¬ìŒ");
+			System.out.println("¹º°¡ Àß¸øµÊ");
 		}
 		
 		if(forward != null){
 			if(forward.isRedirect()){
-				System.out.println("-----sendRedirectì‹¤í–‰-----");
+				System.out.println("-----sendRedirect½ÇÇà-----");
 				resp.sendRedirect(forward.getPath());
 				System.out.println(forward.getPath());
 				System.out.println("-------------------------");
 			}else{
-				System.out.println("-----requestDispatcherì‹¤í–‰-----");
+				System.out.println("-----requestDispatcher½ÇÇà-----");
 				RequestDispatcher view = req.getRequestDispatcher(forward.getPath());
 				System.out.println(forward.getPath());
 				view.forward(req, resp);

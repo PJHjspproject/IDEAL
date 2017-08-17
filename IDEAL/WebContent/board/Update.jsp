@@ -10,6 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="./css/board1.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -45,11 +46,11 @@ function check(){
 }
 $(function(){
 	if($("#originalFineName").val()==null || $("#originalFineName").val()==""){//originalFileName에 값이 있을 경우 -> 즉, 디비에 업로드된 파일이 있을 경우
-		$("#updateFile").css("display", "inline");//업로드할 태그부분을 보이게 처리
+// 		$("#updateFile").css("display", "inline");//업로드할 태그부분을 보이게 처리
 	}
 	
 	$("#deleteFileChk").on("change", function(){//삭제할 checkbox의 상태 체크
-		alert($("#fileimg").attr("src"));
+// 		alert($("#fileimg").attr("src"));
 		if($("#deleteFileChk").is(":checked")){//만약 삭제할 checkbox가 체크되었다면
 // 			alert("체크됨");
 			var src = $("#fileimg").attr("src");//파일삭제에 이용하기 위해 <img>태그의 src값 가져오기
@@ -72,6 +73,7 @@ $(function(){
 %>
 </head>
 <body>
+<div class="wrapUp">
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -80,39 +82,38 @@ $(function(){
 
 <form action="updatePro.bo" enctype="multipart/form-data"  method="post">
 
-	<table>
+	<table class="writetb">
 		<tr>
-			<td>글번호</td>
-			<td><input type="text" name="num" value="${bdto.num }" readonly="readonly"></td>
+			<td>글번호
+			<input type="text" class="tdnum" name="num" value="${bdto.num }" readonly="readonly"></td>
+			<td>닉네임
+			<input type="text" class="tdnic" name="nickName" readonly="readonly" value="${nickName}"></td>
 		</tr>
 		<tr>
-			<td>닉네임</td>
-			<td><input type="text" name="nickName" readonly="readonly" value="${nickName}"></td>
+			<td colspan="2">글제목
+			<input type="text" class="tdtitleUp" name="title" value="${bdto.title }"></td>
 		</tr>
 		<tr>
-			<td>글제목</td>
-			<td><input type="text" name="title" value="${bdto.title }"></td>
+			<td colspan="2">
+			<input type="text" class="tdcon" name="content" id="content" value="${bdto.content }"></td>
 		</tr>
 		<tr>
-			<td>파일</td>
 				<td>
+					<div id="updateFile"><input type="file" name="file" id="file" onchange="check()"><span id="fileck"></span></div>
 					<c:if test="${bdto.file!=null }">
 						<label>삭제<input type="checkbox" id="deleteFileChk" name="deleteFileChk"><img id="fileimg" src="image/${bdto.nickName }/${bdto.file }"></label><br>
 					</c:if>
-					<div id="updateFile"><input type="file" name="file" id="file" onchange="check()"><span id="fileck"></span></div>
+					
 				</td>
 		</tr>
 		<tr>
-			<td>글내용</td>
-			<td colspan="3"><input type="text" name="content" id="content" value="${bdto.content }"></td>
-		</tr>
-		<tr>
-			<td><input type="submit" value="수정하기"></td>
-			<td><input type="button" value="목록보기" onclick="location.href='boardList.bo'"></td>
-			<td><input type="reset" value="다시입력"></td>
+			<td colspan="2">
+			<input class="modify1" type="submit" value="수정하기">
+			<input class="tolist1" type="button" value="목록보기" onclick="location.href='boardList.bo'">
+			<input class="rewrite1" type="reset" value="다시입력"></td>
 		</tr>
 	</table>
 </form>
-
+</div>
 </body>
 </html>

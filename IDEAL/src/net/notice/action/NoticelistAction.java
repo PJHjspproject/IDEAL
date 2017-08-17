@@ -12,14 +12,14 @@ public class NoticelistAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		//DAO객체 생성
 		noticeDao dao = new noticeDao();
 		
 		ArrayList<noticeDto> arry = new ArrayList<noticeDto>();
 		arry = dao.AllNotice();
 		request.setAttribute("arry", arry);
 		
-		
+		//이동 
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("main1.jsp?center=tap_ex2.jsp&centern=notice/list.jsp");

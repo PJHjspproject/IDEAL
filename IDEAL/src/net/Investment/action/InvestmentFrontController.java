@@ -33,27 +33,37 @@ public class InvestmentFrontController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.setCharacterEncoding("utf-8");
+		//ÀüÃ¼ ÁÖ¼Ò °¡Á®¿À±â
 		String requestURI = req.getRequestURI();
 		System.out.println(requestURI);
+		//ÀüÃ¼ ÁÖ¼Ò Áß ¾Õ ºÎºĞ °¡Á®¿À±â
 		String contextPath = req.getContextPath();
 		System.out.println(contextPath.length());
+		//½ÇÁ¦ ¿äÃ» ÁÖ¼Ò °¡Á®¿À±â
 		String command = requestURI.substring(contextPath.length());
 		System.out.println(command);
 		
 		Action action = null;
 		ActionForward forward = null;
 		
-		//investment.jspì—ì„œ íˆ¬ìí•˜ê¸°ë¥¼ ëˆŒëŸ¬ íˆ¬ì ì„±ê³µ ì‹œ index.jspë¡œ ì´ë™í•˜ë¼ëŠ” ìš”ì²­ì´ ë“¤ì–´ì™”ì„ ë•Œ...
+		//investment.jsp¿¡¼­ ÅõÀÚÇÏ±â¸¦ ´­·¯ ÅõÀÚ ¼º°ø ½Ã index.jsp·Î ÀÌµ¿ÇÏ¶ó´Â ¿äÃ»ÀÌ µé¾î¿ÔÀ» ¶§...
 		if(command.equals("/index.im")){
 			
-			
+			//ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ª, ÀÌµ¿ÆäÀÌÁö °æ·Î°ª ÀúÀåÇÏ¿© ¸®ÅÏÇØÁÖ´Â °´Ã¼ »ı¼º
 			forward = new ActionForward();
-			
+			//ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ª false·Î ÀúÀå->RequestDispatcher forward() ¹æ½Ä
 			forward.setRedirect(false);
-			
+			//ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î(ÅõÀÚÇÏ±â ÆäÀÌÁö) ÁÖ¼Ò°ª ÀúÀå
 			forward.setPath("main1.jsp");
-		
-			//investment.jspì—ì„œ íˆ¬ìí•˜ê¸°ë¥¼ ëˆŒëŸ¬ investmentAction.javaë¡œ ì´ë™ í•˜ì—¬ ì…ë ¥ ì •ë³´ í™•ì¸
+			
+			//investment.jsp¿¡¼­ ÀÔ·ÂÇÑ Ä«µåÁ¤º¸ ³»¿ëÀ» ´ã°íÀÖ´Â
+			//request¿µ¿ªÀ» execute¸Ş¼ÒµåÀÇ ¸Å°³º¯¼ö·Î Àü´ŞÇÏ¿©
+			//Ä«µåÁ¤º¸ DBÀÛ¾÷ ÈÄ Ä«µå°áÁ¦¿¡ ¼º°øÇÏ¸é
+			//ÆäÀÌÁö ÀÌµ¿ ¹æ½Ä ¿©ºÎ°ª true¿Í
+			//ÀÌµ¿ÇÒ ÆäÀÌÁö ÁÖ¼Ò¸¦ ´ã°í ÀÖ´Â
+			//new ActionForward()°´Ã¼¸¦ ¸®ÅÏ¹Ş´Â´Ù
+			
+			//investment.jsp¿¡¼­ ÅõÀÚÇÏ±â¸¦ ´­·¯ investmentAction.java·Î ÀÌµ¿ ÇÏ¿© ÀÔ·Â Á¤º¸ È®ÀÎ
 		}else if(command.equals("/investmentAction.im")){
 			action = new investmentAction();
 			try {
@@ -63,7 +73,7 @@ public class InvestmentFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-			//ì¹´ë“œ ì •ë³´ ë¶ˆì¼ì¹˜ ì‹œ íˆ¬ìí•˜ê¸° í˜ì´ì§€ë¡œ ì¬ ì´ë™
+			//Ä«µå Á¤º¸ ºÒÀÏÄ¡ ½Ã ÅõÀÚÇÏ±â ÆäÀÌÁö·Î Àç ÀÌµ¿
 		}else if(command.equals("/investment.im")){
 			
 			action = new goInvestmentAction();
@@ -73,7 +83,7 @@ public class InvestmentFrontController extends HttpServlet{
 				forward= action.excute(req, resp);
 				
 			}catch(Exception e){
-				System.out.println("/investment.im ì—ëŸ¬ì–´"+e);
+				System.out.println("Ä«µåÁ¤º¸ È®ÀÎ ½ÇÆĞ");
 			}
 
 		}

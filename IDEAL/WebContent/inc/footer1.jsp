@@ -6,6 +6,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/footer1.css">
+<script src="js/main.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
@@ -13,7 +14,7 @@
   <div id="foot_container"> 
 	<div id="wrap3">
 		<div id="f_logo">
-			<img src="img/logo.png">
+			<img src="./img/footlogo.png">
 		</div>
 
 
@@ -50,15 +51,22 @@
 					}
 				</script>
 			</div>
-		</div>
+		
 
 		<div id="clear"></div>
 		<div class="f_b2">
-			<p>제작멤버소개</p>
-			<p>회사소개연혁</p>
-			<p>절차진행과정</p>
+			<a href="#">제작멤버소개</a><br/>
+			<a href="#">회사소개연혁</a><br/>
+			<a href="#" onclick="processingInfo(1)">절차진행과정</a>
+			<script type="text/javascript">
+				function processingInfo(num) {
+					//최초 오픈값 설정위해 num값 삽입(1)
+					url = "informationUse/proccessingInfo.jsp?num="+num;
+					window.open(url,"왜안바뀜?","width=1000, height=750" );
+				}
+			</script>
 		</div>
-
+		</div>
 
 
 		<div class="f_a">
@@ -100,6 +108,11 @@
 	   </div>
       </div>
 	</div>
+
+		<button type="button" class="back-to-top">
+    <h3><span class="label">Top</span></h3>
+   	</button>
+
 
 
 </body>

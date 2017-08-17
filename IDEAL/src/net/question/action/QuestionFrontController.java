@@ -16,18 +16,18 @@ public class QuestionFrontController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		//��ü �ּ� ��������
 		String requestURI = req.getRequestURI();
-		
+		//��ü �ּ� �� �� �κ� ��������
 		String contextPath = req.getContextPath();
-		
+		//���� ��û �ּ� ��������
 		String command = requestURI.substring(contextPath.length());
 		System.out.println(command);
 		Action action = null;
 		ActionForward forward = null;
 		
-		if(command.equals("/question.qU")){//1:1 문의사항 글 목록 
-			System.out.println("question.qu탓음");
+		if(command.equals("/question.qU")){
+			System.out.println("question.qu����");
 			action = new questionAction();
 			
 			try {
@@ -37,7 +37,7 @@ public class QuestionFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/questionContent.qU")){//1:1 문의 글 읽기
+		}else if(command.equals("/questionContent.qU")){
 			
 			action = new questionContentAction();
 			
@@ -47,14 +47,14 @@ public class QuestionFrontController extends HttpServlet{
 				
 				e.printStackTrace();
 			}
-		}else if(command.equals("/writequestion.qU")){//목록에서 글쓰기
+		}else if(command.equals("/writequestion.qU")){
 			
 			forward = new ActionForward();
 			
 			forward.setRedirect(false);
 			forward.setPath("./main1.jsp?center=question/writequestion.jsp");
 			
-		}else if(command.equals("/insertquestion.qU")){//글 쓰기 버튼 클릭 insert 실행
+		}else if(command.equals("/insertquestion.qU")){
 			
 			action = new insertquestAction();
 			
@@ -64,7 +64,7 @@ public class QuestionFrontController extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if(command.equals("/deletequestion.qU")){//1:1 글 삭제
+		}else if(command.equals("/deletequestion.qU")){
 			
 			action = new deletequestAction();
 			
@@ -74,14 +74,14 @@ public class QuestionFrontController extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				}
-			}else if(command.equals("/updatequestion.qU")){//1:1글 수정
+			}else if(command.equals("/updatequestion.qU")){
 				action = new updateQuestionAction();
 				try {
 					forward = action.excute(req, resp);
 				} catch (Exception e) {
 					System.out.println("updatequestion.qU:"+e);
 				}
-			}else if(command.equals("/updatequestionPro.qU")){//update 작업 실행
+			}else if(command.equals("/updatequestionPro.qU")){
 				action = new updateQuestionProAction();
 				try {
 					forward = action.excute(req, resp);

@@ -17,27 +17,38 @@ public class getMainListAction implements Action{
 		ActionForward forward = null;
 		
 		/*
-		ë©”ì¸í˜ì´ì§€ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ goMain.ma ìš”ì²­ì„ ë°›ì•„ ì‹¤í–‰ë˜ëŠ” Actionì´ë‹¤.
-		ì—¬ê¸°ì„œëŠ” ë©”ì¸í˜ì´ì§€ ì¦‰, center1.jspì—ì„œ ë¿Œë ¤ì¤˜ì•¼í•  ëª¨ë“  ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ì•¼í•œë‹¤.
-		ê·¸ë¦¬ê³  ì•ì„œ ì´ì•¼ê¸° í–ˆë˜ ê²ƒ ì²˜ëŸ¼ ì‚¬ì´íŠ¸ ì ‘ì†ì‹œì— ëª¨ë“  fundSituationê°’ì´ 1ì¸ ê²ƒë“¤ì„ ì½ì–´ì™€ì„œ
-		ì‹œìŠ¤í…œì˜ ì˜¤ëŠ˜ ë‚ ì§œì™€ ë¹„êµí•´ì„œ ë‚ ì§œê°€ ê°™ê±°ë‚˜ ì§€ë‚œê²ƒë“¤ì€ ëª¨ë‘ fundSituationê°’ì„ 2(íˆ¬ìê¸ˆ ëª¨ê¸ˆ ì‹¤íŒ¨), 4(íˆ¬ìê¸ˆ ëª¨ê¸ˆ 80%ì´ìƒ ë‹¬ì„±, ì„±ê³µ)
-		ìœ¼ë¡œ ë°”ê¿”ì¤€ë‹¤.
+			¸ŞÀÎÆäÀÌÁö ÄÁÆ®·Ñ·¯¿¡¼­ goMain.ma ¿äÃ»À» ¹Ş¾Æ ½ÇÇàµÇ´Â ActionÀÌ´Ù.
+			¿©±â¼­´Â ¸ŞÀÎÆäÀÌÁö Áï, center1.jsp¿¡¼­ »Ñ·ÁÁà¾ßÇÒ ¸ğµç µ¥ÀÌÅÍ¸¦ °¡Á®¿Í¾ßÇÑ´Ù.
+			±×¸®°í ¾Õ¼­ ÀÌ¾ß±â Çß´ø °Í Ã³·³ »çÀÌÆ® Á¢¼Ó½Ã¿¡ ¸ğµç fundSituation°ªÀÌ 1ÀÎ °ÍµéÀ» ÀĞ¾î¿Í¼­
+			½Ã½ºÅÛÀÇ ¿À´Ã ³¯Â¥¿Í ºñ±³ÇØ¼­ ³¯Â¥°¡ °°°Å³ª Áö³­°ÍµéÀº ¸ğµÎ fundSituation°ªÀ» 2(ÅõÀÚ±İ ¸ğ±İ ½ÇÆĞ), 4(ÅõÀÚ±İ ¸ğ±İ 80%ÀÌ»ó ´Ş¼º, ¼º°ø)
+			À¸·Î ¹Ù²ãÁØ´Ù.
+		*/
 		
-	*/
-		
-		//ì„¸ì…˜ì˜ì—­ì„ ì‚¬ìš©í•˜ê¸°ìœ„í•´ ì„¸ì…˜ì„ ë°›ì•„ì˜¨ë‹¤
+		//¼¼¼Ç¿µ¿ªÀ» »ç¿ëÇÏ±âÀ§ÇØ ¼¼¼ÇÀ» ¹Ş¾Æ¿Â´Ù
 		HttpSession session = request.getSession();
 		
 		
-		//ìº í˜ì¸ ê´€ë ¨ ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•´ì„œ InvestRequestDaoê°ì²´ ìƒì„±
+		//Ä·ÆäÀÎ °ü·Ã ¸Ş¼Òµå¸¦ »ç¿ëÇÏ±âÀ§ÇØ¼­ InvestRequestDao°´Ã¼ »ı¼º
 		InvestRequestDao irdao = new InvestRequestDao();
-		//ìº í˜ì¸ ë‚´ìš©ì„ ë¿Œë ¤ì£¼ê¸°ìœ„í•œ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¤ê¸°ì „ì— ë‚ ì§œì²´í¬ë¥¼ ì‹¤í–‰í•œë‹¤
+		
+		//Ä·ÆäÀÎ ³»¿ëÀ» »Ñ·ÁÁÖ±âÀ§ÇÑ µ¥ÀÌÅÍ¸¦ °¡Á®¿À±âÀü¿¡ ³¯Â¥Ã¼Å©¸¦ ½ÇÇàÇÑ´Ù
 		irdao.checkInvestRequest();
 
-		//ìº í˜ì¸ ë‚´ìš©ì„ ë¿Œë ¤ì£¼ê¸°ìœ„í•´ ëª©ë¡ì„ ê°€ì ¸ì˜¨ë‹¤
+		//Ä·ÆäÀÎ ³»¿ëÀ» »Ñ·ÁÁÖ±âÀ§ÇØ ¸ñ·ÏÀ» °¡Á®¿Â´Ù
 		ArrayList<InvestRequestDto> irlist = irdao.ListInvestRequest();
-		session.setAttribute("irlist", irlist);
 		
+		//·Î±×ÀÎÈÄ ÆäÀÌÁö¿¡ »Ñ·ÁÁú °ªµéÀ» ´ãÀ» ¸®½ºÆ® »ı¼º
+		ArrayList<InvestRequestDto> lirlist = new ArrayList<InvestRequestDto>();
+		lirlist.add(irdao.getImminentChampain());
+		lirlist.add(irdao.getHighestNowMoneyChampain());
+		
+		//µî·Ï ¿¹Á¤ Ä·ÆäÀÎ ¸®½ºÆ®
+		ArrayList<InvestRequestDto> eirlist = irdao.expectedIr();
+		
+		//session¿µ¿ª¿¡ °ªÀ» ¿Ã¸°´Ù
+		session.setAttribute("irlist", irlist);
+		session.setAttribute("lirlist", lirlist);
+		session.setAttribute("eirlist", eirlist);
 		
 		
 		PrintWriter out = response.getWriter();

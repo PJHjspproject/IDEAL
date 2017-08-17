@@ -6,50 +6,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link href="./css/notice1.css" type="text/css" rel="stylesheet">
 
-<style type="text/css">
-.tableAll{
-border: none;
-border-collapse: collapse;
-}
-
-.tableAll tr.boardtr{
-	background-image: url("img/boardbg.jpg");
-	background-repeat: repeat-x;
-	border: 1px solid;
-	color: white;
-	height: 40px;
-	letter-spacing: 0.1em;
-}
-.wrap input{
-float: right;
-width: 150px;
-}
-.dotttd{
-border-bottom: 1px dotted;
-}
-.wrap{
-padding-top: 100px;
-}
-</style>
 </head>
 <body>
 <div class="wrap">
 <center>
-<table width="922px" class="tableAll" border="0" >
-	<tr class="boardtr" style="margin-top: 100px;">
-		<th width="772px">${dto.noticeSubject}</th>
-		<th width="150px"><d:formatDate value="${dto.noticeDate}" pattern="yyyy-MM-dd"/> </th>
+<h4 class="subh4">■ IDEAL 공지사항</h4>
+<table class="tablecono" border="0">
+	<tr class="boardtrno1">
+		<th width="742" class="noth1">${dto.noticeSubject}</th>
+		<th width="286" class="noth2"><d:formatDate value="${dto.noticeDate}" pattern="yyyy-MM-dd"/> </th>
 	</tr>
 	<tr>
-		<td>글 이미지 :<img src="notice/image/${dto.noticeImg}"></td>
+		<td colspan="2"><p class="imgpad">[Image]</p><br/>
+		<img class="no_conimg" src="notice/image/${dto.noticeImg}" align="center"></td>
 	</tr>
 	<tr>
 		<td colspan="2" class="dotttd">${dto.noticeContent }</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="button" value="목록" onclick="location.href='list.no'">
+			<input class="tolist1" type="button" value="목록" onclick="location.href='list.no'">
 		</td>
 	</tr>
 </table>

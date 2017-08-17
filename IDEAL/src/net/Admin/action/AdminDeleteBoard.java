@@ -20,7 +20,7 @@ public class AdminDeleteBoard implements Action {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.');");
+			out.println("alert('»èÁ¦µÇ¾ú½À´Ï´Ù');");
 			out.print("location.href='AdminBoardList.ad'");
 			out.println("</script>");
 			out.close();

@@ -16,11 +16,11 @@ public class InvestmentFrontController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		//전체 주소 가져오기
 		String requestURI = req.getRequestURI();
-		
+		//전체 주소 중 앞 부분 가져오기
 		String contextPath = req.getContextPath();
-		
+		//실제 요청 주소 가져오기
 		String command = requestURI.substring(contextPath.length());
 		
 		Action action = null;

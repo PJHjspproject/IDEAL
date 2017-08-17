@@ -8,16 +8,16 @@ import net.investRequest.db.InvestRequestDto;
 
 public interface InvestmentMethod {
 	
-	//íˆ¬ìì ë“±ë¡ ë©”ì†Œë“œ
+	//ÅõÀÚÀÚ µî·Ï ¸Ş¼Òµå
 	public void InsertInvestment(InvestmentDto imDto);
 	
-	//íˆ¬ì ë³€ê²½ ë©”ì†Œë“œ
+	//ÅõÀÚ º¯°æ ¸Ş¼Òµå
 	public int UpdateInvestment(InvestmentDto idto);
 	
-	//íˆ¬ìì ë¦¬ìŠ¤íŠ¸ ë©”ì†Œë“œ
+	//ÅõÀÚÀÚ ¸®½ºÆ® ¸Ş¼Òµå
 	public ArrayList<InvestmentDto> ListInvestment(InvestmentDto idto);
 	
-	//íˆ¬ì ì§„í–‰ë¥  ë©”ì†Œë“œ
+	//ÅõÀÚ ÁøÇà·ü ¸Ş¼Òµå
 	public int PrograssRateInvest(InvestmentDto idto, InvestRequestDto irdto);
 	
 }

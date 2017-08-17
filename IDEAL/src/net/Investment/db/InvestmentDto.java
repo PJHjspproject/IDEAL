@@ -1,14 +1,23 @@
 package net.Investment.db;
 
+import java.sql.Date;
+
 public class InvestmentDto {
 	
 	private int investNum;
-	private String memberEmail;//íˆ¬ììë©”ì¼
-	private int investMoney;//íˆ¬ìê¸ˆì•¡
-	private int investRequestNum;//íˆ¬ìë²ˆí˜¸
-	private String program;//íˆ¬ì í”„ë¡œê·¸ë¨ ì´ë¦„
-	private String investName;
+	private String memberEmail;//ÅõÀÚÀÚ¸ŞÀÏ
+	private int investMoney;//ÅõÀÚ±İ¾×
+	private int investRequestNum;//ÅõÀÚ¹øÈ£
+	private String program;//ÅõÀÚ ÇÁ·Î±×·¥ ÀÌ¸§
+	private String investName;//ÅõÀÚÀÚÀÌ¸§
+	private Date investDate;//ÅõÀÚ³¯Â¥
 	
+	public Date getInvestDate() {
+		return investDate;
+	}
+	public void setInvestDate(Date investDate) {
+		this.investDate = investDate;
+	}
 	public int getInvestRequestNum() {
 		return investRequestNum;
 	}

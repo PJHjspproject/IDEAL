@@ -27,41 +27,47 @@ public class investmentAction implements Action{
 		InvestmentDao imDao = new InvestmentDao();
 		HttpSession session = request.getSession();
 		
-		// ì¹´ë“œì •ë³´ ë¹„êµí•˜ê¸°
+		// Ä«µåÁ¤º¸ ºñ±³ÇÏ±â
 		
-		String cardNum1 = request.getParameter("cardNum1");		
-		String cardNum2 = request.getParameter("cardNum2");		
-		String cardNum3 = request.getParameter("cardNum3");		
-		String cardNum4 = request.getParameter("cardNum4");		
-		String cardNum = cardNum1+cardNum2+cardNum3+cardNum4;	
+		String cardNum1 = request.getParameter("cardNum1");		// Ä«µåÁ¤º¸ Ã¹¹øÂ° ÀÚ¸® ¹Ş¾Æ¿À±â
+		String cardNum2 = request.getParameter("cardNum2");		// Ä«µåÁ¤º¸ µÎ¹øÂ° ÀÚ¸® ¹Ş¾Æ¿À±â
+		String cardNum3 = request.getParameter("cardNum3");		// Ä«µåÁ¤º¸ ¼¼¹øÂ° ÀÚ¸® ¹Ş¾Æ¿À±â
+		String cardNum4 = request.getParameter("cardNum4");		// Ä«µåÁ¤º¸ ³×¹øÂ° ÀÚ¸® ¹Ş¾Æ¿À±â
+		String cardNum = cardNum1+cardNum2+cardNum3+cardNum4;	// ¹Ş¾Æ¿Â Ä«µå ¹øÈ£ cardNum¿¡ ÅëÇÕÇÏ¿© ´ã±â
 		
-		String cardExpiryM = request.getParameter("cardExpiryM");	
-		String cardExpiryY = request.getParameter("cardExpiryY");	
-		int cardExpiry = Integer.parseInt(cardExpiryY+cardExpiryM); 
+		String cardExpiryM = request.getParameter("cardExpiryM");	//Ä«µå À¯È¿±â°£ ¿ù ¹Ş¾Æ¿À±â
+		String cardExpiryY = request.getParameter("cardExpiryY");	//Ä«µå À¯È¿±â°£ ³â ¹Ş¾Æ¿À±â
+		int cardExpiry = Integer.parseInt(cardExpiryY+cardExpiryM); //¹Ş¾Æ¿Â Ä«µå À¯È¿±â°£ ÅëÇÕÇÏ±â
 		
-		int cardPass = Integer.parseInt(request.getParameter("cardPass"));
-		String memberBirth = request.getParameter("memberBirth");	
-		String cardBank = request.getParameter("cardBank");	
+		int cardPass = Integer.parseInt(request.getParameter("cardPass")); //Ä«µå ºñ¹Ğ¹øÈ£ ¹Ş¾Æ¿À±â
+		String memberBirth = request.getParameter("memberBirth");	//¸â¹ö »ı³â¿ùÀÏ ¹Ş¾Æ¿À±â
+		String cardBank = request.getParameter("cardBank");	// Ä«µå ÀºÇàÁ¤º¸ ¹Ş¾Æ¿À±â
 		 
 		 
-		cardDto.setCardNum(cardNum);		
-		cardDto.setCardPass(cardPass); 		
-		cardDto.setMemberBirth(memberBirth);
-		cardDto.setCardExpiry(cardExpiry);	
-		cardDto.setCardBank(cardBank);		
+		cardDto.setCardNum(cardNum);		//Ä«µå¹øÈ£ DTO¿¡ ¼¼ÆÃ
+		cardDto.setCardPass(cardPass); 		//Ä«µå ºñ¹Ğ¹øÈ£ 2ÀÚ¸® DTO¿¡ ¼¼ÆÃ
+		cardDto.setMemberBirth(memberBirth);//Ä«µå ¼ÒÀ¯ÁÖ »ı³â¿ùÀÏ DTO¿¡ ¼¼ÆÃ
+		cardDto.setCardExpiry(cardExpiry);	//Ä«µå À¯È¿±â°£ DTO¿¡ ¼¼ÆÃ
+		cardDto.setCardBank(cardBank);		//Ä«µå ÀºÇà DTO¿¡ ¼¼ÆÃ
 		
 		
-		int result = cardDao.getOneCard(cardDto);	
+		int result = cardDao.getOneCard(cardDto);	//Ä«µå Á¤º¸ ºñ±³ÇÏ±â ¸Ş¼Òµå
 		System.out.println(result);
 		
-		
+		//investment Á¤º¸ ¹Ş¾Æ¿À±â
 		int investRequestNum = Integer.parseInt(request.getParameter("InvestRequestNum"));
 		String memberEmail = request.getParameter("memberEmail");
 		String investName = request.getParameter("investName");
 		int investMoney = Integer.parseInt(request.getParameter("InvestMoney"));
 		String program = request.getParameter("program");
-
 		
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + investRequestNum);
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + memberEmail);
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + investName);
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + investMoney);
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + program);
+		
+		//investment Á¤º¸ ¼¼ÆÃÇÏ±â
 		
 		imDto.setInvestRequestNum(investRequestNum);
 		imDto.setMemberEmail(memberEmail);
@@ -69,12 +75,20 @@ public class investmentAction implements Action{
 		imDto.setInvestMoney(investMoney);
 		imDto.setProgram(program);
 		
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + imDto.getInvestRequestNum());
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + imDto.getMemberEmail());
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + imDto.getInvestName());
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + imDto.getInvestMoney());
+//		System.out.println("investment Á¤º¸ ¼¼ÆÃ È®ÀÎ" + imDto.getProgram());
 		
-		// ì¹´ë“œ ì •ë³´ ë¹„êµí•˜ì—¬ ì…ë ¥í•œ ì¹´ë“œì •ë³´ì™€ DB ì¹´ë“œì •ë³´ê°€ ì¼ì¹˜í•˜ë©´ resultê°€ 1ë¡œ ë³€ê²½ ë¨
-		//resultê°€ 1ì¼ ì‹œ 
+		
+		
+		
+		// Ä«µå Á¤º¸ ºñ±³ÇÏ¿© ÀÔ·ÂÇÑ Ä«µåÁ¤º¸¿Í DB Ä«µåÁ¤º¸°¡ ÀÏÄ¡ÇÏ¸é result°¡ 1·Î º¯°æ µÊ
+		//result°¡ 1ÀÏ ½Ã 
 		if(result==1){
 			
-			//íˆ¬ììš”ì²­ ê²Œì‹œë¬¼ í˜„ì¬ ê¸ˆì•¡(nowMoney)ì— íˆ¬ìê¸ˆì•¡ ì¦ê°€
+			//ÅõÀÚ¿äÃ» °Ô½Ã¹° ÇöÀç ±İ¾×(nowMoney)¿¡ ÅõÀÚ±İ¾× Áõ°¡
 			int nowMoney=Integer.parseInt(request.getParameter("InvestMoney"));
 			int InvestRequestNum = Integer.parseInt(request.getParameter("InvestRequestNum"));
 			
@@ -82,38 +96,38 @@ public class investmentAction implements Action{
 
 			ivrDao.increaseNowMoney(nowMoney, InvestRequestNum);
 			
-			//ì¹´ë“œ ê°€ì ¸ ì˜¤ê¸°
+			//Ä«µå °¡Á® ¿À±â
 			cardDao.getPayCard(cardNum);
 			
-			//ì¹´ë“œ ê¸ˆì•¡ ì°¨ê°
+			//Ä«µå ±İ¾× Â÷°¨
 			
 			cardDao.deductBalance(nowMoney, cardNum);
 			
-			
+			//Ä«µå ±İ¾× Â÷°¨ ½Ã investment DB¿¡ ³»¿ª ¿Ã¸®±â
 			
 			imDao.InsertInvestment(imDto);
 			
-			//íˆ¬ìê¸ˆì•¡ 100% ëª¨ì§‘ì‹œ fundsituation ë³€ê²½
+			//ÅõÀÚ±İ¾× 100% ¸ğÁı½Ã fundsituation º¯°æ
 			
 			ivrDao.updateFundsituation(InvestRequestNum);
 			
-			//íˆ¬ìì™„ë£Œ ë©”ì„¸ì§€ ë„ì›Œì£¼ê¸°
+			//ÅõÀÚ¿Ï·á ¸Ş¼¼Áö ¶ç¿öÁÖ±â
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ì¹´ë“œ ì •ë³´ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤');");
+			out.print("alert('ÅõÀÚÇØ ÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.');");
 			out.print("location.href='index.im';");
 			out.print("</script>");
 			out.close();
 			
 			return null;
-			//resultê°€ 0ì´ë©´ ì¹´ë“œ ì •ë³´ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤ ì•ˆë‚´ë¬¸ ë„ì›Œì£¼ê¸°
+		//result°¡ 0ÀÌ¸é Ä«µå Á¤º¸°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù ¾È³»¹® ¶ç¿öÁÖ±â
 		}else if(result==0){
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alert('ì¹´ë“œ ì •ë³´ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.\\nì¹´ë“œì •ë³´ë¥¼ ë‹¤ì‹œ í™•ì¸í•˜ì—¬ ì£¼ì„¸ìš”.');");
-			out.print("location.href='investment.im';");
+			out.print("alert('Ä«µå Á¤º¸°¡ ÀÏÄ¡ ÇÏÁö ¾Ê½À´Ï´Ù.\\nÄ«µåÁ¤º¸¸¦ ´Ù½Ã È®ÀÎÇÏ¿© ÁÖ¼¼¿ä.');");
+			out.print("location.href='investment.im?investRequestNum="+investRequestNum+"';");
 			out.print("</script>");
 			out.close();
 			return null;

@@ -18,12 +18,13 @@ public class AdminQuestionList implements Action {
 		
 		if(nickName == null){
 		ArrayList<questionDto> questionList = adao.QuestionList();
-		
+		ArrayList<questionDto> cquestionList = adao.CompleteQuestionList();
 		request.setAttribute("questionList", questionList);
 		}else{
 			ArrayList<questionDto> questionList = adao.QuestionList(nickName);
-			
+			ArrayList<questionDto> cquestionList = adao.CompleteQuestionList(nickName);
 			request.setAttribute("questionList", questionList);
+			request.setAttribute("cquestionList", cquestionList);
 		}
 		ActionForward forward = new ActionForward();
 		forward.setPath("AdminQuestionList.jsp");

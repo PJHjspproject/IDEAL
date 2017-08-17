@@ -4,11 +4,11 @@ import java.sql.Timestamp;
 
 public class noticeDto {
 
-	private int noticeNum;//ê³µì§€ì‚¬í•­ ê¸€ë²ˆí˜¸
-	private String noticeSubject;//ê³µì§€ì‚¬í•­ ì œëª©
-	private String noticeContent;//ê³µì§€ì‚¬í•­ ë‚´ìš©
-	private Timestamp noticeDate;//ê³µì§€ì‚¬í•­ ì˜¬ë¦° ë‚ ì§œ
-	private String noticeImg;//ê³µì§€ì‚¬í•­ ì´ë¯¸ì§€
+	private int noticeNum;//°øÁö»çÇ× ±Û¹øÈ£
+	private String noticeSubject;//°øÁö»çÇ× Á¦¸ñ
+	private String noticeContent;//°øÁö»çÇ× ³»¿ë
+	private Timestamp noticeDate;//°øÁö»çÇ× ¿Ã¸° ³¯Â¥
+	private String noticeImg;//°øÁö»çÇ× ÀÌ¹ÌÁö
 	
 	public String getNoticeImg() {
 		return noticeImg;

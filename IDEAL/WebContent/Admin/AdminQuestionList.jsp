@@ -36,5 +36,33 @@
 	</form>
 	</div>
 </c:if>
+
+<c:if test="${cquestList.isEmpty() }">
+	<h3>답변완료 글목록이 없습니다</h3>
+</c:if>
+<c:if test="${!cquestList.isEmpty() }">
+	<br><br><br><br><br><br><br>
+	<div align="center">
+	<h3>답변 완료 글목록 입니다.</h3>
+	<form>
+		<table>
+			<tr>
+				<td>글번호</td>
+				<td>글제목</td>
+				<td>회원이름</td>
+				<td>등록일</td>
+			</tr>
+			<c:forEach var="cq" items="${cquestionList }">
+			<tr onclick="location.href='AdminGetOneQuestion.ad?num=${cq.num}'">
+				<td>${cq.num }</td>
+				<td>${cq.title }</td>
+				<td>${cq.nickName }</td>
+				<td>${cq.inputDate }</td>
+			</tr>
+			</c:forEach>
+		</table>
+	</form>
+	</div>
+</c:if>
 </body>
 </html>

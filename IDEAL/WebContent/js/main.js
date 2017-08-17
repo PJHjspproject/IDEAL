@@ -371,7 +371,9 @@ $(function () {
         // images ----------------------------------------
         var $images = $('#images p');
 
-       
+        $images.find('strong').stop(true).animate({bottom: '-80px'}, duration);
+        $images.find('span').stop(true).animate({opacity: 0}, duration);
+        $images.find('img').stop(true).animate({top: '0px'}, duration);
 
         // images 이미지
         $images.filter('#images p')
@@ -398,6 +400,8 @@ $(function () {
         // img3 ----------------------------------------
         var $images = $('#img3 p');
 
+        $images.find('strong').stop(true).animate({opacity: 0, left: '-200%'}, duration);
+        $images.find('span').stop(true).animate({opacity: 0}, duration);
 
         // img3 이미지
         $images.filter('#img3 p')
@@ -459,7 +463,7 @@ $(function () {
     /*
      * 투자상품들
      */
-    
+    /*
     $(function(){
         // 
         var duration = 300;
@@ -479,7 +483,7 @@ $(function () {
             });
     
     });
-    
+    */
     
 
     

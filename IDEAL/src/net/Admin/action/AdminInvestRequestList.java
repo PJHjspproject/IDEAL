@@ -16,13 +16,13 @@ public class AdminInvestRequestList implements Action{
 		
 		AdminDao adao = new AdminDao();
 		ArrayList InvestRequestList = adao.InvestRequestList();
-		//permitChk가 true인 (=1) (관리자가 승인한)
-		//프로젝트 정보를 뿌려줌
+		//permitChk占쏙옙 true占쏙옙 (占쏙옙청占심삼옙 占싼뱄옙 占쏙옙 占쌍듸옙)
+		//占쏙옙占쏙옙 占쌓쇽옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占�
 		ArrayList InvestRequestList2 = adao.InvestRequestList(true);
 		
 		
 		request.setAttribute("InvestRequestList", InvestRequestList);
-
+		//AdminInvestRequest.jsp占쏙옙 占싼뤄옙占쌍깍옙 占쏙옙占쏙옙 Attribute占쏙옙 占쏙옙占쏙옙
 		request.setAttribute("InvestRequestList2", InvestRequestList2);
 		
 		ActionForward forward = new ActionForward();

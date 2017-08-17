@@ -10,7 +10,7 @@ public class questionContentAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		//글번호 가져오기
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		questionDao dao = new questionDao();
@@ -19,7 +19,7 @@ public class questionContentAction implements Action {
 		
 		request.setAttribute("qdto", qdto);
 		System.out.println(qdto.getImage());
-		
+		//이동
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);

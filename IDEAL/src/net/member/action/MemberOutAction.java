@@ -12,117 +12,71 @@ import net.member.db.MemberDAO;
 
 public class MemberOutAction implements Action {
 
+	//Memberinfo.jsp¿¡¼­ È¸¿øÅ»Åğ¸¦ ´©¸£¸é ÄÁÆ®·Ñ·¯¸¦ °ÅÃÄ¼­ ÀÌ ÆäÀÌÁö·Î ¿Â´Ù.
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		HttpSession session=request.getSession();
-		String email = (String)session.getAttribute("MemberEmail");
-		
-		
+		HttpSession session=request.getSession();//¼¼¼Ç ¿µ¿ª °¡Á®¿À±â
+		String email = (String)session.getAttribute("MemberEmail");//MemberEmailÀ» ¼¼¼Ç¿¡¼­ ²¨³»¿Í¼­ ½ºÆ®¸µ º¯¼ö¿¡ ÀúÀå
 		
 		MemberDAO dao = new MemberDAO();
 		
-		int result = 0;
+		int result = 0; //ÅõÀÚ¿äÃ» »óÅÂ¿¡ µû¶ó ¸Ş¼Òµå¸¦ ´Ş¸® ÇÏ±â ¶§¹®¿¡ ±×°É ±¸ºĞÇÒ ÀÎÆ®Çü º¯¼ö ¼±¾ğ
 		
-		result = dao.checkInvestReqDate(email);
+		//emailÀ» ¸Å°³º¯¼ö·Î ÀÚ½ÅÀÌ ÅõÀÚ¿äÃ»ÇÑ ¸®½ºÆ® °Ë»öÇØ¼­ ±³ºÎ¿¹Á¤ÀÏÀÌ Áö³µ´Â Áö Ã¼Å©ÇÏ´Â ¸Ş¼Òµå¸¦ ¸¸µé¾î¼­ fundsituationÀ» ºñ±³ÇÏ±â À§ÇØ
+		//°ªÀ» ¸®ÅÏÇØ¼­ ÀÎÆ®Çü º¯¼ö¿¡ ´ã¾ÆÁØ´Ù.
+		result = dao.checkInvestReqDate(email); 
 		
 		System.out.println(result);
 		
-		if(result == -1){//ì§„í–‰ì¤‘ì¸ í”„ë¡œì íŠ¸ê°€ ì—†ì§€ë§Œ, ê¸°ê°„ì™„ë£Œì„±ê³µ(fundsituation = 4) ë˜ëŠ”
-			//ì¡°ê¸°ì„±ê³µ(fundsituation = 3) ë˜ì—ˆì„ ê²½ìš° í•´ë‹¹ ìº í˜ì¸ì´ êµë¶€ì˜ˆì •ì¼(payDay)ì´ ì§€ë‚¬ë‹¤ë©´
+		//¸®ÅÏ °ª¿¡ µû¶ó ½ÇÇàÇÒ ¸Ş¼Òµå¸¦ ´Ş¸®ÇØ ÁØ´Ù.
+		
+		if(result == -1){//ÁøÇàÁßÀÎ ÇÁ·ÎÁ§Æ®°¡ ¾øÁö¸¸, ±â°£¿Ï·á¼º°ø(fundsituation = 4) ¶Ç´Â
+		    			//Á¶±â¼º°ø(fundsituation = 3) µÇ¾úÀ» °æ¿ì ÇØ´ç Ä·ÆäÀÎÀÌ ±³ºÎ¿¹Á¤ÀÏ(payDay)ÀÌ Áö³µ´Ù¸é
 			
-			int resultRe = dao.checkInvestMent(email);//íˆ¬ìí•˜ê¸° í€ë“œì‹œì¶”ì—ì´ì…˜ ì²´í¬ ë©”ì†Œë“œ
+			int resultRe = dao.checkInvestMent(email);//ÅõÀÚÇÏ±â Æİµå½ÃÃß¿¡ÀÌ¼Ç Ã¼Å© ¸Ş¼Òµå
 			
-			if(resultRe == -1){//í˜ì´ë°ì´ê°€ ì§€ë‚œ ê²½ìš° ì‚­ì œ ë©”ì†Œë“œ ì‹¤í–‰
+			if(resultRe == -1){//ÆäÀÌµ¥ÀÌ°¡ Áö³­ °æ¿ì »èÁ¦ ¸Ş¼Òµå ½ÇÇà
 				System.out.println(resultRe);
 				
-				dao.MemberoutAction(email);
+				dao.MemberoutAction(email);//È¸¿øÅ»Åğ ¸Ş¼Òµå
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('ì‚¬ì´íŠ¸ë¥¼ ì´ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.');");
+				out.println("alert('»çÀÌÆ®¸¦ ÀÌ¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.');");
 				out.print("location.href='./MemberLogoutAction.mf'");
 				out.println("</script>");
 				out.close();
 				return null;
 				
 				
-			}else if (resultRe == 2) {//Paydayê°€ ì§€ë‚˜ì§€ ì•Šì€ ê²½ìš°
+			}else if (resultRe == 2) {//ÆäÀÌµ¥ÀÌ°¡ Áö³ªÁö ¾ÊÀº°æ¿ì
 				System.out.println(resultRe);
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('êµë¶€ë‚ ì§œê°€ ì§€ë‚˜ì§€ ì•Šì•˜ì–´ìš”. íƒˆí‡´ê°€ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.');");
+				out.println("alert('±³ºÎ³¯Â¥°¡ Áö³ªÁö ¾Ê¾Ò¾î¿ä. ´Ù½Ã È®ÀÎÇØ ÁÖ¼¼¿ä');");
 				out.print("location.href='./Memberinfo.mf'");
 				out.println("</script>");
 				out.close();
 				return null;
-			}else if (resultRe == 1) {//íˆ¬ìê°€ ì‹¤íŒ¨í•œ ê²½ìš°
+			}else if (resultRe == 1) {//ÅõÀÚ°¡ ½ÇÆĞÇÑ °æ¿ì
 				System.out.println(resultRe);
-				dao.MemberoutAction(email);
+				dao.MemberoutAction(email);//È¸¿øÅ»Åğ ¸Ş¼Òµå
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('ì‚¬ì´íŠ¸ë¥¼ ì´ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤. íƒˆí‡´ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.');");
+				out.println("alert('»çÀÌÆ®¸¦ ÀÌ¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.');");
 				out.print("location.href='./MemberLogoutAction.mf'");
 				out.println("</script>");
 				out.close();
 				return null;
-			}else if (resultRe == 0) {
+			}else if (resultRe == 0) {//ÇÁ·ÎÁ§Æ®°¡ ÁøÇàÁßÀÌ¶ó¸é..
 				System.out.println(resultRe);
 				response.setContentType("text/html;charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('í”„ë¡œì íŠ¸ê°€ ì§„í–‰ì¤‘ ì…ë‹ˆë‹¤. ë‹¤ì‹œ í™•ì¸í•´ ì£¼ì„¸ìš”');");
-				out.print("location.href='./Memberinfo.mf'");
-				out.println("</script>");
-				out.close();
-				return null;
-			}
-		    
-			
-		}else if (result == 1) {////íˆ¬ììš”ì²­ì´ ì‹¤íŒ¨í–ˆì„ ê²½ìš° íˆ¬ìí•œ ë¦¬ìŠ¤íŠ¸ì—ì„œ í˜ì´ë°ì´ ê²€ìƒ‰í•œë‹¤.
-			
-			int resultRe = dao.checkInvestMent(email);//íˆ¬ìí•˜ê¸° í€ë“œì‹œì¶”ì—ì´ì…˜ ì²´í¬ ë©”ì†Œë“œ
-			if(resultRe == -1){//í˜ì´ë°ì´ê°€ ì§€ë‚œ ê²½ìš° ì‚­ì œ ë©”ì†Œë“œ ì‹¤í–‰
-				System.out.println(resultRe);
-				dao.MemberoutAction(email);
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('ì‚¬ì´íŠ¸ë¥¼ ì´ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.');");
-				out.print("location.href='./MemberLogoutAction.mf'");
-				out.println("</script>");
-				out.close();
-				return null;
-			}else if (resultRe == 2) {//í˜ì´ë°ì´ê°€ ì§€ë‚˜ì§€ ì•Šì€ê²½ìš°
-				System.out.println(resultRe);
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('ì‚¬ì´íŠ¸ë¥¼ ì´ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.');");
-				out.print("location.href='./Memberinfo.mf'");
-				out.println("</script>");
-				out.close();
-				return null;
-				
-			}else if (resultRe == 1) {//íˆ¬ìê°€ ì‹¤íŒ¨í•œ ê²½ìš°
-				System.out.println(resultRe);
-				dao.MemberoutAction(email);
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('êµë¶€ë‚ ì§œê°€ ì§€ë‚˜ì§€ ì•Šì•˜ì–´ìš”. ë‹¤ì‹œ í™•ì¸í•´ ì£¼ì„¸ìš”');");
-				out.print("location.href='./MemberLogoutAction.mf'");
-				out.println("</script>");
-				out.close();
-				return null;
-			}else if (resultRe == 0) {
-				System.out.println(resultRe);
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('í”„ë¡œì íŠ¸ê°€ ì§„í–‰ì¤‘ ì…ë‹ˆë‹¤. ë‹¤ì‹œ í™•ì¸í•´ ì£¼ì„¸ìš”');");
+				out.println("alert('ÇÁ·ÎÁ§Æ®°¡ ÁøÇàÁß ÀÔ´Ï´Ù. ´Ù½Ã È®ÀÎÇØ ÁÖ¼¼¿ä');");
 				out.print("location.href='./Memberinfo.mf'");
 				out.println("</script>");
 				out.close();
@@ -130,22 +84,72 @@ public class MemberOutAction implements Action {
 			}
 		    
 			
-		}else if (result == 0) {//íˆ¬ììš”ì²­í•œ í”„ë¡œì íŠ¸ê°€ ì§„í–‰ì¤‘ì´ê±°ë‚˜ í˜ì´ë°ì´ê°€ ì§€ë‚˜ì§€ ì•Šì€ ê²½ìš°
+		}else if (result == 1) {//ÅõÀÚ¿äÃ»ÀÌ ½ÇÆĞÇßÀ» °æ¿ì ÅõÀÚÇÑ ¸®½ºÆ®¿¡¼­ ÆäÀÌµ¥ÀÌ °Ë»öÇÑ´Ù.
+			
+			int resultRe = dao.checkInvestMent(email);//ÅõÀÚÇÏ±â Æİµå½ÃÃß¿¡ÀÌ¼Ç Ã¼Å© ¸Ş¼Òµå
+			System.out.println(resultRe);
+			if(resultRe == -1){//ÆäÀÌµ¥ÀÌ°¡ Áö³­ °æ¿ì »èÁ¦ ¸Ş¼Òµå ½ÇÇà
+				System.out.println(resultRe);
+				dao.MemberoutAction(email);//È¸¿øÅ»Åğ ¸Ş¼Òµå
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('»çÀÌÆ®¸¦ ÀÌ¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.');");
+				out.print("location.href='./MemberLogoutAction.mf'");
+				out.println("</script>");
+				out.close();
+				return null;
+			}else if (resultRe == 2) {//ÆäÀÌµ¥ÀÌ°¡ Áö³ªÁö ¾ÊÀº°æ¿ì
+				System.out.println(resultRe);
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('±³ºÎ³¯Â¥°¡ Áö³ªÁö ¾Ê¾Ò¾î¿ä. ´Ù½Ã È®ÀÎÇØ ÁÖ¼¼¿ä');");
+				out.print("location.href='./Memberinfo.mf'");
+				out.println("</script>");
+				out.close();
+				return null;
+				
+			}else if (resultRe == 1) {//ÅõÀÚ°¡ ½ÇÆĞÇÑ °æ¿ì
+				System.out.println(resultRe);
+				dao.MemberoutAction(email);//È¸¿øÅ»Åğ ¸Ş¼Òµå
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('»çÀÌÆ®¸¦ ÀÌ¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.');");
+				out.print("location.href='./MemberLogoutAction.mf'");
+				out.println("</script>");
+				out.close();
+				return null;
+			}else if (resultRe == 0) {//ÇÁ·ÎÁ§Æ®°¡ ÁøÇàÁßÀÌ¶ó¸é..
+				System.out.println(resultRe);
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('ÇÁ·ÎÁ§Æ®°¡ ÁøÇàÁß ÀÔ´Ï´Ù. ´Ù½Ã È®ÀÎÇØ ÁÖ¼¼¿ä');");
+				out.print("location.href='./Memberinfo.mf'");
+				out.println("</script>");
+				out.close();
+				return null;
+			}
+		    
+			
+		}else if (result == 0) {//ÅõÀÚ¿äÃ»ÇÑ ÇÁ·ÎÁ§Æ®°¡ ÁøÇàÁßÀÌ¶ó¸é
 			
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('í”„ë¡œì íŠ¸ê°€ ì§„í–‰ì¤‘ ì…ë‹ˆë‹¤. ë‹¤ì‹œ í™•ì¸í•´ ì£¼ì„¸ìš”');");
+			out.println("alert('ÇÁ·ÎÁ§Æ®°¡ ÁøÇàÁß ÀÔ´Ï´Ù. ´Ù½Ã È®ÀÎÇØ ÁÖ¼¼¿ä');");
 			out.print("location.href='./Memberinfo.mf'");
 			out.println("</script>");
 			out.close();
 			return null;
 			
-		}else if (result == 2) {
+		}else if (result == 2) {//ÇÁ·ÎÁ§Æ®´Â ³¡³µÁö¸¸ ±³ºÎ³¯Â¥°¡ Áö³ªÁö ¾Ê¾Ò´Ù¸é?
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('êµë¶€ë‚ ì§œê°€ ì§€ë‚˜ì§€ ì•Šì•˜ì–´ìš”. ë‹¤ì‹œ í™•ì¸í•´ ì£¼ì„¸ìš”');");
+			out.println("alert('±³ºÎ³¯Â¥°¡ Áö³ªÁö ¾Ê¾Ò¾î¿ä. ´Ù½Ã È®ÀÎÇØ ÁÖ¼¼¿ä');");
 			out.print("location.href='./Memberinfo.mf'");
 			out.println("</script>");
 			out.close();

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Downloadfile implements Action {
-	/*ë¸Œë¼ìš°ì € í—¤ë”ë¥¼ ì–»ê¸° ìœ„í•œ ë©”ì†Œë“œ (íŒŒì¼ í•œê¸€ì²˜ë¦¬ì„ ìœ„í•´ì„œ ë§Œë“¤ì—ˆë‹¤)*/
+
 	private String getBrowser(HttpServletRequest request) {
 	    String header =request.getHeader("User-Agent");
 	    if (header.contains("MSIE")) {
@@ -35,14 +35,13 @@ public class Downloadfile implements Action {
 		String nickName = (String)session.getAttribute("nickName");
 		String realPath = request.getServletContext().getRealPath("image\\"+nickName);
 		String header = getBrowser(request);
-		//ë‹¤ìš´ë¡œë“œ íŒŒì¼ì„ ì„œë²„ì—ì„œ í´ë¼ì´ì–¸íŠ¸ì˜ ë¸Œë¼ìš°ì €ë¡œ ë‚´ë³´ë‚´ê¸° ì „ì— í—¤ë”ì •ë³´ ì„¤ì •í•˜ê¸°
-		//ë‹¤ìš´ë¡œë“œ ë¬¸ì„œí˜•ì‹ìœ¼ë¡œ ë‚´ë³´ë‚´ê² ë‹¤ê³  ìˆ˜ì •í•˜ê¸°
+		
 		response.setContentType("Application/x-msdownload");
-		//ì—…ë¡œë“œëœ ì„œë²„ì— ìˆëŠ” íŒŒì¼ì— ì§ì ‘ì ìœ¼ë¡œ ì ‘ê·¼í• ìˆ˜ ìˆëŠ” íŒŒì¼ ê°ì²´ ìƒì„±
+		
 		File file = new File(realPath + "/"+name);
 		
 		System.out.println(file);
-		/*íŒŒì¼ í•œê¸€ì²˜ë¦¬ ifë¬¸ì€ IE11ì—ì„  ì‘ë™ì„ í•˜ì§€ì•ŠëŠ”ë‹¤.. elseë¬¸ì€ í¬ë¡¬ì¸ë° í¬ë¡¬ì—ì„  ì •ìƒì ìœ¼ë¡œ ì‘ë™í•œë‹¤.*/
+		
 		if(header.contains("MSIE")){
 			String docName = URLEncoder.encode(name,"UTF-8").replaceAll("\\", "%20");
 			response.setHeader("Content-Disposition", "attachment; filename=" + docName + ";");
@@ -50,40 +49,40 @@ public class Downloadfile implements Action {
 		}else{
 			response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(name,"UTF-8") + ";");
 		}
-		//ì„œë²„ì— ìˆëŠ” íŒŒì¼ì˜ ë°ì´í„°ë¥¼  1024ë°”ì´íŠ¸ ì”© ì½ì–´ ë“¤ì´ê¸°ìœ„í•œ ë‹¨ìœ„
 		byte[] data = new byte[1024];
 		
-		//ë§Œì•½ì—  ë‹¤ìš´ë¡œë“œí•  íŒŒì¼ì´  fileí˜•ì‹ì´ ë§ë‹¤ë©´?
+		
 		if (file.isFile()) {
 			
 			try {
-				/*ì„œë²„ì— ìˆëŠ” ë‹¤ìš´ë¡œë“œí•  íŒŒì¼ì˜ ë‚´ìš©ì„ ì½ì–´ ë“¤ì´ê¸° ìœ„í•œ í†µë¡œ ì¤€ë¹„ */
+				/*¼­¹ö¿¡ ÀÖ´Â ´Ù¿î·ÎµåÇÒ ÆÄÀÏÀÇ ³»¿ëÀ» ÀĞ¾î µéÀÌ±â À§ÇÑ Åë·Î ÁØºñ */
 				// new FileInputStream(file) : 
-				//ë‹¤ìš´ë¡œë“œí•  ì‹¤ì œ íŒŒì¼ê°ì²´ ê°€ ê°€ë¦¬í‚¤ëŠ” íŒŒì¼ì„ 1ë°”ì´íŠ¸ì”© ì½ì–´ ë“¤ì´ê¸° ìœ„í•œ ìŠ¤íŠ¸ë¦¼ í†µë¡œ ë§Œë“¤ê¸°
+				//´Ù¿î·ÎµåÇÒ ½ÇÁ¦ ÆÄÀÏ°´Ã¼ °¡ °¡¸®Å°´Â ÆÄÀÏÀ» 1¹ÙÀÌÆ®¾¿ ÀĞ¾î µéÀÌ±â À§ÇÑ ½ºÆ®¸² Åë·Î ¸¸µé±â
 				// new BufferedInputStream(new FileInputStream(file)) : 
-				//íŒŒì¼ê°ì²´ê°€ ê°€ë¦¬í‚¤ëŠ” íŒŒì¼ ë°ì´í„° ëª¨ë‘ë¥¼ 1ë°”ì´íŠ¸ì”© ì½ì–´ ë“¤ì—¬ì„œ..
-				//ë³„ë„ ë‚´ë¶€ë²„í¼ ê³µê°„ì— ëª¨ì•„ë‘ì—ˆë‹¤ê°€....
-				//í•œêº¼ë²ˆì— íŒŒì¼ìì²´ë¥¼ ì½ì–´ ë“¤ì´ê¸° ìœ„í•œ í†µë¡œ ë§Œë“¤ê¸° 
+				//ÆÄÀÏ°´Ã¼°¡ °¡¸®Å°´Â ÆÄÀÏ µ¥ÀÌÅÍ ¸ğµÎ¸¦ 1¹ÙÀÌÆ®¾¿ ÀĞ¾î µé¿©¼­..
+				//º°µµ ³»ºÎ¹öÆÛ °ø°£¿¡ ¸ğ¾ÆµÎ¾ú´Ù°¡....
+				//ÇÑ²¨¹ø¿¡ ÆÄÀÏÀÚÃ¼¸¦ ÀĞ¾î µéÀÌ±â À§ÇÑ Åë·Î ¸¸µé±â 
 				BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
-				/*ì‚¬ìš©ìì—ê²Œ íŒŒì¼ì„ ì¶œë ¥, ë‚´ë³´ë‚´ê¸°(ë‹¤ìš´ë¡œë“œ)í•˜ê¸°ìœ„í•œ í†µë¡œ ì¤€ë¹„*/
+
+				/*»ç¿ëÀÚ¿¡°Ô ÆÄÀÏÀ» Ãâ·Â, ³»º¸³»±â(´Ù¿î·Îµå)ÇÏ±âÀ§ÇÑ Åë·Î ÁØºñ*/
 				BufferedOutputStream output = new BufferedOutputStream(response.getOutputStream());
-				
+
 				int read;
-				
-				while ((read = input.read(data)) != -1) {//read()ë©”ì†Œë“œì˜ ë°˜í™˜ê°’ì€ ì½ì–´ë“¤ì´ê¸° ì„±ê³µí•œ ë°”ì´íŠ¸ìˆ˜ë¥¼ ë°˜í™˜
-					//ì „ì²´ dataë°°ì—´ì˜ 0ë¶€í„° 1024ê°œ ë°”ì´íŠ¸ì”© ë¬¶ì–´ì„œ ì¶œë ¥ ë²„í¼ì— ë‚´ë³´ë‚¸ë‹¤.				
+
+				while ((read = input.read(data)) != -1) {//read()¸Ş¼ÒµåÀÇ ¹İÈ¯°ªÀº ÀĞ¾îµéÀÌ±â ¼º°øÇÑ ¹ÙÀÌÆ®¼ö¸¦ ¹İÈ¯
+					//ÀüÃ¼ data¹è¿­ÀÇ 0ºÎÅÍ 1024°³ ¹ÙÀÌÆ®¾¿ ¹­¾î¼­ Ãâ·Â ¹öÆÛ¿¡ ³»º¸³½´Ù.
 					output.write(data, 0, read);
 				}
-				
-				output.flush();
-				output.close();
-				input.close();
+				//Ãâ·Â¹öÆÛ °ø°£ÀÌ °¡µæ Â÷Áö ¾Ê¾Æµµ ÆÄÀÏ³»¿ëÀ» °­Á¦ÀûÀ¸·Î »ç¿ëÀÚÀÇ È­¸é¿¡ »Ñ·ÁÁÖ´Â ±â´ÉÀ» Á¦°øÇÑ´Ù.
+				output.flush(); // °­Á¦·Î Ãâ·Â¹öÆÛ¿¡¼­ µ¥ÀÌÅÍ ºñ¿ì±â 
+				output.close(); //ÀÚ¿ø ´İ±â
+				input.close(); //ÀÚ¿ø ´İ±â
 
 			} catch (Exception err) {
 				err.printStackTrace();
 			}
 	}//if end
-		//ì´ë™í•  í˜ì´ì§€ê°€ ì—†ìœ¼ë¯€ë¡œ nullì„ ë¦¬í„´
+		
 		ActionForward forward =null;
 		
 		return forward;

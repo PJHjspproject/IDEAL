@@ -10,13 +10,13 @@ public class BoardDeleteComment implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		int cNum = Integer.parseInt(request.getParameter("cNum"));
-		int num = Integer.parseInt(request.getParameter("num"));
+		int cNum = Integer.parseInt(request.getParameter("cNum"));//comment �� pk
+		int num = Integer.parseInt(request.getParameter("num"));//board�� pk > comment�� fk
 		
 		
 		System.out.println("BoardDeleteComment()�޼ҵ忡�� Ȯ��");
-		System.out.println("Comment cNum:"+cNum);
-		System.out.println("Comment num:"+num);
+		System.out.println("�ڸ�Ʈ ��ȣ cNum:"+cNum);
+		System.out.println("�Խù� ��ȣ num:"+num);
 		//
 		BoardDao bdao = new BoardDao();
 		bdao.commentDelete(cNum);

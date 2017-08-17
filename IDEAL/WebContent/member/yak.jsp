@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/default.css"><!-- 약속된 css-->
+<link rel="stylesheet" href="css/member1.css">
 <script type="text/javascript">
 function chk(){
  var req = document.form.req.checked;
@@ -25,22 +26,21 @@ location.href="./index.mf";}
 </head>
 <body>
 <form action="./mailauth.mf" name="form" method="post">
- <table width="1400" height="650">
+ <div class="wrap0">
+ <table width="1240" height="650">
   <tr>
-   <td width="100%" height="10%"><span style="padding-left: 160px"></span>&nbsp; <b>회원가입</b>
+   <td width="100%" height="10%"><span style="padding-left: 5px"></span>&nbsp; <b class="sqatit">■ 회원가입</b>
     <br>
     <hr>
    </td>
   </tr>
   <tr>
    <td width="100%" height="50%" align="center">
-   <p align="left">
-   <span style="padding-left: 160px">
-   약관동의</span>
+   <p align="left" style="padding-left: 5px;margin:10px;">
+   <span>- 약관동의 안내사항</span>
    </p>
-   <br>
-   <textarea
-     rows="20" cols="150">가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
+   <textarea class="yaktext">
+   가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
 회원가입
 - 이름, 생년월일, 성별, 아이디, 비밀번호, 별명, 연락처(메일주소, 휴대폰 번호 중 선택), 가입인증정보
 만14세 미만 아동 회원가입 
@@ -64,16 +64,19 @@ location.href="./index.mf";}
 - 생성정보 수집 툴을 통한 수집
    </textarea>
    <br>
-   <input type="checkbox" name="req"> 개인정보 수집 및 이용에 동의합니다. 
+   <p style="padding-left: 5px;margin:10px;margin-top:15px;">
+   <input type="checkbox" name="req" > 개인정보 수집 및 이용에 동의합니다. 
+   </p>
    </td>
   </tr>
   <tr>
    <td align="center" valign="top">
-    <input type="button" value="동의" onclick="chk()"/>&nbsp;&nbsp;&nbsp;
-    <input type="button" value="동의하지 않습니다" onclick="nochk()"/>
+    <input class="agree1" type="button" value="동의" onclick="chk()"/>&nbsp;&nbsp;&nbsp;
+    <input class="agree2" type="button" value="동의 안함" onclick="nochk()"/>
    </td>
   </tr>
  </table>
+ </div>
 </form>
 </body>
 </html>

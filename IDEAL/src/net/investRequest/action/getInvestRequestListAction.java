@@ -16,13 +16,16 @@ public class getInvestRequestListAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
-			
+		
+//		System.out.println("getInvestRequestListAction()¸Ş¼Òµå È®ÀÎ");
 		InvestRequestDao irdao = new InvestRequestDao();
+		//°Ë»öÃ¢¿¡¼­ ¶Ç´Â ÅõÀÚÇÏ±â ¹öÆ°À» Å¬¸¯ÇßÀ»¶§ ³Ñ°Ü¹ŞÀº category°ª°ú search°ª
 		String category = request.getParameter("category");
 		String search = request.getParameter("search");
+		//ÅõÀÚ °¡´ÉÇÑ Ä·ÆäÀÎ ¸ñ·ÏÀ» ´ã±âÀ§ÇÑ ArrayList°´Ã¼
 		ArrayList<InvestRequestDto> irlist = null;
+		//product.jspÆäÀÌÁö ÆäÀÌÂ¡À» À§ÇÑ count°ª ¹Ş±âÀ§ÇÑ º¯¼ö ¼±¾ğ
 		int count = 0;
-		//ì¹´í…Œê³ ë¦¬ê°€ nullì¼ê²½ìš° ì¹´í…Œë¡œë¦¬ë¥¼ ALLë¡œ
 		if(category == null) category = "All";
 		irlist = irdao.ListInvestRequest(category, search);
 		count = irdao.getCountInvestRequestList(category, search);
@@ -31,7 +34,7 @@ public class getInvestRequestListAction implements Action{
 		session.setAttribute("irlist", irlist);
 		session.setAttribute("category", category);
 		session.setAttribute("count", count);
-		System.out.println("irslist :"+irlist);
+//		System.out.println("irslist ¼¼¼Ç ¼¼ÆÃ :"+irlist);
 		
 		PrintWriter out = response.getWriter();
 		out.println("<script>");

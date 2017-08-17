@@ -5,11 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	.wrap{
-		padding-top: 100px;
-	}
-</style>
+<link href="./css/board1.css" type="text/css" rel="stylesheet">
 <script type="text/javascript">
 $(function(){
 	$("#file").on("change", function(){
@@ -75,33 +71,29 @@ function check(){
 <body>
 <div class="wrap">
 <form action="addpost.bo" enctype="multipart/form-data"  method="post">
-	<table>
-		
-		<tr>
-			<td>닉네임</td>
-			<td><input type="text" name="nickName" readonly="readonly" value="${nickName}"></td>
+	<table width="1028px" class="tablewri">
+		<tr class="boardtr"> 
+			<th colspan="2">글제목<input  class="thtitle" type="text" name="title"></th>
+			<th>회원이름<input type="text" name="nickName" readonly="readonly" value="${nickName}"></th>
 		</tr>
 		<tr>
-			<td>글제목</td>
-			<td><input type="text" name="title"></td>
+			
 		</tr>
 		<tr>
-			<td>글내용</td>
-			<td colspan="3"><input type="text" name="content" id="content"></td>
+			<td colspan="4">
+			<input type="text" name="content" id="content" class="incontent"></td>
 		</tr>
 		<tr>
-			<td>파일</td>
-			<td>
+			<td colspan="2">
 				<input type="file" id="file" name="file" onchange="check()"><span id="fileck"></span>
 				<br/>용량 10M미만 / 영문,숫자 파일명 권장 / 등록가능 확장자 png, gif, jpg
 			</td>
-		</tr>
 		
-		<tr>
-			<td><input type="submit" value="글쓰기"></td>
-			<td><input type="reset" value="다시입력"></td>
+			<td colspan="2"><input class="wrbt" type="submit" value="글쓰기">
+			<input class="rewrbt" type="reset" value="다시입력"></td>
 		</tr>
 	</table>
+	<div class="clear"></div>
 </form>
 </div>
 </body>

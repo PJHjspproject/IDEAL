@@ -8,59 +8,65 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class NoticeFrontController extends HttpServlet {
+public class NoticeFrontController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
 	}
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		//ÀüÃ¼ ÁÖ¼Ò °¡Á®¿À±â
 		String requestURI = req.getRequestURI();
 		System.out.println(requestURI);
-
+		//ÀüÃ¼ ÁÖ¼Ò Áß ¾Õ ºÎºĞ °¡Á®¿À±â
 		String contextPath = req.getContextPath();
 		System.out.println(contextPath);
-
+		//½ÇÁ¦ ¿äÃ» ÁÖ¼Ò °¡Á®¿À±â
 		String command = requestURI.substring(contextPath.length());
 		System.out.println(command);
 		Action action = null;
 		ActionForward forward = null;
-
-		if (command.equals("/list.no")) {// list.no(ê³µì§€ì‚¬í•­)í˜ì´ì§€ë¥¼ ìš”ì²­ ë°›ì•˜ë‹¤ë©´
-
+		
+		if(command.equals("/list.no")){//list.no(°øÁö»çÇ×)ÆäÀÌÁö¸¦ ¿äÃ» ¹Ş¾Ò´Ù¸é
+			
 			action = new NoticelistAction();
-
+			
 			try {
 				forward = action.excute(req, resp);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-		} else if (command.equals("/NoticeContent.no")) {// í•˜ë‚˜ì˜ ê³µì§€ì‚¬í•­ ìƒì„¸ í˜ì´ì§€ë¥¼
-															// ë³´ì—¬ì£¼ë ¤ë©´
+			
+		}else if(command.equals("/NoticeContent.no")){
 			action = new NoticeContentAction();
-
+			
 			try {
 				forward = action.excute(req, resp);
 			} catch (Exception e) {
-
+				
 				e.printStackTrace();
 			}
 		}
-
-		if (forward != null) {
-			if (forward.isRedirect()) {
+		
+		
+		
+		
+		
+		
+		if(forward != null){
+			if(forward.isRedirect()){
 				resp.sendRedirect(forward.getPath());
-			} else {
-				RequestDispatcher view = req.getRequestDispatcher(forward.getPath());
+			}else{
+				RequestDispatcher view =  req.getRequestDispatcher(forward.getPath());
 				view.forward(req, resp);
 			}
 		}
-
+		
+		
+		
 	}
 
+	
 }

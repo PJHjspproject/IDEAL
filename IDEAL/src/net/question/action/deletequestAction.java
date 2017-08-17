@@ -17,18 +17,18 @@ public class deletequestAction implements Action {
 		questionDao dao = new questionDao();
 		
 		int result = dao.DeleteQuestion(num);
-		//result ==0 삭제 실패
+		
 		if(result == 0){
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
-			out.println("alert('삭제 실패');");
+			out.println("alert('���� ����');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 			return null;
 		}
-		//삭제 성공일때
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		out.println("<script>");

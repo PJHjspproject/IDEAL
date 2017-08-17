@@ -51,22 +51,85 @@ div.irlistwrap{
 }
 
 
+/* 캠페인 CSS + Hover Event */
 #eachir{
+	position:relative;
 	display:inline-block;
 	width:286px;
 	height:310px;
 /* 	background-color:skyblue; */
 	box-sizing:border-box;
+/* 	border:1px solid #A50019; */
 	border:1px solid #eee;
+	overflow:hidden;
  	line-height: 1.5em; 
 }
 
+#eachir img{
+	z-index = 0;
+}
+#eachir strong#blackShadow{
+	color:#fff;
+	font-size: 20px;
+}
+#eachir strong#blackShadow {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    padding:0;
+    bottom: -0;
+    width: 286px;
+    height: 310px;
+/*     background: rgba(0, 0, 0, 0.9); */
+	background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95));
+    text-align: left;
+    padding: 20px;
+    box-sizing:border-box;
+}
+
+#eachir span#yellowShadow {
+    position: absolute;
+    display: block;
+    z-index: 0;
+    top: 0;
+    width: 286px;
+    height: 310px;
+    box-shadow: inset 0 0 50px rgba(50, 30, 0, 0.6),
+                inset 0 0 100px rgba(50, 30, 0, 0.3);
+    background: rgba(255, 155, 0, 0.2);
+    opacity: 0;
+    left:0%;
+}
+
+#eachir strong#blackShadow {
+    opacity: 0;
+    left: -200%;
+}
+span#hover_prog{
+	color:#ff003f;
+	font-size: 20px;
+}
+span#hover_intro{
+	color: rgba(255,255,255,0.8);
+	font-size: 16px;
+	font-weight: normal;
+}
+span#hover_d{
+	color: rgba(255,255,255,0.8);
+	font-size: 14px;
+}
+/* 캠페인 CSS + Hover Event */
+
 span#remainDay{
-	color:#ccc;
+	color:#102E3F;
 	letter-spacing: 0.1em;
+	font-size:12px;
+	font-weight: bold;
+	text-align: right;
+	padding-right:2px;
 }
 span#nowMoney{
-	font-size:1.3em;
+	font-size:1.1em;
 	width:50%;
 	text-align: left;
 	display:inline-block;
@@ -81,6 +144,9 @@ span#persent{
 }
 span#idealColor{
 	color:#A50019;
+}
+span#intro_size{
+	font-size:0.8em;
 }
 div#emptydiv{
 	width:32px;
@@ -110,6 +176,7 @@ select#category{
 input[type=text]#search{
 	font-size:30px;
 	border:none;
+	border-bottom: 2px solid black;
 }
 .search_icon{
 	background-image: url("image/search.png");
@@ -139,26 +206,21 @@ button#scrollBtn{/* 수정 */
 </style>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-	var a = 1;
-	$(function(){
-		if(a == 1){
+// 	var a = 1;
+// 	$(function(){
+// 		if(a == 1){
 		
-		$("body").html($("body").html());
-		a++;
-		}
-	})
+// 		$("body").html($("body").html());
+// 		a++;
+// 		}
+// 	})
 </script>
 <script type="text/javascript">
-	var memberEmail = '<%=memberEmail%>';
-	
-	alert(memberEmail);
-	
-	
 	function startIR(){
 		location.href="./investRequest.iR";
 	}
 	function viewIR(num){//캠페인 목록에서 캠페인 상세페이지로 넘어가는 메소드
-		if(memberEmail == 'null'){
+		if(memberEmail == "null" || memberEmail == ""){
 		$('a.login-window').trigger("click");
 		return false;
 		}else{
@@ -183,8 +245,29 @@ button#scrollBtn{/* 수정 */
 		$("#search_image").on("click", function(){
 			var $p = $("#search_image").parent();
 			$p.submit();
+		});
+	});
+	
+	$(function(){
+		//
+		var duration = 300;
+		//irlistwrap > eachir
+		var $items = $(".irlistwrap #eachir");
+		//
+		$items.find("strong#blackShadow").stop(true).animate({opacity:0,left:"-200%"}, duration);
+//	 	$items.find("span#yellowShadow").stop(true).animate({opacity:0}, duration);
+		$items.filter("#eachir")
+		.on("mouseover", function(){
+			$(this).css("border", "2px solid #A50019");
+			$(this).find("strong#blackShadow").stop(true).animate({opacity: 1, left: "0%"}, duration);
+//			$(this).find("span#yellowShadow").stop(true).animate({opacity: 1}, duration);
 		})
-	})
+		.on("mouseout", function(){
+			$(this).css("border", "2px solid #eee");
+			$(this).find("strong#blackShadow").stop(true).animate({opacity: 0, left: "-200%"}, duration);
+//			$(this).find("span#yellowShadow").stop(true).animate({opacity: 0}, duration);
+		});
+	});
 </script>
 </head>
 <%
@@ -217,17 +300,31 @@ button#scrollBtn{/* 수정 */
 		</div>
 		<div class="irlistwrap"><!-- 
 		--><c:if test="${sessionScope.irlist!=null}"><!-- 
-			--><c:forEach var="irdto" items="${sessionScope.irlist }" varStatus="s"><!--
+			--><c:forEach var="irdto" items="${sessionScope.irlist }" varStatus="s"><!-- 
 				--><div id="eachir" onclick="viewIR(${irdto.investRequestNum});"><!-- 
 					--><img src="image/${irdto.memberEmail }/${irdto.thumbImage}"><!--
 					--><div style="width:286px; height:110px; box-sizing:border-box; padding:0 20px;"><!--  
+						--><strong id="blackShadow"><!--
+							--><br><!--
+							--><span id="hover_prog">${irdto.program }</span><!--
+							--><br><br><!--  
+							--><span id="hover_intro">${irdto.introduce }</span><!--
+							--><br><br><!--
+							--><span id="hover_d">Start By ${irdto.DName }</span><!--  
+						--></strong><!--  
+						--><span id="yellowShadow"></span><!--  
 						--><strong><!--  
-						-->${irdto.program }<br><!--  
+							--><c:if test="${fn:length(irdto.program) > 17 }"><c:set var="program" value="${fn:substring(irdto.program, 0, 17) }..."/></c:if><!--
+							--><c:if test="${fn:length(irdto.program) < 17 }"><c:set var="program" value="${irdto.program }"/></c:if><!--
+							--><span>${program }</span><br><!--  
 						--></strong><!--
-						--><c:if test="${fn:length(irdto.introduce)>15 }"><c:set var="introduce" value="${fn:substring(irdto.introduce, 0, 15) }..."/></c:if><!--
-						--><c:if test="${fn:length(irdto.introduce)<15 }"><c:set var="introduce" value="${irdto.introduce }"/></c:if><!--  
-						--><span>${introduce }</span><br><!--
+						--><c:if test="${fn:length(irdto.introduce) > 20 }"><c:set var="introduce" value="${fn:substring(irdto.introduce, 0, 20) }..."/></c:if><!--
+						--><c:if test="${fn:length(irdto.introduce) < 20 }"><c:set var="introduce" value="${irdto.introduce }"/></c:if><!--  
+						--><span id="intro_size">${introduce }</span><br><!--
 						--><span id="remainDay">${irdto.startDay } ~ ${irdto.endDay }</span><br><!--
+						--><div id="outProgressBar"><f:parseNumber var="percent" integerOnly="true" value="${irdto.nowMoney/irdto.successMoney*100 }"/><!--  
+							--><div id="innerProgressBar" style="width:${percent}%"></div><!--  
+						--></div><!--  						
 						--><span id="nowMoney"><span id="skyblue">${irdto.nowMoney }</span>원</span><!--  
 						--><span id="persent"><!--
 						--><f:formatNumber value="${irdto.nowMoney/irdto.successMoney }" type="percent"/><!-- 
@@ -238,9 +335,7 @@ button#scrollBtn{/* 수정 */
 								-->[<span id="idealColor">종료</span>]<!--  
 							--></c:if><!--  
 						--></span><br><!--  
-						--><div id="outProgressBar"><f:parseNumber var="percent" integerOnly="true" value="${irdto.nowMoney/irdto.successMoney*100 }"/><!--  
-							--><div id="innerProgressBar" style="width:${percent}%"></div><!--  
-						--></div><!--  
+						
 					--></div><!-- 
 				--></div><!--  
 					--><c:if test="${s.count%4==0 }"><!--  

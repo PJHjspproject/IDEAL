@@ -44,7 +44,7 @@ public class goInvestmentAction implements Action {
 //				session.removeAttribute("InvestRequestNum");
 				
 				ActionForward forward = new ActionForward();
-				forward.setPath("main1.jsp?center=investment/investment2.jsp");
+				forward.setPath("main1.jsp?center=investment/investment.jsp");
 				forward.setRedirect(false);
 				return forward;
 

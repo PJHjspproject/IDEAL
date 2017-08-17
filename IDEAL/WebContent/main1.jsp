@@ -5,8 +5,8 @@
 <html lang="ko">
 <meta charset="UTF-8">
 <head>
-<title>IdeaL</title>
-<link rel="stylesheet" href="css/main.css">
+<title>IDEAL</title>
+<!-- <link rel="stylesheet" href="css/main1.css"> -->
 </head>	
 <!-- Body 영역  --> 
 <c:set var="center" value="${param.center}"/>
@@ -19,16 +19,13 @@
 
 <body>
 	<header>
-	<!-- Top include 영역  --> 	]
-	<jsp:include page="inc/Top.jsp"/> 
+		<!-- Top include 영역  --> 
+		<jsp:include page="inc/Top.jsp"/> 
 	</header>
-	
-   	<jsp:include page="${center}"/> 
-   	
-    
+	<jsp:include page="${center}"/>
 	<!-- footer 영역  -->   	
 	<footer>
-	<jsp:include page="inc/footer1.jsp"/> 
+		<jsp:include page="inc/footer1.jsp"/> 
 	</footer>
 </body>
 </html>

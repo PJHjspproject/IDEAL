@@ -321,7 +321,7 @@ function mainImagePreview(d){
 	var file = d.files[0];//<input type="file">태그의 첫번째 파일 > 여러개 올리는것도 가능하지만 이경우에는 하나만 올리게 되어 잇으므로 0번째 배열의 값을 가져오는것이다.
 	
 	var IMG_FORMAT = "\\.(gif|jpg|jpeg|png)$";
-	 
+	
     if(!(new RegExp(IMG_FORMAT, "i")).test(d.value)){//정규표현식으로 파일 확장자를 학인한 후 이미지 파일이 아닌경우
     	alert("이미지 파일만 등록 가능합니다.\njpb, png, gif\n파일확장자를 확인해주세요.");
     	previewimg.style.display = "none";
@@ -334,8 +334,9 @@ function mainImagePreview(d){
 			previewimg.src = reader.result;
 // 			alert(reader);
 // 			alert(reader.result);
-			$("html, body").animate({scrollTop:$("#submitdiv").offset().top}, 1000);
+			
 		}, false)
+		$("html, body").animate({scrollTop:$("#submitdiv").offset().top}, 1000);
     }
 //     if(file){
     	reader.readAsDataURL(file);

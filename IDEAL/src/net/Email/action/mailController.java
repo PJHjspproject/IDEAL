@@ -17,28 +17,47 @@ import net.Email.action.ActionForward;
 public class mailController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//¼¼¼Ç °ª
+		//HttpSession session = req.getSession();
+		
+		//°¡»ó ¿äÃ» ÁÖ¼Ò °¡Á®¿À±â
+	// System.out.println(RequestURI);
 		String RequestURI = req.getRequestURI();
+
+	// /MailtoAdmin.em ¾ò±â
+		//RequestURI ¿¡¼­ ¸¶Áö¸· ÁÖ¼Ò°ªÀ» / ·Î Àß¶ó¼­ ³ªÅ¸³¿
 		System.out.println(RequestURI);
 		System.out.println(req.getRequestURI().substring(RequestURI.lastIndexOf('/')+1));
 		String command = req.getRequestURI().substring(req.getRequestURI().lastIndexOf('/')+1);
+	/*ÁÖ¼Ò ºñ±³*/
+	//ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ª, ÀÌµ¿ÆäÀÌÁö °æ·Î°ª ÀúÀåÇÏ¿© ¸®ÅÏ ÇØÁÖ´Â °´Ã¼¸¦ ÀúÀåÇÒ 
+	//ÂüÁ¶º¯¼ö ¼±¾ğ
 		ActionForward forward = null;
+	
+	//ÀÚ½Ä Action°´Ã¼µéÀ» ´ãÀ» ÀÎÅÍ ÆäÀÌ½º Å¸ÀÔÀÇ ÂüÁ¶º¯¼ö ¼±¾ğ
 		Action action = null;
 		
+		//mailtoadmin.jsp ¿¡¼­ ³Ñ¾î¿È
+			//mailActiond.java·Î ³Ñ¾î°¨
 		if(command.equals("MailtoAdmin.em")){
-			
+			//Action ÀÎÅÍÆäÀÌ½º¿¡ mailAction() ¾÷Ä³½ºÆÃ
 			action = new mailAction2();
 			
 			try{
 				forward = action.execute(req, resp);
-			}catch(Exception e){
-				e.printStackTrace();
-				}
-
-		}else if (command.equals("sent.em")){//ë©”ì¼ë³´ë‚´ê¸° ë²„íŠ¼ì„ ëˆ„ë¥¼ë•Œ
+			}catch(Exception e){e.printStackTrace();}
+			//ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ª false
+//			forward.setisRedirect(false);
+			//ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î (È¸¿ø°¡ÀÔ ÆäÀÌÁö) ÁÖ¼Ò°ª ÀúÀå
+//			forward.setPath("");	
+		//mailAction.java¿¡¼­ ³Ñ¾î¿È
 			
+			//°á°ú°ª »Ñ·ÁÁÖ·¯ mailtoadmin.jsp·Î ´Ù½Ã ÀÌµ¿
+		}else if (command.equals("sent.em")){
+			//ÀÌµ¿¹æ½Ä ¿©ºÎ°ª, ÀÌµ¿ ÆäÀÌÁö°æ·Î °ª ÀúÀå
 			
 			forward = new ActionForward();
-			forward.setisRedirect(false);
+			forward.setisRedirect(false);//ÁÖ¼Ò°ª ³ëÃâ ¾ÈÇÔ
 			try{
 				forward.setPath("mailtoadmin.jsp");
 				System.out.println(forward.getPath());
@@ -46,12 +65,12 @@ public class mailController extends HttpServlet {
 			
 			
 			
-			//*** ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ***
+			//*** ¼¼¼Ç°ªÀº °è¼Ó µû¶ó¿È ***
 			
 		}
-		//(ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò·ï¿½ ï¿½Ìµï¿½)
+		//(½ÇÁ¦ ÁÖ¼Ò·Î ÀÌµ¿)
 		if(forward != null){
-			//new ActionForward()ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½.....
+			//new ActionForward()°´Ã¼°¡ Á¸ÀçÇÏ°í.....
 			if(forward.getisRedirect()){
 				//true
 				resp.sendRedirect(forward.getPath());
@@ -65,7 +84,7 @@ public class mailController extends HttpServlet {
 		}
 		
 	}
-	@Override
+	@Override//Get,Post¹æ½Ä µÑ´Ù doProcess·Î Request, Response ³Ñ±è
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doProcess(req, resp);
 	}

@@ -17,7 +17,7 @@ public class BoardList implements Action {
 		
 		
 		String pageNum = request.getParameter("pageNum");
-		int pageSize = 5;
+		int pageSize = 6;
 		System.out.println("pagenum"+pageNum);
 		
 		if(pageNum == null){
@@ -35,9 +35,9 @@ public class BoardList implements Action {
 		if(count > 0){
 			pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 			startPage = ((nowPage/pageBlock)-(nowPage%pageBlock == 0? 1 : 0)) * pageBlock + 1;
-			System.out.println("시작페이지"+startPage);
+			System.out.println("�떆�옉�럹�씠吏�"+startPage);
 			endPage = startPage + pageBlock - 1;
-			System.out.println("끝페이지"+endPage);
+			System.out.println("�걹�럹�씠吏�"+endPage);
 			if(endPage > pageCount){
 				endPage = pageCount;
 			}

@@ -18,17 +18,17 @@ public class AdminMemberAbout implements Action {
 		
 		AdminDao adao = new AdminDao();
 		MemberDTO mdto = adao.getOneMember(request.getParameter("memberEmail"));
-		ArrayList blist = adao.BoardList();
-		ArrayList qlist = adao.QuestionList();
-		ArrayList irlist = adao.InvestRequestList();
+		ArrayList blist = adao.BoardList(request.getParameter("nickName"));
+		ArrayList qlist = adao.QuestionList(request.getParameter("nickName"));
+		ArrayList irlist = adao.InvestRequestListPro(request.getParameter("memberEmail"));
 		ArrayList imlist = adao.InvestMentList(request.getParameter("memberEmail"));
-		ArrayList rlist = adao.commentListName(request.getParameter("nickName"));
+		ArrayList clist = adao.commentListName(request.getParameter("nickName"));
 		request.setAttribute("mdto", mdto);
 		request.setAttribute("blist", blist);
 		request.setAttribute("qlist", qlist);
 		request.setAttribute("irlist", irlist);
 		request.setAttribute("imlist", imlist);
-		request.setAttribute("rlist", rlist);
+		request.setAttribute("clist", clist);
 		
 		
 		ActionForward forward = new ActionForward();

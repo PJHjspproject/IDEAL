@@ -25,73 +25,73 @@ public class mailAction2 implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		//í•œê¸€ì²˜ë¦¬
+		//ÇÑ±ÛÃ³¸®
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		//ì„¸ì…˜ê°’ ë°›ì•„ì˜¤ê¸°(ê³ ê° ì´ë©”ì¼,ë‹‰ë„¤ì„)
+		//¼¼¼Ç°ª ¹Ş¾Æ¿À±â(°í°´ ÀÌ¸ŞÀÏ,´Ğ³×ÀÓ)
 		HttpSession session = request.getSession();
 		String senderMail = (String)session.getAttribute("memberEmail");
 		String senderNic = (String)session.getAttribute("nickName");
 		if(senderMail==null){
-			senderNic = "ë¹„íšŒì›";
+			senderNic = "ºñÈ¸¿ø";
 			senderMail = request.getParameter("email");
 		}
 		
-		//mailtoadmin.jspì—ì„œ ì‘ì„±ëœ ê°’ ë°›ì•„ì˜¤ê¸°
-		String adminMail = "idealDRT@gmail.com";//ê´€ë¦¬ì ë©”ì¼ ì €ì¥
+		//mailtoadmin.jsp¿¡¼­ ÀÛ¼ºµÈ °ª ¹Ş¾Æ¿À±â
+		String adminMail = "idealDRT@gmail.com";//°ü¸®ÀÚ ¸ŞÀÏ ÀúÀå
 		String adminPass ="11335577";
 
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");		
 		
 	
-		//ì‚¬ìš©í•˜ëŠ” ì´ë©”ì¼ ì˜ë¼ë‚´ê¸° 
+		//»ç¿ëÇÏ´Â ÀÌ¸ŞÀÏ Àß¶ó³»±â 
 		//ex abc123@gmail.com ==>gmail.com
 		String site = "";
 		StringTokenizer st = new StringTokenizer(adminMail, "@");
 		while(st.hasMoreTokens()){
 			site = st.nextToken();
 		}
-		//ì‚¬ìš©í•˜ëŠ” ì´ë©”ì¼ ê³„ì • ì ‘ì†í•˜ê¸° ìœ„í•œ ì •ë³´ ì €ì¥
+		//»ç¿ëÇÏ´Â ÀÌ¸ŞÀÏ °èÁ¤ Á¢¼ÓÇÏ±â À§ÇÑ Á¤º¸ ÀúÀå
 		Properties p = new Properties();
-		p.put("mail.smtp.host", "smtp."+site);//í•´ë‹¹ ì‚¬ì´íŠ¸ ì‚½ì…
-		p.put("mail.smtp.port", "465");		//í¬íŠ¸ ë²ˆí˜¸
-		p.put("mail.smtp.starttls.enable", "true");//ì—°ê²°ì—¬ë¶€1
-		p.put("mail.smtp.auth", "true");		//ì—°ê²°ì—¬ë¶€2
-		p.put("mail.smtp.debug", "true");	//ë””ë²„ê¹… í™•ì¸
-		p.put("mail.smtp.socketFactory.port", "465");//í¬íŠ¸ë²ˆí˜¸ í™•ì¸
+		p.put("mail.smtp.host", "smtp."+site);//ÇØ´ç »çÀÌÆ® »ğÀÔ
+		p.put("mail.smtp.port", "465");		//Æ÷Æ® ¹øÈ£
+		p.put("mail.smtp.starttls.enable", "true");//¿¬°á¿©ºÎ1
+		p.put("mail.smtp.auth", "true");		//¿¬°á¿©ºÎ2
+		p.put("mail.smtp.debug", "true");	//µğ¹ö±ë È®ÀÎ
+		p.put("mail.smtp.socketFactory.port", "465");//Æ÷Æ®¹øÈ£ È®ÀÎ
 		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		p.put("mail.smtp.socketFactory.fallback", "false");//ë¡œê·¸ì¸ ì—¬ë¶€ ê²°ê³¼ í™•ì¸
+		p.put("mail.smtp.socketFactory.fallback", "false");//·Î±×ÀÎ ¿©ºÎ °á°ú È®ÀÎ
 		
 		try{
-			Authenticator auth = new SMTPAuthenticator(adminMail, adminPass);//ì‚¬ìš©í•˜ëŠ” ë©”ì¼ ê³„ì •,ë¹„ë²ˆ
-			Session ses = Session.getInstance(p, auth);//ì ‘ì† ì‹œë„í•˜ì—¬ ì„¸ì…˜ê°’ ë°›ìŒ
+			Authenticator auth = new SMTPAuthenticator(adminMail, adminPass);//»ç¿ëÇÏ´Â ¸ŞÀÏ °èÁ¤,ºñ¹ø
+			Session ses = Session.getInstance(p, auth);//Á¢¼Ó ½ÃµµÇÏ¿© ¼¼¼Ç°ª ¹ŞÀ½
 			
-			ses.setDebug(true);//ì„¸ì…˜ê°’ í•´ë‹¹ ì‚¬ì´íŠ¸ì™€ ë¹„êµ í™•ì¸
-			//ë©”ì¼ì˜ ë‚´ìš©ì„ ë‹´ì„ ê°ì²´
+			ses.setDebug(true);//¼¼¼Ç°ª ÇØ´ç »çÀÌÆ®¿Í ºñ±³ È®ÀÎ
+			//¸ŞÀÏÀÇ ³»¿ëÀ» ´ãÀ» °´Ã¼
 			MimeMessage msg = new MimeMessage(ses);
 			
 			
-			/* ë³´ë‚´ëŠ” ì‚¬ëŒ ì„¤ì • */
+			/* º¸³»´Â »ç¶÷ ¼³Á¤ */
 			Address fromAddr = new InternetAddress(adminMail, MimeUtility.encodeText(senderNic, "utf-8", "B"));
-			//ë³´ë‚´ëŠ” ì‚¬ëŒ
+			//º¸³»´Â »ç¶÷
 			msg.setFrom(fromAddr);
 			
-			/* ë°›ëŠ” ì‚¬ëŒ ì„¤ì • */
-			//í˜¹ì‹œë‚˜ ê°€ë³€ ë°°ì—´ë¡œ ë°›ìŒ
+			/* ¹Ş´Â »ç¶÷ ¼³Á¤ */
+			//È¤½Ã³ª °¡º¯ ¹è¿­·Î ¹ŞÀ½
 			InternetAddress[] TOemails = {new InternetAddress(adminMail)};
 //	 		Address toAddr = new InternetAddress(adminMail);
-			//ë°›ëŠ” ì‚¬ëŒ
+			//¹Ş´Â »ç¶÷
 			msg.addRecipients(Message.RecipientType.TO, TOemails);
 
 			
-			//ì œëª©
-			msg.setSubject(subject+", íšŒì‹ ë©”ì¼ : "+senderMail);
-			//ë³´ë‚¸ ë‚ ì§œ
+			//Á¦¸ñ
+			msg.setSubject(subject+", È¸½Å¸ŞÀÏ : "+senderMail);
+			//º¸³½ ³¯Â¥
 			msg.setSentDate(new Date());
-			//ë‚´ìš©ê³¼ ì¸ì½”ë”©
+			//³»¿ë°ú ÀÎÄÚµù
 			msg.setContent(content, "text/html;charset=utf-8");
-			//ë©”ì¼ ì „ì†¡
+			//¸ŞÀÏ Àü¼Û
 			Transport.send(msg);
 			
 			request.setAttribute("check","1");
@@ -100,18 +100,18 @@ public class mailAction2 implements Action{
 			e.printStackTrace();
 
 		}
-		//ë©”ì¼ ë°œì†¡ ì„±ê³µ ì‹¤íŒ¨ ì—¬ë¶€ íŒë³„í•  check(í‚¤)ê°’ì„
-		//request.setAttributeì— ë‹´ì•„ ê°™ì´ ë³´ëƒ„
+		//¸ŞÀÏ ¹ß¼Û ¼º°ø ½ÇÆĞ ¿©ºÎ ÆÇº°ÇÒ check(Å°)°ªÀ»
+		//request.setAttribute¿¡ ´ã¾Æ °°ÀÌ º¸³¿
 		
-		//ë°œì†¡ ì¤€ë¹„ ActionForward ê°ì²´ ìƒì„±
+		//¹ß¼Û ÁØºñ ActionForward °´Ã¼ »ı¼º
 		ActionForward forward = new ActionForward();
- 		forward.setisRedirect(false);//ì´ë™í•  ì£¼ì†Œ ë…¸ì¶œ ì•ˆí•¨
- 		//sent.emìœ¼ë¡œ mailConterollerë¥¼ ê±°ì¹œë‹¤ìŒ mailtoadmin.jsp
- 		//ë¡œ ê²°ê³¼ê°’ ë³´ë‚´ì£¼ëŸ¬ ì´ë™
+ 		forward.setisRedirect(false);//ÀÌµ¿ÇÒ ÁÖ¼Ò ³ëÃâ ¾ÈÇÔ
+ 		//sent.emÀ¸·Î mailConteroller¸¦ °ÅÄ£´ÙÀ½ mailtoadmin.jsp
+ 		//·Î °á°ú°ª º¸³»ÁÖ·¯ ÀÌµ¿
  		forward.setPath("./sent.em");
- 		return forward;//í˜ì´ì§€ ì´ë™ë°©ì‹ ì—¬ë¶€ê°’falseì™€ 
- 		//ì´ë™í•  í˜ì´ì§€ ì£¼ì†Œë¥¼ ë‹´ê³ ìˆëŠ” new ActionForward()ê°ì²´ë¥¼ 
- 		//mailConterollerë¡œ ë¦¬í„´
+ 		return forward;//ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ªfalse¿Í 
+ 		//ÀÌµ¿ÇÒ ÆäÀÌÁö ÁÖ¼Ò¸¦ ´ã°íÀÖ´Â new ActionForward()°´Ã¼¸¦ 
+ 		//mailConteroller·Î ¸®ÅÏ
 	}
 
 	

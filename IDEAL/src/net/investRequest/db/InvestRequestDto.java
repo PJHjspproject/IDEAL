@@ -2,29 +2,29 @@ package net.investRequest.db;
 
 import java.util.Date;
 
-public class InvestRequestDto {
+public class InvestRequestDto{
 
 
 	private String memberEmail;
-	private int investRequestNum;//투자요청번호
-	private String program; //투자프로그램이름
-	private String dName; //대표자이름
-	private String introduce;//프로그램 간략 소개
-	private String category; //카테고리
-	private String hashTag;//해쉬태그
-	private Date startDay;//모집시작일
-	private Date endDay;//모집 종료일
-	private Date payDay;//교부 예정일
-	private int successMoney;//목표금액
-	private int nowMoney; //현재금액
-	private String thumbImage; //섬네일 이미지
-	private String mainThumb;//메인 fotorama용 이미지
-	private String mainImage;//본문내용 이미지
-	private String mainText;//본문내용 글
-	private String file; //파일업로드
-	private int fundSituation;//펀딩진행상황
-	private boolean permitChk;//심사허가체크
-	private boolean updateChk;//수정허가체크
+	private int investRequestNum; //占쏙옙占쌘울옙청占쏙옙호
+	private String program; //占쏙옙占쏙옙占쏙옙占싸그뤄옙占싱몌옙
+	private String dName; //占쏙옙표占쏙옙占싱몌옙
+	private String introduce; //占쏙옙占싸그뤄옙 占쏙옙占쏙옙 占쌀곤옙
+	private String category; //카占쌓곤옙
+	private String hashTag; //占쌔쏙옙占승깍옙
+	private Date startDay; //占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+	private Date endDay; //占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	private Date payDay; //占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	private int successMoney; //占쏙옙표占쌥억옙
+	private int nowMoney; //占쏙옙占쏙옙附占�
+	private String thumbImage; //占쏙옙占쏙옙占쏙옙 占싱뱄옙占쏙옙
+	private String mainThumb; //占쏙옙占쏙옙 fotorama占쏙옙 占싱뱄옙占쏙옙
+	private String mainImage; //占쏙옙占쏙옙占쏙옙占쏙옙 占싱뱄옙占쏙옙
+	private String mainText; //占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙
+	private String file; //占쏙옙占싹억옙占싸듸옙
+	private int fundSituation;//占쌥듸옙占쏙옙占쏙옙占싫�
+	private boolean permitChk; //占심삼옙占썬가체크
+	private boolean updateChk; //占쏙옙占쏙옙占썬가체크
 	public String getMemberEmail() {
 		return memberEmail;
 	}

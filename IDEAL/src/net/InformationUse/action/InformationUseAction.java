@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import net.InformationUse.db.InformationUseDao;
 import net.InformationUse.db.InformationUseDto;
 import net.InformationUse.action.ActionForward;
-/*FAQ 旮� 氇╇ 於滊牓*/
+
 public class InformationUseAction implements Action {
 
 	@Override
@@ -17,11 +17,22 @@ public class InformationUseAction implements Action {
 		InformationUseDao dao = new InformationUseDao();
 
 		ArrayList<InformationUseDto> array = null;
+			
 		array = dao.Information();
+		
 		request.setAttribute("array", array);
+		
+		//其捞瘤 捞悼 规侥 咯何蔼, 捞悼其捞瘤 版肺 蔼阑 历厘窍咯 府畔 秦林绰 按眉 积己
 		ActionForward forward = new ActionForward();
+				
+		//其捞瘤 捞悼 规侥 咯何蔼 true肺 历厘
 		forward.setRedirect(false);
+		
+		
+		//捞悼且 其捞瘤 林家 历厘
 		forward.setPath("main1.jsp?center=tap_ex2.jsp&centern=informationUse/informationUse.jsp");
+				
+				
 		return forward;
 	}
 

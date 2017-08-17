@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 public interface InformationMethod {
 	
-	//ì´ìš©ì•ˆë‚´ ëª¨ë“  ê¸€ë“¤ì„ ë¶ˆëŸ¬ì˜¤ëŠ” ë©”ì†Œë“œ
+	//ÀÌ¿ë¾È³» ¸ðµç ±ÛµéÀ» ºÒ·¯¿À´Â ¸Þ¼Òµå
 	public ArrayList<InformationUseDto> Information();
 	
-	//ê¸€ì˜ ì£¼ì œì™€ , ì œëª©ì„ ë§¤ê°œë³€ìˆ˜ë¡œ í•˜ë‚˜ì˜ ê¸€ì„ ìƒì„¸ë³´ê¸°í•˜ëŠ” ë©”ì†Œë“œ
+	//±ÛÀÇ ÁÖÁ¦¿Í , Á¦¸ñÀ» ¸Å°³º¯¼ö·Î ÇÏ³ªÀÇ ±ÛÀ» »ó¼¼º¸±âÇÏ´Â ¸Þ¼Òµå
 	public InformationUseDto getInfo(int InfoNum);
 
-	//ê´€ë¦¬ìžê°€ ê¸€ì„ ì¨ì£¼ê¸° ìœ„í•œ ë©”ì†Œë“œ
+	//°ü¸®ÀÚ°¡ ±ÛÀ» ½áÁÖ±â À§ÇÑ ¸Þ¼Òµå
 	public void InsertInfo(InformationUseDto iudto);
 	
-	//ê´€ë¦¬ìžê°€ ê¸€ì„ ìˆ˜ì •í•˜ê¸° ìœ„í•œ ë©”ì†Œë“œ
+	//°ü¸®ÀÚ°¡ ±ÛÀ» ¼öÁ¤ÇÏ±â À§ÇÑ ¸Þ¼Òµå
 	public void UpdateInfo(InformationUseDto iudto);
 	
-	//ê´€ë¦¬ìžê°€ ê¸€ì„ ì‚­ì œí•˜ê¸° ìœ„í•œ ë©”ì†Œë“œ
+	//°ü¸®ÀÚ°¡ ±ÛÀ» »èÁ¦ÇÏ±â À§ÇÑ ¸Þ¼Òµå
 	public void DeleteInfo(int InfoNum);
 	
 }

@@ -6,26 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>FAQ</title>
-<!-- <link href="aie.css" type="text/css" rel="stylesheet"> -->
-<style type="text/css">
-.wrap{
-	padding: 300px;
-}
+<link href="./css/infouse.css" type="text/css" rel="stylesheet">
 
-</style>
 </head>
 <body>
 <div class="wrap">
 <center>
-<table>
+<h4 class="subh4">■ IDEAL 이용안내사항</h4>
+<table class="tableAll">
 	<tr class="boardtr">
-		<th>주제</th>
-		<th>제목</th>
+		<th class="iuth1">주제</th>
+		<th class="iuth1">제목</th>
 	</tr>
 	<c:forEach var="v" items="${array }">
 	<tr onclick="location.href='informationUse_content.iU?infoNum=${v.infoNum}'">
-		<td width="150px">${v.infoSubject }</td>
-		<td width="772px">${v.infoTitle }</td>
+		<td width="150px" class="dot2center">${v.infoSubject }</td>
+		<td width="772px" class="dot2center">${v.infoTitle }</td>
 	</tr>
 	</c:forEach>
 </table>

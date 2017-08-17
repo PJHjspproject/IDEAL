@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.member.db.MemberDAO;
 import net.member.db.MemberDTO;
-/*회원가입 메소드*/
+
 public class MemberJoinAction implements Action {
 
 	@Override

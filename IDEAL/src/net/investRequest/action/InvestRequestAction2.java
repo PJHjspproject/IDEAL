@@ -23,35 +23,40 @@ public class InvestRequestAction2 implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("InvestRequestAction2 ì§„ì…");
+		System.out.println("InvestRequestAction2 ÁøÀÔ");
 		System.out.println("request getContentType : " + request.getContentType());
+		//ÇÑ±Û Ã³¸®
 		request.setCharacterEncoding("utf-8");
+		//session ¿µ¿ªÀ» »ç¿ëÇÏ±â À§ÇØ¼­ session¿µ¿ª ¹Ş¾Æ¿À±â
 		HttpSession session = request.getSession();
+		//session ¿µ¿ª¿¡¼­ memberEmail °¡Á®¿À±â(¸¸¾à session¿¡ ¾øÀ¸¸é request¿¡¼­ °¡Á®¿À±â)
 		String memberEmail = (String)session.getAttribute("memberEmail");
 		if(memberEmail==null) memberEmail = request.getParameter("memberEmail");
+		//session ¿µ¿ª¿¡¼­ irdto °¡Á®¿À±â(¸¸¾à session¿¡ ¾øÀ¸¸é request¿¡¼­ °¡Á®¿À±â)
 		InvestRequestDto irdto = (InvestRequestDto)session.getAttribute("irdto");
 		if(irdto == null) irdto = (InvestRequestDto)request.getAttribute("irdto");
+		//¸¸¾à session¿¡µµ request¿¡µµ ¾øÀ¸¸é °¡Á®¿Âirdto¿¡¼­ ²¨³»¿À±â
 		if(memberEmail==null) memberEmail = irdto.getMemberEmail();
 		
 		System.out.println("memberEmail:"+memberEmail);
 		
 		
-		//ì—…ë¡œë“œí•  íŒŒì¼ì˜ ê²½ë¡œ//ìƒëŒ€ê²½ë¡œ
+		//¾÷·ÎµåÇÒ ÆÄÀÏÀÇ °æ·Î//»ó´ë°æ·Î
 		String realFolder = request.getServletContext().getRealPath("image\\"+memberEmail);
-//		File folder = new File("D:\\jsp\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\test2\\image"+"\\"+memberEmail);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//		File folder = new File("D:\\jsp\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\test2\\image"+"\\"+memberEmail);//¼­¹öÂÊ ÇÁ·ÎÁ§Æ® Æú´õ¿¡ »ç¿ëÀÚ ´Ğ³×ÀÓÀ¸·Î Æú´õ »ı¼º
 //		File folder = new File("D:\\workspace_jquerymobile\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\test2\\image\\"+memberEmail);
 		File folder = new File(realFolder);
-		if(!folder.exists()){
-			folder.mkdirs();
-			System.out.println(memberEmail+"ìœ ì €ì˜ í´ë”ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.");
+		if(!folder.exists()){//ÇØ´ç Æú´õ°¡ ÀÖ´ÂÁö Ã¼Å©
+			folder.mkdirs();//Æú´õ°¡ ¾ø´Ù¸é Æú´õ »ı¼º
+			System.out.println(memberEmail+"À¯ÀúÀÇ Æú´õ¸¦ »ı¼ºÇÕ´Ï´Ù.");
 		}
 		
 		
 		
-		
+		//¾÷·Îµå ÆÄÀÏÀÇ ÃÖ´ë Å©±â -> ¸ñ·Ï¿¡ ³ëÃâµÇ´Â ½æ³×ÀÏ ÀÌ¹ÌÁö Å©±â Á¦ÇÑ 1mb
 		int max = 100*1024*1024;//100MB
 		
-		//multipartë¡œ íŒŒì¼ì²˜ë¦¬ë¥¼ ìœ„í•œ ê°ì²´ ìƒì„±
+		//multipart·Î ÆÄÀÏÃ³¸®¸¦ À§ÇÑ °´Ã¼ »ı¼º	
 		MultipartRequest multi = new MultipartRequest(request, realFolder, max, "UTF-8", new DefaultFileRenamePolicy());
 		
 		System.out.println("folderpath:"+realFolder);
@@ -68,7 +73,7 @@ public class InvestRequestAction2 implements Action {
 		System.out.println("mtc:"+mtc);
 		System.out.println("mfc:"+mfc);
 		
-		//mainthumbcheckêµ¬ë¶„í•˜ì—¬ arraylistì— ë„£ê¸°
+		//mainthumbcheck±¸ºĞÇÏ¿© arraylist¿¡ ³Ö±â
 		st = new StringTokenizer(mtc, "$");
 		if(st!=null){
 			while(st.hasMoreTokens()){
@@ -82,8 +87,8 @@ public class InvestRequestAction2 implements Action {
 			}
 		}
 		
-//		multi.getFilesystemName(arg0);//íŒŒì¼ì˜ ì—…ë¡œë“œëœ ì§„ì§œ ì´ë¦„.
-//		multi.getOriginalFileName(arg0);//inputíƒœê·¸ì— í‘œê¸°ëœíŒŒì¼ì´ë¦„ 
+//		multi.getFilesystemName(arg0);//ÆÄÀÏÀÇ ¾÷·ÎµåµÈ ÁøÂ¥ ÀÌ¸§.
+//		multi.getOriginalFileName(arg0);//inputÅÂ±×¿¡ Ç¥±âµÈÆÄÀÏÀÌ¸§ 
 		String src = "";
 		ArrayList<String> file_arr = new ArrayList<String>();
 		System.out.println("-------ir2's file list--------");
@@ -95,7 +100,26 @@ public class InvestRequestAction2 implements Action {
 		while(files.hasNext()){
 			file = (String) files.next();
 			file_arr.add(file);
-
+//			src = realFolder+"\\"+multi.getFilesystemName(file);
+//			System.out.println(src);
+//			System.out.println("multi.getFilesystemName(file):"+multi.getFilesystemName(file));
+//			System.out.println("multi.getOriginalFileName(file):"+multi.getOriginalFileName(file));
+//			for(int m=0;m<mtc_arr.size();m++){
+//				if(multi.getOriginalFileName(file)!=null && multi.getOriginalFileName(file).equals(mtc_arr.get(m))){
+////					System.out.println("["+str+"]["+multi.getOriginalFileName(file)+"]");
+////					System.out.println("mainThumb ÀÌ¹ÌÁö È®ÀÎ");
+//					if(mainThumb.equals("")) mainThumb += multi.getFilesystemName(file);
+//					else mainThumb += "$"+multi.getFilesystemName(file);
+//				}
+//			}
+//			for(int m=0;m<mfc_arr.size();m++){
+//				if(multi.getOriginalFileName(file)!=null && multi.getOriginalFileName(file).equals(mfc_arr.get(m))){
+////					System.out.println("["+str+"]["+multi.getOriginalFileName(file)+"]");
+////					System.out.println("mainImage ÀÌ¹ÌÁö È®ÀÎ");
+//					if(mainImage.equals("")) mainImage += multi.getFilesystemName(file);
+//					else mainImage += "$"+multi.getFilesystemName(file);
+//				}
+//			}
 		}
 		
 		System.out.println("file_arr list");
@@ -103,7 +127,6 @@ public class InvestRequestAction2 implements Action {
 			System.out.println(str);
 		}
 		System.out.println("-----------------------------------");
-		//ì—¬ëŸ¬ ì‚¬ì§„íŒŒì¼ ë°°ì—´ì— ë‹´ê¸°!
 		for(int i=0;i<mtc_arr.size();i++){
 			for(int j=0;j<file_arr.size();j++){
 				if(multi.getOriginalFileName(file_arr.get(j))!=null && multi.getOriginalFileName(file_arr.get(j)).equals(mtc_arr.get(i))){
@@ -133,10 +156,40 @@ public class InvestRequestAction2 implements Action {
 		irdto.setMainThumb(mainThumb);
 		irdto.setMainImage(mainImage);
 		irdto.setMainText(mainText);
-
-		request.setAttribute("irdto", irdto);//requestì˜ì—­ì— irdto ì˜¬ë¦¬ê¸°
-		session.setAttribute("irdto", irdto);//sessionì˜ì—­ì— irdto ì˜¬ë¦¬ê¸°
-
+		
+//		System.out.println("---ir1¿¡¼­ ³Ñ¾î¿ÂÆÄÀÏ+ir2 È®ÀÎ----");
+		//1ÆäÀÌÁö
+//		System.out.println("memberEmail:"+irdto.getMemberEmail());
+		//irdto.investRequestNumÀº auto_increment
+//		System.out.println("program:"+irdto.getProgram());
+//		System.out.println("dName:"+irdto.getdName());
+//		System.out.println("introduce:"+irdto.getIntroduce());
+//		System.out.println("category:"+irdto.getCategory());
+//		System.out.println("hashtag:"+irdto.getHashtag());
+//		System.out.println("startDay:"+irdto.getStartDay());
+//		System.out.println("endDay:"+irdto.getEndDay());
+//		System.out.println("payDay:"+irdto.getPayDay());
+//		System.out.println("successMoney:"+irdto.getSuccessMoney());
+//		System.out.println("thumbimage:"+irdto.getThumbImage());
+		//2ÆäÀÌÁö
+//		System.out.println("mainThumb:"+irdto.getMainThumb());
+//		System.out.println("mainImage:"+irdto.getMainImage());
+//		System.out.println("mainText:"+irdto.getMainText());
+		//3ÆäÀÌÁö
+//		System.out.println(irdto.getFile());
+		//default or DB
+//		System.out.println(irdto.getFundsituation());//±âº»°ª 1
+//		System.out.println(irdto.getPermitChk());
+//		System.out.println(irdto.getUpdateChk());
+//		System.out.println("----------------------------");
+		
+		request.setAttribute("irdto", irdto);//request¿µ¿ª¿¡ irdto ¿Ã¸®±â
+		session.setAttribute("irdto", irdto);//session¿µ¿ª¿¡ irdto ¿Ã¸®±â
+		
+//		ActionForward forward = new ActionForward();
+//		forward.setPath("./index.jsp?center=investRequest/investRequest3.jsp");
+//		forward.setRedirect(false);
+//		return forward;
 		PrintWriter out =  response.getWriter();
 		out.println("<script>");
 		out.println("location.href='main1.jsp?center=investRequest/investRequest3.jsp';");

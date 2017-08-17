@@ -2,11 +2,11 @@ package net.Card.db;
 
 public class CardDto {
 
-	private String cardNum;
-	private int cardPass;
-	private int cardBalance;
-	private String memberEmail;
-	private String cardBank;
+	private String cardNum;//카드번호
+	private int cardPass;//카드비밀번호(앞두자리)
+	private int cardBalance;//카드에 남은 잔액
+	private String memberEmail;//회원 이메일
+	private String cardBank;//카드은행사
 	private String memberBirth;
 	public String getMemberBirth() {
 		return memberBirth;

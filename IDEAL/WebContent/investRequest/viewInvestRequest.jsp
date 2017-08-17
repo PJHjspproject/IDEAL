@@ -38,7 +38,7 @@
 	#body_section2{
 		width:1240px;
 		min-height:500px;
-		background-color : #abc;
+/* 		background-color : #abc; */
 	}
 	article, aside.junside{
 		float:left;
@@ -146,13 +146,31 @@ $(function(){
 	}
 	
 	/* 남은날 계산 */
-	var sd = ${irdto.startDay.getTime()};
-	var ed = ${irdto.endDay.getTime()};
+	var sd = ${irdto.startDay.getTime()};//시작일
+	var ed = ${irdto.endDay.getTime()};//종료일
+	var nd = new Date().getTime();//지금 시스템 날짜
 	var dayCal = 24*60*60*1000;
-// 	alert(sd+"\n"+ed);	
-	var remainDay = (ed-sd)/dayCal;
+	nd = (parseInt(nd/dayCal));
+	nd = nd*dayCal;
+// 	alert("before:\n"+sd+"\n"+ed+"\n"+nd);
+	sd = parseInt(sd/dayCal);
+	ed = parseInt(ed/dayCal);
+	nd = parseInt(nd/dayCal);
+// 	alert("after:\n"+sd+"\n"+ed+"\n"+nd);
+// 	var remainDay = parseInt((sd-nd)/dayCal);
+// 	var remainedDay = parseInt((ed-nd)/dayCal);
+	var remainDay = sd-nd+1;
+	var remainedDay = ed-nd;
+// 	alert("remainDay:"+remainDay+"\nremainedDay:"+remainedDay);
 // 	alert(remainDay);
-	$("#remaindDay").text(remainDay);
+// 	$("#remaindDay").text(remainDay);
+	
+	if(remainDay>0){
+		$("#remaindDay").text("D - "+remainDay+" ");
+		$(".clickbtn").html("<button id='exitedBtn'>준비중인 상품입니다.</button>");
+	}else{
+		$("#remaindDay").text(remainedDay);
+	}
 });
 </script>
 </head>
@@ -252,9 +270,10 @@ $(function(){
 								<span id="smallgray"><%=startDay %> ~ <%=endDay %></span>
 							</div>
 							<br>
-							<div id="aside_div">
+							<span id="tiny">목표금액 미달 시, 취소 및 환불 됩니다.</span><br>
+							<div id="aside_div" class="clickbtn">
+								<c:set var="notyet" value="1"/>
 								<!-- 투자하기 버튼 -->
-								<span id="tiny">목표금액 미달 시, 취소 및 환불 됩니다.</span><br>
 								<c:if test="${irdto.fundSituation == 1 && sessionScope.memberEmail != null}">
 									<a href="investment.im?investRequestNum=${irdto.investRequestNum }"><button id="investmentBtn">투자하기</button></a>
 								</c:if>
@@ -270,9 +289,29 @@ $(function(){
 				</aside>
 			</section>
 			<div class="clear"></div>
-			<section id="body_section2">
-				${irdto.program } Start By<br>
-				${irdto.introduce } ${irdto.DName }
+			<section style="width:80%; margin:0 auto;">
+				<fieldset style="border:1px solid black; left:10px;">
+					<legend>투자 상품 정보</legend>
+					<table style="width:100%; padding:10px 30px;">
+						<tr>
+							<th>대표명</th>
+							<td>${irdto.DName }</td>
+							<th>이메일</th>
+							<td>${irdto.memberEmail }</td>
+						</tr>
+						<tr>
+							<th>카테고리</th>
+							<td>
+								<c:if test="${irdto.category=='Art' }">Art/Music</c:if>
+								<c:if test="${irdto.category=='TechDev' }">Technology</c:if>
+								<c:if test="${irdto.category=='Env' }">Environment</c:if>
+								<c:if test="${irdto.category=='Edu' }">Education</c:if>
+							</td>
+							<th>해쉬태그</th>
+							<td>${irdto.hashTag }</td>
+						</tr>
+					</table>
+				</fieldset>
 			</section>
 			<section id="body_section2">
 				<div id="section2_wrap">

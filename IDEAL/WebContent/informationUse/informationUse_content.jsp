@@ -5,48 +5,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<!-- <link href="aie.css" type="text/css" rel="stylesheet"> -->
-<style type="text/css">
-.tableAll{
-border: none;
-border-collapse: collapse;
-}
+<link href="./css/infouse.css" type="text/css" rel="stylesheet">
 
-.tableAll tr.boardtr{
-	background-image: url("img/boardbg.jpg");
-	background-repeat: repeat-x;
-	border: 1px solid;
-	color: white;
-	height: 40px;
-	letter-spacing: 0.1em;
-}
-.wrap input{
-float: right;
-width: 150px;
-}
-.wrap{
-padding-top: 100px;
-}
-</style>
 </head>
 <body>
 <div class="wrap">
 <center>
-<table width="922px" class="tableAll">
+<h4 class="subh4">■ IDEAL 이용안내사항</h4>
+<table width="1028px" class="tableinfouse">
 	<tr class="boardtr">
-		<th>${dto.infoTitle}</th>
+		<th class="iuth1">${dto.infoTitle}</th>
 	</tr>
 	<tr>
-		<td><img src="informationUse/image/${dto.infoImage }"></td>
+		<td><p class="imgpad">[Image]</p><br/>
+		<img class="no_conimg" src="informationUse/image/${dto.infoImage }"></td>
 	</tr>
 	<tr>
-		<td class="txtarere">
+		<td class="txtarere dotttd">
 		${dto.infoContent}
 		
 		</td>
 	</tr>
 	<tr>
-		<td><input type="button" value="목록" onclick="location.href='Information.iU'"></td>
+		<td><input class="tolist1" type="button" value="목록" onclick="location.href='Information.iU'"></td>
 	</tr>
 </table>
 

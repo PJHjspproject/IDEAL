@@ -8,15 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link href="./css/infouse.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-<input type="button" class="btn1" value="FAQ">
-<input type="button" class="btn2" value="공지사항">
-<input type="button" class="btn3" value="1:1문의">
-<form action="Information.iU" class="info" method="post"></form>
-<form action="list.no" class="notice" method="post"></form>
-<form action="question.qU" class="question" method="post"></form>
+	<div class="subwrap">
+		<div class="subpos">
+			<input type="button" class="btn1" value="FAQ"><!--  --><input
+				type="button" class="btn2" value="공지사항"><!--  --><input
+				type="button" class="btn3" value="1:1문의">
+			<form action="Information.iU" class="info" method="post"></form>
+			<form action="list.no" class="notice" method="post"></form>
+			<form action="question.qU" class="question" method="post"></form>
+		</div>
+	</div>
 </body>
 </html>

@@ -7,42 +7,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<!-- <link href="aie.css" type="text/css" rel="stylesheet"> -->
-<style type="text/css">
-.tableAll{
-border: 1px solid;
-border-collapse: collapse;
-}
-.tableAll td{
-text-align: center;
-}
-.tableAll tr.boardtr{
-	background-image: url("img/boardbg.jpg");
-	background-repeat: repeat-x;
-	border: 1px solid;
-	height: 40px;
-	letter-spacing: 0.1em;
-}
-.tableAll td{
- border-bottom: 1px dotted;
-}
-div.wrap{
-	padding: 300px;
-}
-</style>
+<link href="./css/notice1.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="wrap">
 <center>
+<h4 class="subh4">■ IDEAL 공지사항</h4>
 <table width="1028px" class="tableAll">
-	<tr class="boardtr">
-		<th width="772px">제목</th>
-		<th width="150px">등록일</th>
+	<tr class="boardtrno1">
+		<th width="772px" class="noth1">제목</th>
+		<th width="150px" class="noth0">등록일</th>
 	</tr>
 	<c:forEach var="v" items="${arry}">
 	<tr onclick="location.href='./NoticeContent.no?noticeNum=${v.noticeNum}'">
-		<td>${v.noticeSubject}</td>
-		<td><d:formatDate value="${v.noticeDate}" pattern="yyyy-MM-dd"/></td>
+		<td class="dot2center">${v.noticeSubject}</td>
+		<td class="dot2center"><d:formatDate value="${v.noticeDate}" pattern="yyyy-MM-dd"/></td>
 	</tr>
 	</c:forEach>
 </table>

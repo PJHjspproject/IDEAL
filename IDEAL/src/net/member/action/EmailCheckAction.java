@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.member.db.MemberDAO;
 
 public class EmailCheckAction implements Action {
-	/*이메일 중복검사*/
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -17,7 +17,9 @@ public class EmailCheckAction implements Action {
 		boolean result = dao.CheckMember(id);
 		request.setAttribute("id", id);
 		request.setAttribute("result", result);
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html;charset=euc-kr");
+		
+		
         PrintWriter out = response.getWriter();
         ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
